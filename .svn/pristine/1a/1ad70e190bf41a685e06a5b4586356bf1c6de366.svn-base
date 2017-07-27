@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>注册</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+		<style>
+			input[type="radio"] {
+			  margin: 3px 3px 0px 5px;
+			  display: none;
+			}
+			label {
+			  padding-left: 25px !important;
+			  cursor: pointer;
+			  background:url(images/radios.png) no-repeat 5px;
+			}
+			label.checked {
+			   background:url(images/radio.png) no-repeat 5px;
+			}
+			.weui_toast_text {width: 22em !important;}
+		</style>
+	</head>
+
+	<body style="background: #fff;">
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<!--注册导航-->
+			<div class="login-nav">
+				<a href="index.html"><div class="login-return"><img src="images/left.png"></div></a>
+				<div class="login-logo"><img src="images/login-logo.png"></div>
+				<div class="login-nav-name"><a href="login.html"><div>登 录</div></a><a href="register.html"><div class="login-nav-active">注 册</div></a><div class="clear"></div></div>
+			</div>
+			<!--注册内容-->
+			<div class="login-main">
+				<div class="login-input"><img src="images/iconuser.png" class="login-img"><input type="text" class="border-none username" maxlength="15" placeholder="请输入用户名"></div>
+				<div class="login-input"><img src="images/iconphone.png" class="login-img"><input type="text" class="border-none login-user" placeholder="请输入手机号码或者邮箱"></div>
+				<div>
+					<div class="reset-input fl"><img src="images/iconemail.png" class="login-img"><input type="text" class="border-none yzm" placeholder="请输入验证码"></div>
+					<div class=" fl reset-hq">获取验证码</div>
+					<div class="clear"></div>
+				</div>
+				<div class="login-input"><img src="images/iconkey.png" class="login-img"><input type="password" class="border-none login-pwd" maxlength="12" placeholder="请输入6-12位数字或字母组合的密码"></div>
+				<div class="login-input"><img src="images/iconkey.png" class="login-img"><input type="password" class="border-none login-repwd" maxlength="12" placeholder="请再次输入密码"></div>
+				<div class="clear"></div>
+				<div class="register-text mt20">
+					<input type="radio" id="small"  name="atype">
+ 					<label name="atype1"  for="small" id="pass">我已经阅读并同意<a href="user-xy.html" class="colors">《用户注册协议》</a></label>
+				</div>
+				<div class="login-inputs mt0 mb10"><input type="submit" class="border-none login-btn" value="注册"></div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/center.js"></script>	
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		$(function  () {
+//			else if(!reuser.test(username)){
+//				$.toast("请输入字母、数字、下划线组成，字母开头，4-16位字符", "text");
+//				 return false;
+//			}
+	    //获取短信验证码
+	    var validCode=true;
+	    $(".reset-hq").click (function  () {
+	    	var username=$(".username").val();
+			var phone=$(".login-user").val();
+			var regx = /^(13[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(18[0-9]{9})|(15[0-9]{9})$/;
+			var reem=/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+//			var reuser=/^[a-zA-z]\w{3,15}$/;
+			var patt = new RegExp('@');
+			if(username==""){
+				$.toast("请输入用户名", "text");
+				 return false;
+			}else if(phone==""){
+				$.toast("请输入手机号码或者邮箱", "text");
+				 return false;
+			}else{
+				if(patt.test(phone)){
+					if(!reem.test(phone)){
+						$.toast("请输入正确的邮箱", "text");
+						 return false;
+					}else{
+						var timestamp = Date.parse(new Date());
+ 				         var values=["type","phone","timestamp"];
+				         var data={"type":"1","phone":phone,"timestamp":timestamp};
+				         var sign = doSign(values,data);
+						 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+						$.ajax({
+							type:"post",
+							url: link_url+"getVerifyCode",
+							dataType: "json",
+				            data: {"type":"1","phone":phone,"key":keys,"timestamp":timestamp,"sign":sign},
+				            success: function(data) {
+				            	 if(data.status == 1){
+				            	 	console.log("ok");
+				            	 	console.log(data);
+				            	 }else{
+				            	 	$.toast(data.data, "text");
+				            	 }
+				            },
+				            error:function(){
+				            	console.log(link_url);
+				            	
+				            }
+						})
+					}
+				}else{
+					if(phone.length < 11 || !regx.test(phone)||phone.length > 11){
+						$.toast("请输入正确的手机号码", "text");
+						 return false;
+					}else{
+						 var timestamp = Date.parse(new Date());
+ 				         var values=["type","phone","timestamp"];
+				         var data={"type":"1","phone":phone,"timestamp":timestamp};
+				         var sign = doSign(values,data);
+						 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+						 $.ajax({
+							type:"post",
+							url: link_url+"getVerifyCode",
+							dataType: "json",
+				            data: {"type":"1","phone":phone,"key":keys,"timestamp":timestamp,"sign":sign},
+				            success: function(data) {
+				            	 if(data.status == 1){
+				            	 	console.log("ok");
+				            	 	console.log(data);
+				            	 	djs();
+				            	 }else{
+				            	 	$.toast(data.data, "text");
+				            	 }
+				            },
+				            error:function(){
+				            	console.log(link_url);
+				            	
+				            }
+						})
+					}
+				}
+			}
+			function djs(){
+				 var time=60;
+		        var code=$(this);
+		        if (validCode) {
+		            validCode=false;
+		            code.addClass("msgs1");
+		        var t=setInterval(function  () {
+		            time--;
+		            code.html(time+"秒后重发");
+		            if (time==0) {
+		                clearInterval(t);
+		            code.html("重新获取");
+		                validCode=true;
+		            code.removeClass("msgs1");
+		
+		            }
+		        },1000)
+		        }
+			}
+	       
+	    })
+	})
+		
+		$(".login-btn").click(function(){
+			var username=$(".username").val();
+			var phone=$(".login-user").val();
+			var pwd=$(".login-pwd").val();
+			var pp=md5(pwd);
+			var yzm=$(".yzm").val();
+			var repwd=$(".login-repwd").val();
+			var regx = /^(13[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(18[0-9]{9})|(15[0-9]{9})$/;
+			var reem=/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+//			var reuser=/^{2,15}$/;
+			var patt = new RegExp('@');
+			if(username==""){
+				$.toast("请输入用户名", "text");
+			}else if(phone==""){
+				$.toast("请输入手机号码或者邮箱", "text");
+			}else{
+				if(patt.test(phone)){
+					if(!reem.test(phone)){
+						$.toast("请输入正确的邮箱", "text");
+					}else if(yzm==""){
+						$.toast("请输入验证码", "text");
+					}else if(pwd==""||repwd==""){
+						$.toast("请输入6-12位数字或字母组合的密码", "text");
+					}else if(pwd.length<6||repwd.length<6){
+						$.toast("请输入6-12位数字或字母组合的密码", "text");
+					}else if(repwd!=pwd){
+						$.toast("两次密码不一致，请重新输入！", "text");
+					}else if(!$("#pass").hasClass("checked")){
+						$.toast("请勾选用户协议", "text");
+					}else{
+						 
+						 var timestamp1 = Date.parse(new Date());
+ 				         var values1=["phone","user_nicename","user_pass","yzm","timestamp"];
+				         var data1={"phone":phone,"user_nicename":username,"user_pass":pp,"yzm":yzm,"timestamp":timestamp1};
+				         var sign1 = doSign(values1,data1);
+						 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+						 console.log(phone);
+						$.ajax({
+							type:"post",
+							url: link_url+"goRegister",
+							dataType: "json",
+				            data: {"phone":phone,"user_nicename":username,"user_pass":pp,"yzm":yzm,"key":keys,"timestamp":timestamp1,"sign":sign1},
+				            success: function(data) {
+				            	 if(data.status == 1){
+				            	 	console.log(1);
+				            	 	console.log(data);
+				            	 	window.location.href="login.html";
+				            	 }else{
+				            	 	$.toast(data.data, "text");
+				            	 }
+				            },
+				            error:function(){
+				            	
+				            }
+						})
+						
+					}
+				}else{
+					if(phone.length < 11 || !regx.test(phone)||phone.length > 11){
+						$.toast("请输入正确的手机号码", "text");
+					}else if(yzm==""){
+						$.toast("请输入验证码", "text");
+					}else if(pwd==""||repwd==""){
+						$.toast("请输入6-12位数字或字母组合的密码", "text");
+					}else if(pwd.length<6||repwd.length<6){
+						$.toast("请输入6-12位数字或字母组合的密码", "text");
+					}else if(repwd!=pwd){
+						$.toast("两次密码不一致，请重新输入！", "text");
+					}else if(!$("#pass").hasClass("checked")){
+						$.toast("请勾选用户协议", "text");
+					}else{
+						 var timestamp1 = Date.parse(new Date());
+ 				         var values1=["phone","user_nicename","user_pass","yzm","timestamp"];
+				         var data1={"phone":phone,"user_nicename":username,"user_pass":pp,"yzm":yzm,"timestamp":timestamp1};
+				         var sign1 = doSign(values1,data1);
+						 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+						 console.log(phone);
+						$.ajax({
+							type:"post",
+							url: link_url+"goRegister",
+							dataType: "json",
+				            data: {"phone":phone,"user_nicename":username,"user_pass":pp,"yzm":yzm,"key":keys,"timestamp":timestamp1,"sign":sign1},
+				            success: function(data) {
+				            	 if(data.status == 1){
+				            	 	console.log(1);
+				            	 	console.log(data);
+				            	 	window.location.href="login.html";
+				            	 }else{
+				            	 	$.toast(data.data, "text");
+				            	 }
+				            },
+				            error:function(){
+				            	
+				            }
+						})	
+					}
+					
+				}
+			}
+		})
+		$(function() {
+		  $('label').click(function(){
+		    var radioId = $(this).attr('name');
+		    $('label').removeAttr('class') && $(this).attr('class', 'checked');
+		    $('input[type="radio"]').removeAttr('checked') && $('#' + radioId).attr('checked', 'checked');
+		  });
+		});
+	</script>
+</html>

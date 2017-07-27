@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>我的订单</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="order">
+				<div class="order-left">
+		             <a href="order.html"><li class="on1"  id="li-1" >全部</li></a>
+		             <a href="order1.html"><li class="on2 active" id="li-2">待付款</li></a>
+		             <a href="order2.html"><li class="on3" id="li-3">待发货</li></a>
+		             <a href="order3.html"><li class="on4" id="li-4">待收货</li></a>
+		        </div>
+		        
+		        <div class="order-right">
+		            
+		            <div class="help-right-box"  id="div-2" >  
+		            	<!--待付款-->
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			<a href="store.html" class="color6">金蘑姑姑桃宝店<img src="images/right.png" /></a><span class="fr colors">待付款</span>
+		            		</div>
+		            		<a href="order-details.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-details.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            		<div class="btns">
+			            		<a href="pay.html"><div class="order-btn fl">立即支付</div></a>
+			            		<div class="order-del fl show-confirms">取消订单</div>
+			            		<div class="clear"></div>
+		            		</div>
+		            	</div>
+		            	
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			<a href="store.html" class="color6">金蘑姑姑桃宝店<img src="images/right.png" /></a><span class="fr colors">定金等待买家付款</span>
+		            		</div>
+		            		<a href="order-details1.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-details1.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            		<div class="btns">
+			            		<a href="pay.html"><div class="order-btn fl">立即支付</div></a>
+			            		<div class="order-del fl show-confirms">取消订单</div>
+			            		<div class="clear"></div>
+		            		</div>
+		            	</div>
+		            	
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			<a href="store.html" class="color6">金蘑姑姑桃宝店<img src="images/right.png" /></a><span class="fr colors">12.31 15:00开始支付尾款</span>
+		            		</div>
+		            		<a href="order-details2.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-details2.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            		<div class="btns">
+			            		<a href="pay.html"><div class="order-btn fl">立即支付</div></a>
+			            		<div class="order-del fl show-confirms">取消订单</div>
+			            		<div class="clear"></div>
+		            		</div>
+		            	</div>
+		            	
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			<a href="store.html" class="color6">金蘑姑姑桃宝店<img src="images/right.png" /></a><span class="fr colors">尾款等待买家付款</span>
+		            		</div>
+		            		<a href="order-details3.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-details3.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计:<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            		<div class="btns">
+			            		<a href="pay.html"><div class="order-btn fl">立即支付</div></a>
+			            		<div class="order-del fl show-confirms">取消订单</div>
+			            		<div class="clear"></div>
+		            		</div>
+		            	</div>
+		            	
+		            </div>
+		           
+		        </div>
+	        </div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script src="js/fastclick.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+<script src="js/jquery-weui.js"></script>
+<script>
+	$(document).on("click", ".show-confirms", function() {
+        $.confirm("您是否确认取消订单吗？", "提示", function() {
+//       window.location.href="order-detailsSucc.html";
+        }, function() {
+          //取消操作
+        });
+      });
+</script>
+</html>

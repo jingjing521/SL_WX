@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>店铺详情</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+		<style>
+		#store .seconds-con span {
+			margin-top: -14px !important;
+		}
+		
+		#store .minutes-con span {
+			margin-top: -14px !important;
+		}
+		
+		#store .hours-con span {
+			margin-top: -14px !important;
+		}
+		
+		#store .days-con span {
+			margin-top: -14px !important;
+		}
+		</style>
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="store">
+				<div class="store-top">
+					
+				</div>
+				<div class="store-time">
+					<div class="fl store-time-img"><img src="images/djs.png"></div>
+					<div class="fl store-time-con">
+						<div class="days fl">
+							<div class="days-con"><img src="images/ti (1).png"><span></span></div>
+							<div class="tr linh0 mt2">天</div>
+						</div>
+						<div class="fl f"><img src="images/ti (2).png"></div>
+						<div class="days fl">
+							<div class="hours-con"><img src="images/ti (1).png"><span></span></div>
+							<div class="tr linh0 mt2">时</div>
+						</div>
+						<div class="fl f"><img src="images/ti (2).png"></div>
+						<div class="days fl">
+							<div class="minutes-con"><img src="images/ti (1).png"><span></span></div>
+							<div class="tr linh0 mt2">分</div>
+						</div>
+						<div class="fl f"><img src="images/ti (2).png"></div>
+						<div class="days fl">
+							<div class="seconds-con"><img src="images/ti (1).png"><span></span></div>
+							<div class="tr linh0 mt2">秒</div>
+						</div>
+					</div>
+					<div class="fl store-time-text">后结束</div>
+					<div class="clear"></div>
+				</div>
+				<div class="store-video">
+					
+				</div>
+				<div class="store-con">
+					<div class="store-con-top">
+						<div class="fl jg" >价格<img src="images/sx2.png"></div>
+						<div class="fl xl" >销量<img src="images/sx2.png"></div>
+						<div class="fl sx">筛选<img src="images/sx.png"></div>
+						<p class="clear"></p>
+					</div>
+					<div class="store-con-bottom">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/webim.config.js"></script>
+	<script src="js/strophe-1.2.8.min.js"></script>
+	<script src="js/websdk-1.4.10.min.js"></script>
+	<script src="js/adapter.js"></script>
+	<script src="js/webrtc-1.4.10.js"></script>
+	<script type="text/javascript" src="js/jquery-2.2.1.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>$(document).ready(function() {
+		login();
+	//价格
+	var i = 1;
+	$(".jg").click(function() {
+		if(i % 2 != 0) {
+			a();
+
+			i++;
+		} else if(i % 2 == 0) {
+			b();
+
+			i++;
+		} else {
+			alert("error");
+		};
+		//		alert(i)
+	})
+
+	function a() {
+		$(".jg img").attr("src", "images/sx1.png");
+		$(".jg").css("color", "#E43494");
+		indexData(1, 1,0);
+		$(".store-con-bottom").empty();
+	}
+
+	function b() {
+		$(".jg img").attr("src", "images/sx2.png");
+		$(".jg").css("color", "#333");
+		indexData(2, 1,0);
+		$(".store-con-bottom").empty();
+	}
+	$(".sx").click(function() {
+			window.location.href = "screenings.html?id=" + parseUrl().id;
+		})
+		//销量
+	var j = 1;
+	$(".xl").click(function() {
+		if(j % 2 != 0) {
+			c();
+			j++;
+		} else if(j % 2 == 0) {
+			d();
+			j++;
+		} else {
+			alert("error");
+		};
+		//		alert(i)
+	})
+
+	function c() {
+
+		$(".xl img").attr("src", "images/sx1.png");
+		$(".xl").css("color", "#E43494");
+		indexData(1, 2,0);
+		$(".store-con-bottom").empty();
+	}
+
+	function d() {
+		$(".xl img").attr("src", "images/sx2.png");
+		$(".xl").css("color", "#333");
+		indexData(2, 2,0);
+		$(".store-con-bottom").empty();
+	}
+})
+
+//商品详情
+var loading = false;
+var page = 0;
+indexData("","",page);
+
+function indexData(sortrule, sorttype,page) {
+	//ajax
+	page++;
+	var shop_id = parseUrl().id;
+	var users=localStorage.getItem("user_id");
+	if(users=="NaN"){
+		users="";
+	}
+	var user_id = users || "";
+	var cat_id = parseUrl().cat_id || "";
+	var spec = parseUrl().spec || "";
+	var sortrule = sortrule || "";
+	var sorttype = sorttype || "";
+	var timestamp1 = Date.parse(new Date());
+	console.log(sortrule, sorttype);
+	var values1 = ["shop_id", "user_id", "cat_id", "spec", "sortrule", "sorttype", "page", "timestamp"];
+	var data1 = {
+		"shop_id": shop_id,
+		"page": page,
+		"user_id": user_id,
+		"cat_id": cat_id,
+		"spec": spec,
+		"sortrule": sortrule,
+		"sorttype": sorttype,
+		"timestamp": timestamp1
+	};
+	var sign1 = doSign(values1, data1);
+	var keys = "idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+	console.log(shop_id, user_id, cat_id, spec, sortrule, sorttype, page);
+	$.ajax({
+		type: "post",
+		url: link_url + "shopDetail",
+		dataType: "json",
+		data: {
+			"shop_id": shop_id,
+			"user_id": user_id,
+			"cat_id": cat_id,
+			"spec": spec,
+			"sortrule": sortrule,
+			"sorttype": sorttype,
+			"page": page,
+			"key": keys,
+			"timestamp": timestamp1,
+			"sign": sign1
+		},
+		success: function(data) {
+			if(data.status == 1) {
+				console.log(data);
+				var v = data.data.cinfo;
+
+				var start_time = v.start_time;
+				var end_time = v.end_time;
+
+				function timeS(num) {
+					return('0' + num).slice(-2);
+				}
+
+				function FreshTime() {
+					var attr_s = start_time;
+					var attr_e = end_time;
+					var startTime = new Date().getTime();
+					var endTime = parseInt(attr_e * 1000);
+					var differTime = endTime - startTime;
+					var d = parseInt(differTime / (24 * 60 * 60 * 1000));
+					var h = parseInt(differTime / (60 * 60 * 1000) % 24);
+					var m = parseInt(differTime / (60 * 1000) % 60);
+					var s = parseInt(differTime / 1000 % 60);
+					$(".days-con span").text(timeS(d));
+					$(".hours-con span").text(timeS(h));
+					$(".minutes-con span").text(timeS(m));
+					$(".seconds-con span").text(timeS(s));
+					if(differTime <= 0) {
+						$.toast("活动已经结束！", "text");
+						clearInterval(timer);
+					}
+					var a = $(".days-con span").text();
+					var b = $(".hours-con span").text();
+					var c = $(".minutes-con span").text();
+					var x = $(".seconds-con span").text();
+					if(a != "") {
+						var str = a.replace(/(\d{1})/g, '$1 ').replace(/\s*$/, '');
+						var strb = b.replace(/(\d{1})/g, '$1 ').replace(/\s*$/, '');
+						var strc = c.replace(/(\d{1})/g, '$1 ').replace(/\s*$/, '');
+						var strd = x.replace(/(\d{1})/g, '$1 ').replace(/\s*$/, '');
+						console.log(str);
+						$(".days-con span").text(str);
+						$(".hours-con span").text(strb);
+						$(".minutes-con span").text(strc);
+						$(".seconds-con span").text(strd);
+					}
+				}
+				FreshTime();
+				var timer = setInterval(FreshTime, 1000);
+				$(".store-top").empty();
+				$(".store-video").empty();
+				$('<div class="fl store-top-logo"><img src="' + v.logo + '"></div><div class="fl store-top-details"><div class="store-top-name">' + v.name + '</div><div class="store-top-fs">粉丝数：<span>' + v.store_collect + '</sapn></div><div class="store-top-gz">+关注</div></div><div class="clear"></div>').appendTo($(".store-top"));
+				if(v.is_collect == 1) {
+					$(".store-top-gz").text("已关注");
+					$(".store-top-gz").addClass("has");
+				} else {
+					$(".store-top-gz").text("+关注");
+					$(".store-top-gz").removeClass("has");
+				}
+				console.log(user_id);
+				if(user_id == "NaN") {
+					$(".store-top-gz").on("click", function() {
+						$(".store-top-gz").text("+关注");
+						collect();
+					});
+				} else {
+					$(".store-top-gz").on("click", function() {
+						//								$(this).toggleClass("gz");
+						var fs = parseInt($(".store-top-fs span").text());
+						var num = 1;
+						if($(this).hasClass("has")) {
+							$(".store-top-gz").text("+关注");
+							$(".store-top-gz").removeClass("has");
+							$(".store-top-fs span").text(parseInt(fs - num));
+						} else {
+							$(".store-top-gz").text("已关注");
+							$(".store-top-gz").addClass("has");
+							$(".store-top-fs span").text(parseInt(fs + num));
+						}
+						collect();
+					});
+				}
+				if(v.video==""||v.video_thumb==""){
+					$(".store-video").css("height","1px");
+					$(".store-video").css("background","#ddd");
+					
+				}else{
+					$('<a class="video"><img src="' + v.video_thumb + '" /><img src="images/video (2).png" class="play" /></a>').appendTo($(".store-video"));
+					$(".video").click(function(){
+						localStorage.setItem("video", v.video);
+						localStorage.setItem("video_thumb", v.video_thumb);
+						window.location.href="video.html?type=s";
+					})
+				}
+				
+				
+				
+				if(data.data.goods_posts.length == 0) {
+					$.toast("没有更多的商品了！", "text");
+					loading = true;
+					$(document.body).infinite().on("infinite", function() {
+						if(loading) return;
+						loading = false;
+						setTimeout(function() {
+							indexData(sortrule, sorttype,page);
+							loading = true;
+						}, 500);
+					});
+
+				} else {
+					$.each(data.data.goods_posts, function(a, b) {
+						$('<div class="store-con-bottom-item"><a href="product.html?id=' + b.id + '"><div class="store-con-bottom-img"><img src="' + b.smeta.thumb + '"></div><div class="store-con-bottom-price">￥' + b.price + '</div><div class="store-con-bottom-text">' + b.name + '</div></a></div>').appendTo($(".store-con-bottom"));
+					})
+					$(".store-con-bottom-item").click(function(){
+						localStorage.setItem("shoplogo",data.data.cinfo.logo);
+					})
+					$(document.body).infinite().on("infinite", function() {
+						if(loading) return;
+						loading = true;	
+						setTimeout(function() {
+							indexData(sortrule, sorttype,page);
+							page++;
+							loading = false;
+						}, 500);
+					});
+
+				}
+				
+			} else {
+				console.log(data);
+				$.toast(data.data, "text");
+			}
+		},
+		error: function() {
+
+		}
+	})
+}
+
+function collect() {
+	var shop_id1 = parseInt(parseUrl().id);
+	var user_id = localStorage.getItem("user_id");
+	console.log(shop_id1);
+	var timestamp1 = Date.parse(new Date());
+	var values1 = ["shop_id", "user_id", "timestamp"];
+	var data1 = {
+		"shop_id": shop_id1,
+		"user_id": user_id,
+		"timestamp": timestamp1
+	};
+	var sign1 = doSign(values1, data1);
+	var keys = "idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+	$.ajax({
+		type: "post",
+		url: link_url + "shopCollect",
+		dataType: "json",
+		data: {
+			"shop_id": shop_id1,
+			"user_id": user_id,
+			"key": keys,
+			"timestamp": timestamp1,
+			"sign": sign1
+		},
+		success: function(data) {
+			if(data.status == 1) {
+				console.log("ok");
+				console.log(data);
+				$.toast(data.data, "text");
+				//					indexData();
+			} else {
+				console.log(data);
+				$.toast("请先登录哦！", "text");
+				setInterval(function(){
+					window.location.href = "login.html";
+				},1500)
+				
+			}
+		},
+		error: function() {
+
+		}
+	})
+}</script>
+
+</html>

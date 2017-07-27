@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>搜索</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel=" stylesheet" type="text/css" href="css/jquery-weui.css" />
+		<link rel=" stylesheet" type="text/css" href="css/weui.min.css" />
+		<style>
+			.weui_toast_text {width: 15em !important; margin: auto; min-height: 30px; border-radius: 5px;max-height: 200px; height: 43px !important;}
+		</style>
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="searchOrder">
+				<div class="searchOrder-cons">
+					<a href="store.html"><div class="searchOrder-cons-item"></div></a>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		$(document).ready(function(){
+			var keywords=localStorage.getItem("keywords");
+			$('.searchOrder-cons-item').text(keywords);
+		 })
+	</script>
+</html>

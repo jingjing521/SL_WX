@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+<!--离线应用的另一个技巧-->
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<!--指定的iphone中safari顶端的状态条的样式-->
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<!--告诉设备忽略将页面中的数字识别为电话号码-->
+<meta content="telephone=no" name="format-detection" />
+<title>评价</title>
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<link rel="stylesheet" type="text/css" href="css/weui.css" />
+<link rel="stylesheet" type="text/css" href="css/weui2.css" />
+<link rel="stylesheet" href="css/weui.min.css">
+<link rel="stylesheet" href="css/jquery-weui.css">
+<style>
+	.weui_toast_text {width: 13em !important; margin: auto; min-height: 30px; border-radius: 5px;max-height: 200px; height: 43px !important;}
+</style>
+</head>
+<body style="background:#e5e5e5;">
+<!-- 总体框架 -->
+<div class="index-bg appraise" style="min-height: 580px;">
+	<div class="appraise-bg">
+		<div class="appraise-bg-name">交易已完成！</div>
+		<div class="appraise-bg-text">赶紧评价吧！</div>
+	</div>
+	<div class="appraise-star" style="margin-left: 15px; margin-top: 20px;">
+		<div class="fl">
+			<div class="appraise-img" style="width: 80px; height: 80px; margin-right: 15px; overflow: hidden;"><img width="100%" src="images/2.png"></div>
+		</div>
+		<div class="fl" style="width: 50%;">
+			<div>全部评价</div>
+			 <div class="weui-rater" style="width: 100%;">
+		        <a data-num="0" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a>
+		        <a data-num="1" class="weui-rater-box"> <span class="weui-rater-inner"><img src="images/xx1.png" alt=""></span> </a>
+		        <a data-num="2" class="weui-rater-box"> <span class="weui-rater-inner"><img src="images/xx1.png" alt=""></span> </a>
+		        <a data-num="3" class="weui-rater-box"> <span class="weui-rater-inner"><img src="images/xx1.png" alt=""></span> </a>
+		        <a data-num="4" class="weui-rater-box"> <span class="weui-rater-inner"><img src="images/xx1.png" alt=""></span> </a>
+		    </div>
+		</div>
+		<div class="clear"></div>
+	</div>
+   
+	<div class="weui_cells weui_cells_form">
+        <div class="weui_cell">
+             
+            <div class="weui_cell_bd weui_cell_primary">
+                <textarea id="textarea" class="weui_textarea" placeholder="请输入您的评价！" rows="5"></textarea>
+                <div class="weui_textarea_counter">
+                <span id="count">150字以内</span>
+                </div>
+            </div>
+             
+        </div> 
+               
+    </div>
+    <a href="javascript:;" class="weui_btn weui_btn_disabled weui_btn_primary" style="background: #e43494;">提交评价</a>
+</div>
+<script src="js/zepto.min.js"></script>
+<script src="js/jquery-2.2.1.js"></script>
+<script src="js/jquery-weui.js"></script>
+<script src="js/md5.js"></script>
+<script src="js/center.js"></script>
+<script>
+	var imgs=parseUrl().imgs;
+	$(".appraise-img").children("img").attr("src",imgs);
+    var write=$('.weui_textarea')[0];
+    
+    write.onkeyup=write.onkeypress=function(){
+        
+        var val=write.value;
+        var length=val.length;
+        if(length<=120){    
+           $('#count').css('color','#666');
+        }else{
+            var val=val.substr(0,120);
+            write.value=val;
+            $('#count').css('color','red');
+        }
+    }
+    $('#textarea').onkeyup=$('#textarea').onkeypress=function(){
+        var write=$('#textarea').val();   console.log(write);
+        var length=write.length;
+        console.log(length);
+        if(length<=150){
+        }else{
+            var val=val.substr(0,150);
+            $('#count').css('color','red');
+        }
+    } 
+    var arr = ["1分","2分","3分","4分","5分"];
+    var num = 0;
+    $(".weui-rater a").mouseover(function(){
+        var thisL = $(this).index();
+        for(var i = 0;i < thisL;i++){
+            $(".weui-rater a").eq(i).addClass('checked');
+            $(".weui-rater a").eq(i+1).find('img').attr('src','images/xx.png');
+        }
+        for(var i = thisL; i < 5;i++){
+            $(".weui-rater a").eq(i).removeClass('checked');
+            $(".weui-rater a").eq(i+1).find('img').attr('src','images/xx1.png')
+        }
+        $(this).addClass('checked');
+    })
+    $(".weui-rater a").mouseout(function(){
+        var thisL = $(this).index();
+        for(var i = thisL; i < 5;i++){
+            $(".weui-rater a").eq(i).removeClass('checked');
+            $(".weui-rater a").eq(i+1).find('img').attr('src','images/xx1.png')
+        }
+    })
+    $(".weui-rater").mouseout(function(){
+        for(var i = 0; i < num;i++){
+            $(".weui-rater a").eq(i).addClass('checked');
+            $(".weui-rater a").eq(i+1).find('img').attr('src','images/xx.png')
+        }
+    })
+    $(".weui-rater a").click(function(){
+        var thisL = $(this).index();
+        $("#fen").html(arr[thisL]);
+        $(this).addClass('checked');
+        $(".weui-rater a").eq(i).find('img').attr('src','images/xx.png');
+        num = thisL;
+        console.log(num);
+    })
+	$('.weui_btn').on('click',function(){
+        var appraise = $('#textarea').val();
+        
+        if(appraise == ''){
+        	$.toast("请输入您的评价！", "text");return false;
+        }else{
+//      	订单商品评价接口
+//			接口名
+//			orderGoodsDoComment
+//			参数
+//			参数	类型	说明	是否必须	取值范围
+//			user_id	Int(11)	用户id	Y	
+//			order_itemid	Int(11)	订单明细id	Y	 
+//			star_level	String	星级	Y	
+//			content	String	内容	N	
+//			key	String	秘钥key	Y	
+//			timestamp	Int(11)	时间戳	Y	
+//			sign	String	签名	Y	
+			var order_itemid=parseUrl().order_itemid;
+			var key="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			var user_id=localStorage.getItem("user_id");
+			var star=num+1;
+			var content=appraise;
+			var timestamp =Date.parse(new Date());
+			var value=["user_id","order_itemid","star_level","content","timestamp"];
+			var data = {"user_id":user_id,"order_itemid":order_itemid,"star_level":star,"content":content,"timestamp": timestamp};
+			var sign=doSign(value,data);
+			$.ajax({
+				type:"post",
+				url:link_url+"orderGoodsDoComment",
+				dataType:"json",
+				data:{"user_id":user_id,"order_itemid":order_itemid,"star_level":star,"content":content,"key":key,"sign":sign,"timestamp":timestamp},
+				success:function(data){
+					if(data.status=1){
+						console.log(data);	
+						console.log(star);
+						$.toast(data.data,"text");
+						setInterval(function(){
+							window.location.href="order.html";
+						},2000)
+					}
+				},error:function(e){
+					console.log(e);
+				}
+			});
+        }
+	});
+   
+
+ 
+</script>
+</body>
+</html>

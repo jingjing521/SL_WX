@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>支付</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="pay">
+				<div class="pay-con">
+					<div class="pay-con-item">
+						<div class="fl pay-con-item-img"><img src="images/pay (3).png"></div>
+						<div class="fl pay-con-item-con">
+							<div class="pay-con-item-name">支付宝</div>
+							<div class="pay-con-item-text">推荐支付宝用户使用</div>
+						</div>
+						<div class="fr commodity" paytype="2"></div>
+						<div class="clear"></div>
+					</div>
+					<div class="pay-con-item">
+						<div class="fl pay-con-item-img"><img src="images/pay (1).png"></div>
+						<div class="fl pay-con-item-con">
+							<div class="pay-con-item-name">微信</div>
+							<div class="pay-con-item-text">推荐微信用户使用</div>
+						</div>
+						<div class="fr commodity select" paytype="1"></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="pay-footer">
+					<div class="fl pay-text">订单金额：<span></span></div>
+					<div class="fr pay-btn">立即支付</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-2.2.1.js" ></script>
+	<script type="text/javascript" src="js/center.js" ></script>
+	<script type="text/javascript" src="js/md5.js" ></script>
+	<script type="text/javascript" src="js/jquery-weui.js" ></script>
+	<script>
+	$(document).ready(function(){
+		var paytype;
+		$(".pay-con-item").on("click",".commodity",function(){
+		 	$(".commodity").removeClass("select");
+		 	$(this).addClass("select");
+		 	paytype=$(this).attr("paytype");
+		});
+		$(".pay-text").children("span").text("￥"+parseUrl().total);
+		var scores=parseUrl().score||"";
+		var score=parseInt(scores);
+		var msg=localStorage.getItem("msg")||"";
+		var address_id=parseInt(localStorage.getItem("address_id"));
+		var user_id=parseInt(localStorage.getItem("user_id"));
+		paytype=parseInt($(".select").attr("paytype"));
+		var goods_id=parseUrl().goods_id;
+		var goods_spec=parseUrl().goods_spec||"";
+		var goods_num=parseUrl().goods_num||"";
+		console.log(address_id,user_id,goods_id,goods_spec,score,goods_num,paytype,msg);
+		$(".pay-btn").click(function(){
+			var timestamp = Date.parse(new Date());
+	 		var values=["address_id","user_id","goods_id","goods_spec","goods_num","paytype","msg","score","timestamp"];
+			var data={"address_id":address_id,"user_id":user_id,"goods_id":goods_id,"goods_spec":goods_spec,"goods_num":goods_num,"paytype":paytype,"msg":msg,"score":score,"timestamp":timestamp};
+			var sign = doSign(values,data);
+			var key="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			$.ajax({
+				type:"post",
+				url: link_url+"goodsImmediateSettlementInfoSubmit",
+				dataType: "json",
+				data: {"address_id":address_id,"user_id":user_id,"goods_id":goods_id,"goods_spec":goods_spec,"goods_num":goods_num,"paytype":paytype,"msg":msg,"score":score,"key":key,"timestamp":timestamp,"sign":sign},
+					success: function(data) {
+					if(data.status == 1){
+					    console.log(data);
+					    window.location.href="pay-fin.html";
+					}else{
+					    console.log(data);
+					    $.toast(data.data,"text");
+					}
+				},error:function(){
+				}
+			}) 
+		})
+		
+	})
+	
+	</script>
+</html>

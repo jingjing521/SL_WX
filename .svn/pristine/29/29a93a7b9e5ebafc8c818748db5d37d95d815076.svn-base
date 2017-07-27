@@ -1,0 +1,2279 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>聊天</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<style>
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				font-size: 13px;
+				overflow-y: hidden;
+				overflow-x: hidden;
+				background-color: #fafafa;
+				border: 1px solid rgba(250, 250, 250, 0);
+				-webkit-font-smoothing: antialiased;
+				padding: 0;
+				margin: 0;
+			}
+			
+			input,
+			button {
+				outline: none;
+			}
+			
+			input:focus,
+			button:focus {}
+			
+			textarea {
+				outline: none;
+				resize: none;
+			}
+			
+			ul,
+			ol,
+			li {
+				list-style: none;
+			}
+			
+			.pointer {
+				cursor: pointer;
+			}
+			
+			.left {
+				float: left;
+			}
+			
+			.right {
+				float: right;
+			}
+			
+			.w100 {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.pad0 {
+				padding: 0;
+			}
+			
+			.top50 {
+				margin-top: 50px;
+			}
+			
+			.rel {
+				position: relative;
+			}
+			
+			.dib {
+				display: inline-block;
+			}
+			
+			object {
+				z-index: 3;
+				position: absolute;
+				left: 340px;
+				bottom: 118px;
+				width: 84px;
+			}
+			
+			@font-face {
+				font-family: 'webim';
+				src: url(css/demo/stylesheet/src/font/iconfont.eot);
+				src: url(css/demo/stylesheet/src/font/iconfont.woff) format("woff"), url(css/demo/stylesheet/src/font/iconfont.ttf) format("truetype"), url(css/demo/stylesheet/src/font/iconfont.svg#iconfont) format("svg");
+			}
+			
+			.font {
+				width: 50px;
+				height: 50px;
+				font-family: 'webim' !important;
+				font-size: 50px;
+				font-style: normal;
+				margin: auto;
+				-webkit-font-smoothing: antialiased;
+				-webkit-text-stroke-width: 0.2px;
+				-moz-osx-font-smoothing: grayscale;
+			}
+			
+			.font.small {
+				width: 30px;
+				height: 30px;
+				font-size: 30px;
+			}
+			
+			.font.xsmaller {
+				width: 26px;
+				height: 26px;
+				font-size: 26px;
+			}
+			
+			.font.smaller {
+				width: 24px;
+				height: 24px;
+				font-size: 24px;
+			}
+			
+			.font.smallest {
+				width: 16px;
+				height: 16px;
+				font-size: 16px;
+			}
+			
+			.hide {
+				display: none;
+			}
+			
+			.bg-color {
+				color: #fff;
+				border: 1px solid #4eb1f4;
+				-webkit-tap-highlight-color: transparent;
+				background-color: #4eb1f4;
+			}
+			
+			.color {
+				color: #4eb1f4;
+			}
+			
+			.hover-color:hover {
+				color: #4eb1f4;
+			}
+			
+			.webim-logo {
+				width: 200px;
+				margin: 0 auto;
+			}
+			
+			.webim {
+				position: absolute;
+				right: 0;
+				left: 0;
+				margin: auto;
+				top: 10%;
+				bottom: 10%;
+			}
+			
+			.copyright {
+				z-index: 3;
+				position: absolute;
+				width: 100%;
+				bottom: 10px;
+				text-align: center;
+				color: #cccccc;
+			}
+			
+			.webim-rtc-video {
+				z-index: 3;
+				cursor: pointer;
+				position: fixed;
+				margin: auto;
+				right: 0;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				overflow: hidden;
+				border-radius: 4px;
+				background-color: #cccccc;
+			}
+			
+			.webim-rtc-video video {
+				position: absolute;
+			}
+			
+			.webim-rtc-video video.full {
+				z-index: 1;
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+			}
+			
+			.webim-rtc-video video.corner {
+				z-index: 2;
+				top: 40px;
+				left: auto;
+				right: 10px;
+				bottom: auto;
+				max-height: 17%;
+				max-width: 17%;
+				object-fit: contain;
+			}
+			
+			.webim-rtc-video span {
+				z-index: 2;
+				position: absolute;
+				margin: 0 auto;
+				left: 0;
+				right: 0;
+				top: 6px;
+				bottom: 0;
+				width: 200px;
+				height: 80px;
+				text-align: center;
+				color: #fff;
+			}
+			
+			.webim-rtc-video i {
+				z-index: 2;
+				position: absolute;
+				background-color: rgba(255, 255, 255, 0.2);
+				font-style: normal;
+				border-radius: 50%;
+				text-align: center;
+				color: rgba(0, 0, 0, 0.2);
+				cursor: pointer;
+			}
+			
+			.webim-rtc-video i.close {
+				color: #e90101;
+			}
+			
+			.webim-rtc-video i.toggle {
+				color: #98e024;
+			}
+			
+			.webim-rtc-video i.accept {
+				color: #98e024;
+			}
+			
+			.webim-rtc-video i.mute {
+				color: #eeeeee;
+			}
+			/*
+ * loading
+ */
+			
+			.webim-loading {
+				position: fixed;
+				z-index: 3;
+				background-color: #FAFAFA;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+			}
+			
+			.webim-loading img {
+				position: absolute;
+				margin: auto;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 24px;
+			}
+			/*
+ * button
+ */
+			
+			.webim-button {
+				font-size: 16px;
+				box-sizing: border-box;
+				display: inline-block;
+				margin: 10px auto;
+				width: 300px;
+				height: 36px;
+				cursor: pointer;
+				border-radius: 2px;
+			}
+			
+			.webim-button.error {
+				background-color: #ff3a00;
+				border: 1px solid #ff3a00;
+			}
+			
+			.webim-button:hover {
+				background-color: #1aa1e4;
+			}
+			/*
+ * input
+ */
+			
+			.webim-input {
+				box-sizing: border-box;
+				font-size: 14px;
+				padding: 0 4px;
+				display: inline-block;
+				margin: 10px auto 0;
+				width: 300px;
+				height: 36px;
+				line-height: 36px;
+				cursor: pointer;
+				border-radius: 2px;
+				border: 1px solid #e5e5e5;
+				-webkit-tap-highlight-color: transparent;
+				background-color: white;
+			}
+			/*
+ * checkbox
+ */
+			
+			.webim-checkbox {
+				text-align: left;
+				margin: 10px 0 10px 5px;
+				padding-left: 50px;
+				box-sizing: border-box;
+			}
+			
+			.webim-checkbox span {
+				height: 30px;
+				line-height: 30px;
+			}
+			
+			.webim-checkbox> i {
+				position: relative;
+				margin-right: 6px;
+				width: 14px;
+				height: 14px;
+				border-radius: 2px;
+				display: inline-block;
+				vertical-align: middle;
+				border: 1px solid #cccccc;
+				cursor: pointer;
+			}
+			
+			.webim-checkbox> i:hover {
+				background-color: #fff;
+			}
+			
+			.webim-checkbox> i:hover em {
+				display: inline-block;
+				color: #cccccc;
+			}
+			
+			.webim-checkbox> i.checked {
+				background-color: #afd7e8;
+			}
+			
+			.webim-checkbox> i.checked em {
+				display: inline-block;
+				color: #000;
+			}
+			
+			.webim-checkbox> i em {
+				display: none;
+				position: absolute;
+				left: -6px;
+				top: -10px;
+				color: #000;
+			}
+			/*
+ * left bar
+ */
+			
+			.webim-leftbar {
+				position: relative;
+				float: left;
+				width: 50px;
+				height: 100%;
+				text-align: center;
+				border-radius: 2px 0px 0px 2px;
+				border: 1px solid #f2f2f2;
+				-webkit-tap-highlight-color: transparent;
+				background-color: #fcfdfb;
+			}
+			/*
+ * contact list
+ */
+			
+			.webim-contact-wrapper {
+				float: left;
+				height: 100%;
+				width: 250px;
+				overflow-x: hidden;
+				overflow-y: auto;
+				border-right: 1px solid #f2f2f2;
+				-webkit-tap-highlight-color: transparent;
+				background-color: white;
+			}
+			
+			.webim-contact-item {
+				cursor: pointer;
+				position: relative;
+				width: 100%;
+				overflow: hidden;
+				height: 60px;
+			}
+			
+			.webim-contact-item .webim-avatar-icon {
+				float: left;
+				margin: 10px;
+			}
+			
+			.webim-contact-item .webim-contact-info {
+				position: relative;
+			}
+			
+			.webim-contact-item .webim-contact-handlers {
+				text-align: right;
+				position: absolute;
+				right: 2px;
+				top: 0;
+			}
+			
+			.webim-contact-item .webim-contact-handlers i {
+				font-size: 16px;
+				line-height: 36px;
+			}
+			
+			.webim-contact-item> span,
+			.webim-contact-item .webim-contact-username {
+				color: #1a1a1a;
+				font-size: 14px;
+				margin: 10px 0;
+				display: inline-block;
+				width: calc(100% - 70px);
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			
+			.webim-contact-item> i {
+				display: inline-block;
+				right: 2px;
+				bottom: 10px;
+				top: auto;
+			}
+			
+			.webim-contact-item> em {
+				display: block;
+				height: 20px;
+				line-height: 20px;
+				width: calc(100% - 100px);
+				position: absolute;
+				margin: auto;
+				left: 30px;
+				top: 30px;
+				right: 10px;
+				color: #999999;
+				font-style: normal;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+			
+			.webim-contact-item> em img {
+				width: 20px;
+				vertical-align: middle;
+			}
+			
+			.webim-contact-item.selected {
+				background-color: #f3f6f6;
+			}
+			
+			.webim-profile-avatar {
+				display: inline-block;
+				margin: 10px auto;
+			}
+			
+			.webim-avatar-icon {
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				overflow: hidden;
+				-webkit-filter: contrast(1.2);
+				-webkit-tap-highlight-color: transparent;
+			}
+			
+			.webim-avatar-icon.small {
+				width: 30px;
+				height: 30px;
+			}
+			
+			.webim-operations-icon,
+			.webim-leftbar-icon {
+				position: relative;
+				display: inline-block;
+				cursor: pointer;
+				margin-bottom: 10px;
+				color: #cccccc;
+			}
+			
+			.webim-operations-icon:hover,
+			.webim-leftbar-icon:hover,
+			.webim-operations-icon.selected,
+			.webim-leftbar-icon.selected {
+				color: #4eb1f4;
+			}
+			
+			.webim-operations-icon {
+				color: #cccccc;
+				position: absolute;
+				margin-bottom: 0;
+				bottom: 10px;
+				left: 10px;
+			}
+			
+			.webim-operations-icon:hover {
+				color: #4eb1f4;
+			}
+			/*
+ * operations
+ */
+			
+			.webim-operations {
+				z-index: 1;
+				position: absolute;
+				text-align: left;
+				left: 40px;
+				bottom: 10px;
+				width: 160px;
+				box-shadow: rgba(0, 0, 0, 0.298039) 0px 0px 6px 0px;
+				background-color: #fff;
+			}
+			
+			.webim-operations i {
+				margin: 0 10px;
+				color: #cccccc;
+			}
+			
+			.webim-operations span {
+				vertical-align: top;
+				word-break: keep-all;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			
+			.webim-operations li {
+				height: 30px;
+				line-height: 30px;
+				cursor: pointer;
+				overflow: hidden;
+			}
+			
+			.webim-operations li:hover {
+				color: #4eb1f4;
+				background-color: #f2f2f2;
+			}
+			
+			.webim-operations li:hover i {
+				color: #4eb1f4;
+			}
+			
+			.webim-operations li:nth-child(2) i {
+				display: inline-block;
+				margin-top: -4px;
+				vertical-align: top;
+			}
+			
+			.webim-operations li:last-child:hover {
+				color: #e90101;
+			}
+			
+			.webim-operations li:last-child:hover i {
+				color: #e90101;
+			}
+			
+			.webim-msg-prompt {
+				position: absolute;
+				top: -4px;
+				right: 0;
+				line-height: 16px;
+				font-style: normal;
+				width: 16px;
+				height: 16px;
+				font-size: 12px;
+				text-align: center;
+				color: #fff;
+				border-radius: 50%;
+				border: 2px solid #fcfdfb;
+				-webkit-tap-highlight-color: transparent;
+				background-color: #ff3a00;
+			}
+			
+			.webim-msg-icon-prompt {
+				width: 10px;
+				height: 10px;
+				top: 0px;
+				right: 8px;
+			}
+			
+			.webim-blacklist-wrapper {
+				position: relative;
+				height: 100%;
+				width: 100%;
+				overflow-x: hidden;
+				overflow-y: auto;
+				-webkit-tap-highlight-color: transparent;
+				background-color: white;
+				margin-bottom: 30px;
+			}
+			
+			.webim-blacklist-item {
+				position: relative;
+				cursor: pointer;
+				display: block;
+				width: 100%;
+				overflow: hidden;
+				height: 30px;
+				font-size: 20px;
+				line-height: 30px;
+			}
+			
+			.webim-blacklist-item i.font {
+				line-height: 30px;
+				float: right;
+				position: static;
+			}
+			
+			.webim-operation-icon {
+				width: 100px;
+				float: right;
+				margin-right: 10px;
+				text-align: right;
+			}
+			
+			*:focus {
+				outline: 0;
+			}
+			/*
+ * notify
+ */
+			
+			.webim-notify {
+				z-index: 3;
+				position: fixed;
+				top: 10px;
+				word-wrap: break-word;
+				padding: 4px;
+				width: 50%;
+				color: #fff;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				max-width: 90%;
+				min-height: 30px;
+				border-radius: 2px;
+				line-height: 30px;
+				text-align: center;
+				box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 6px 0px;
+				-webkit-tap-highlight-color: transparent;
+				border: 0px none black;
+			}
+			
+			.webim-notify.success {
+				background-color: #aeda3e;
+			}
+			
+			.webim-notify.error {
+				background-color: #ff3a00;
+			}
+			
+			.webim-notify i {
+				position: absolute;
+				right: 10px;
+				top: 9px;
+			}
+			/*
+ * signin & signup
+ */
+			
+			.webim-sign {
+				overflow: hidden;
+				width: 400px;
+				margin: 40px auto;
+				text-align: center;
+				border-radius: 2px;
+				box-shadow: rgba(0, 0, 0, 0.298039) 0px 0px 6px 0px;
+				border: 0px none black;
+				-webkit-tap-highlight-color: transparent;
+				background-color: white;
+			}
+			
+			.webim-sign h2 {
+				font-size: 24px;
+				color: #1a1a1a;
+				width: 100%;
+				line-height: 84px;
+				height: 64px;
+			}
+			
+			.webim-sign p {
+				margin: 0px auto 40px;
+				width: 300px;
+				text-align: left;
+			}
+			
+			.webim-sign p i {
+				font-style: normal;
+				color: #4eb1f4;
+				cursor: pointer;
+			}
+			
+			.webim-sign.webim-signup button {
+				margin-top: 30px;
+			}
+			
+			.webim-chat {
+				position: relative;
+				max-width: 1024px;
+				min-width: 960px;
+				max-height: 600px;
+				height: 100%;
+				margin: auto;
+				box-shadow: rgba(0, 0, 0, 0.298039) 0px 0px 6px 0px;
+				border: 0px none black;
+				-webkit-tap-highlight-color: transparent;
+				background-color: white;
+				border-radius: 2px;
+				overflow: hidden;
+			}
+			
+			.webim-chatwindow {
+				position: relative;
+				float: left;
+				height: 100%;
+				width: 100%;
+			}
+			
+			.webim-chatwindow textarea {
+				position: absolute;
+				bottom: 10px;
+				left: 10px;
+				box-sizing: border-box;
+				min-height: 30px;
+				height: 30px;
+				border: none;
+				width: 70%;
+				padding: 5px;
+				border-radius: 3px;
+				border: 1px solid #ddd;
+				overflow-y: hidden;
+			}
+			
+			.webim-chatwindow .webim-group-memeber {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 40px;
+				margin: auto;
+				padding: 10px 7px;
+				border-radius: 2px;
+				width: 200px;
+				overflow: auto;
+				box-shadow: rgba(0, 0, 0, 0.298039) 0px 0px 6px 0px;
+				z-index: 2;
+				background: #fff;
+				max-height: 300px;
+			}
+			
+			.webim-chatwindow .webim-group-memeber li {
+				height: 30px;
+				line-height: 30px;
+				padding: 0 4px;
+				box-sizing: border-box;
+				text-align: left;
+			}
+			
+			.webim-chatwindow .webim-group-memeber li> div {
+				display: inline-block;
+				vertical-align: middle;
+				margin: 0 6px;
+				width: 20px;
+				height: 20px;
+			}
+			
+			.webim-chatwindow-title {
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				font-size: 14px;
+			}
+			
+			.webim-chatwindow-title i {
+				color: #cccccc;
+				vertical-align: middle;
+				cursor: pointer;
+				margin-left: 10px;
+				padding-bottom: 22px;
+			}
+			
+			.webim-chatwindow-title i.webim-up-icon {
+				transform: rotate(180deg);
+			}
+			
+			.webim-chatwindow-title i.webim-call-icon {
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			
+			.webim-chatwindow-title i.webim-accept-icon {
+				position: absolute;
+				left: 40px;
+				top: 0;
+			}
+			
+			.webim-chatwindow-options {
+				/*border-top: 1px solid #f2f2f2;*/
+				width: 26%;
+				z-index: 1;
+				position: absolute;
+				bottom: 10px;
+				right: 0px;
+				height: 30px;
+				line-height: 30px;
+			}
+			
+			.webim-chatwindow-options> span {
+				margin-left: 6px;
+				color: #cccccc;
+				cursor: pointer;
+			}
+			
+			.webim-chatwindow-options> span:hover {
+				color: #4eb1f4;
+			}
+			
+			.webim-chatwindow-options img {
+				width: 25px;
+				height: auto;
+			}
+			
+			.webim-send-btn {
+				position: absolute;
+				bottom: 0;
+				right: 10px;
+				width: 50px;
+				height: 31px;
+				font-size: 12px;
+				z-index: 999;
+				display: none;
+			}
+			
+			.webim-chatwindow-msg {
+				z-index: 1;
+				position: absolute;
+				top: -8px;
+				bottom: 150px;
+				overflow-x: hidden;
+				overflow-y: auto;
+				box-sizing: border-box;
+				padding: 20px 10px;
+				width: 100%;
+			}
+			
+			.webim-send-wrapper> ul {
+				z-index: 1;
+				position: absolute;
+				width: 100%;
+				height: auto;
+				bottom: 0px;
+				left: 0px;
+				border-radius: 2px;
+				background: #fff;
+				box-sizing: border-box;
+				padding: 4px;
+				box-shadow: rgba(0, 0, 0, 0.298039) 0px 4px 12px 0px;
+			}
+			
+			.webim-send-wrapper> ul li {
+				cursor: pointer;
+				display: inline-block;
+				margin: 2px 3px 0 5px;
+			}
+			
+			#test {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				z-index: 2222;
+			}
+			
+			.webim-msg-container {
+				overflow: hidden;
+				margin: 24px 0;
+			}
+			
+			.webim-msg-container> div {
+				max-width: 70%;
+				overflow: hidden;
+			}
+			
+			.webim-msg-container .right> p {
+				color: #999999;
+				letter-spacing: 1px;
+				margin-right: 10px;
+			}
+			
+			.webim-msg-container .right .webim-msg-icon {
+				color: #b4e4fc;
+				right: -50px;
+			}
+			
+			.webim-msg-container .right .webim-msg-value {
+				float: right;
+				margin: 6px 10px 0 0;
+				background-color: #b4e4fc;
+			}
+			
+			.webim-msg-container .right .webim-msg-error {
+				float: right;
+				margin: 6px 10px 0 0;
+			}
+			
+			.webim-msg-container .right .webim-msg-header {
+				text-align: right;
+			}
+			
+			.webim-msg-container .left> p {
+				color: #999999;
+				letter-spacing: 1px;
+				margin-left: 10px;
+			}
+			
+			.webim-msg-container .left .webim-msg-icon {
+				color: #f1f2ec;
+				left: -10px;
+			}
+			
+			.webim-msg-container .left .webim-msg-value {
+				background-color: #f1f2ec;
+				float: left;
+				margin: 6px 0 0 10px;
+				width: 90%;
+			}
+			
+			.webim-msg-container .left .webim-msg-header {
+				text-align: left;
+			}
+			
+			.webim-msg-icon {
+				position: absolute;
+				top: 4px;
+				font-size: 10px;
+			}
+			
+			.webim-msg-value {
+				position: relative;
+				min-height: 30px;
+				max-width: 100%;
+				border-radius: 4px;
+				padding: 6px;
+				box-sizing: border-box;
+				min-width: 60%;
+			}
+			
+			.webim-msg-value video {
+				width: 100%;
+			}
+			
+			.webim-msg-value.webim-img-msg-wrapper {
+				padding: 1px;
+			}
+			
+			.webim-msg-value> div,
+			.webim-msg-value> pre {
+				white-space: pre-wrap;
+				word-break: break-all;
+				color: #1a1a1a;
+				font-size: 14px;
+				line-height: 20px;
+				margin: 0;
+				min-width: 150px;
+			}
+			
+			.webim-msg-value .emoji {
+				width: 32px;
+				vertical-align: bottom;
+			}
+			
+			.webim-msg-value i {
+				display: block;
+				font-style: normal;
+				margin-left: 40px;
+				font-size: 12px;
+				color: rgba(0, 0, 0, 0.25);
+			}
+			
+			.webim-msg-value a {
+				display: block;
+				margin-left: 30px;
+				margin-top: -28px;
+				font-size: 12px;
+				color: rgba(0, 0, 0, 0.25);
+				text-decoration: none;
+			}
+			
+			.webim-msg-img {
+				max-width: 100%;
+				vertical-align: middle;
+				cursor: pointer;
+				border-radius: 4px;
+			}
+			
+			.webim-msg-header {
+				line-height: 30px;
+				margin-bottom: 4px;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+			}
+			
+			.webim-msg-header-icon {
+				vertical-align: middle;
+				display: inline-block;
+				margin: -46px 4px 0 -4px;
+				line-height: 40px;
+				color: #868683;
+			}
+			
+			.webim-msg-name {
+				width: calc(100% - 80px);
+				display: inline-block;
+				height: 40px;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+			
+			.webim-msg-fileSize {
+				display: inline-block;
+				float: right;
+				width: 47px;
+				overflow: hidden;
+			}
+			
+			.webim-img-expand {
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				left: 0;
+				top: 0;
+				background: rgba(0, 0, 0, 0.3);
+				z-index: 3;
+			}
+			
+			.webim-img-expand img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				max-width: 90%;
+				max-height: 90%;
+				margin: auto;
+			}
+			
+			.webim-audio-slash {
+				background-color: transparent;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				border-radius: 4px;
+			}
+			
+			.slash {
+				animation: slash 1s infinite;
+				-moz-animation: slash 1s infinite;
+				-webkit-animation: slash 1s infinite;
+			}
+			
+			@keyframes slash {
+				from {
+					background-color: transparent;
+				}
+				50% {
+					background-color: rgba(0, 0, 0, 0.1);
+				}
+				to {
+					background-color: transparent;
+				}
+			}
+			
+			@-moz-keyframes slash {
+				from {
+					background-color: transparent;
+				}
+				50% {
+					background-color: rgba(0, 0, 0, 0.1);
+				}
+				to {
+					background-color: transparent;
+				}
+			}
+			
+			@-webkit-keyframes slash {
+				from {
+					background-color: transparent;
+				}
+				50% {
+					background-color: rgba(0, 0, 0, 0.1);
+				}
+				to {
+					background-color: transparent;
+				}
+			}
+			
+			.clearfix:after {
+				content: ' ';
+				display: table;
+				clear: both;
+			}
+			/*
+ * dialog
+ */
+			
+			.webim-dialog {
+				z-index: 3;
+				position: absolute;
+				width: 400px;
+				min-height: 168px;
+				top: 20%;
+				left: 0;
+				right: 0;
+				margin: auto;
+				border-radius: 2px;
+				box-shadow: rgba(0, 0, 0, 0.298039) 0px 0px 8px 0px;
+				background-color: white;
+			}
+			
+			.webim-dialog h3 {
+				line-height: 40px;
+				box-sizing: border-box;
+				padding-left: 10px;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+				font-weight: normal;
+			}
+			
+			.webim-dialog .font {
+				font-size: 20px;
+				position: absolute;
+				right: 6px;
+				top: 6px;
+				width: 20px;
+				height: 20px;
+				color: rgba(0, 0, 0, 0.1);
+				cursor: pointer;
+			}
+			
+			.webim-dialog> div {
+				border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+				padding: 10px 10px 20px;
+			}
+			
+			.webim-dialog .webim-dialog-button {
+				position: absolute;
+				right: 8px;
+				bottom: 2px;
+				width: 80px;
+				height: 26px;
+			}
+			
+			.webim-dialog .webim-dialog-button-left {
+				position: absolute;
+				right: 100px;
+				bottom: 2px;
+				width: 80px;
+				height: 26px;
+			}
+			
+			.webim-dialog .webim-subscribe-button {
+				width: 60px;
+				height: 30px;
+				margin-left: 10px;
+			}
+			
+			.webim-dialog input {
+				height: 30px;
+				width: 220px;
+			}
+			
+			.webim-dialog textarea {
+				margin-top: 20px;
+				right: 0;
+				box-sizing: border-box;
+				height: 80px;
+				border: 1px solid rgba(0, 0, 0, 0.1);
+				width: 220px;
+			}
+			
+			.webim-dialog-body {
+				min-height: 100px;
+			}
+			
+			.webim-dialog .webim-dialog-footer {
+				padding: 10px;
+				position: relative;
+				min-height: 20px;
+				text-align: right;
+			}
+			
+			.webim-dialog .webim-dialog-footer .webim-button {
+				position: static;
+				margin-right: 10px;
+			}
+			
+			.webim-dialog-2 {
+				height: 450px;
+			}
+			
+			.webim-friend-requests {
+				height: auto;
+			}
+			
+			.webim-friend-requests span {
+				width: 60%;
+				display: inline-block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			
+			.webim-friend-requests> div {
+				overflow: auto;
+				max-height: 400px;
+			}
+			/*
+ * layer
+ */
+			
+			.webim-layer {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 1;
+				background-color: rgba(0, 0, 0, 0.25);
+			}
+			/*
+  说明:
+  下面的css都是为了快速实现功能，覆盖旧有属性的各种trick
+  后期需要找专门的css人员整理一遍，合并入正常的文件，然后删除本文件!
+*/
+			/******************* multiple select box ********************/
+			
+			.react-multi-select-box-container {
+				position: relative;
+				width: 240px;
+				display: inline-block;
+				background-color: #fff;
+				border-radius: 4px;
+				text-align: left;
+				box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+			}
+			
+			.react-multi-select-box {
+				padding: 10px 0;
+				display: inline-block;
+				cursor: pointer;
+				border: none;
+				width: 100%;
+				text-align: left;
+				background-color: transparent;
+			}
+			
+			.react-multi-select-box::before {
+				content: ' ';
+				position: absolute;
+				z-index: 1;
+				height: 20px;
+				top: -7px;
+				right: 13px;
+				border-left: 3px solid transparent;
+				border-right: 3px solid transparent;
+				border-bottom: 4px solid #a7a8aa;
+			}
+			
+			.react-multi-select-box::after {
+				content: ' ';
+				position: absolute;
+				z-index: 1;
+				top: 20px;
+				right: 13px;
+				border-top: 4px solid #a7a8aa;
+				border-left: 3px solid transparent;
+				border-right: 3px solid transparent;
+			}
+			
+			.react-multi-select-box-label {
+				padding: 0 40px 0 10px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				color: #333;
+				line-height: 16px;
+			}
+			
+			.react-multi-select-box-empty .react-multi-select-box-label {
+				color: #c5c5c5;
+			}
+			
+			.react-multi-select-area {
+				position: absolute;
+				margin-top: 4px;
+				padding: 0 10px;
+				height: 225px;
+				min-width: 260px;
+				border-radius: 4px;
+				background-color: #fff;
+				z-index: 4;
+				box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+			}
+			
+			.react-multi-select-box-hidden {
+				display: none;
+			}
+			
+			.react-multi-select-hide {
+				display: none;
+			}
+			
+			.react-multi-select-panel {
+				display: flex;
+				height: 185px;
+			}
+			
+			.react-multi-select-col {
+				min-width: 110px;
+				overflow-y: auto;
+			}
+			
+			.react-multi-select-col .selected-option-row {
+				padding: 5px 0;
+				cursor: pointer;
+			}
+			
+			.react-multi-select-sign {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				width: 15px;
+			}
+			
+			.react-multi-select-sign i {
+				width: 6px;
+				height: 6px;
+				border-top: 2px solid #a9a9a9;
+				border-right: 2px solid #a9a9a9;
+				-webkit-transform: rotate(45deg);
+				-moz-transform: rotate(45deg);
+				-o-transform: rotate(45deg);
+				transform: rotate(45deg);
+			}
+			
+			.react-multi-select-area-btn {
+				padding: 5px 0;
+				height: 40px;
+				border-top: 1px solid #eee;
+				text-align: center;
+			}
+			
+			.react-multi-select-area-btn .eg-btn {
+				padding: 4px 20px;
+				margin-right: 10px;
+			}
+			
+			.react-multi-select-area-btn .eg-btn:last-child {
+				margin-right: 0;
+			}
+			
+			.classification {
+				padding: 5px 0;
+				cursor: pointer;
+			}
+			
+			.react-multi-select-list-arrow {
+				position: relative;
+				display: inline-block;
+				vertical-align: middle;
+				width: 8px;
+				height: 8px;
+			}
+			
+			.react-multi-select-list-arrow::before {
+				content: ' ';
+				position: absolute;
+				border-top: 3px solid transparent;
+				border-bottom: 3px solid transparent;
+				border-left: 4px solid #87c2e5;
+			}
+			
+			.react-multi-select-list-arrow.expand::before {
+				content: ' ';
+				position: absolute;
+				border-left: 3px solid transparent;
+				border-right: 3px solid transparent;
+				border-top: 4px solid #87c2e5;
+			}
+			
+			.react-multi-select-sub-options {
+				padding-left: 16px;
+			}
+			
+			.react-multi-select-list-option:last-child {
+				padding-bottom: 0;
+			}
+			
+			.react-multi-select-list-option .eg-input.checkbox .input-icon {
+				margin-right: 2px;
+			}
+			
+			.react-multi-select-list-option .eg-input.checkbox.active .input-icon {
+				fill: #87c2e5;
+			}
+			
+			.react-multi-select-list-option .react-multi-select-box-option {
+				position: relative;
+				padding: 5px 0 5px 20px;
+				margin: 0;
+				cursor: pointer;
+				display: block;
+				text-decoration: none;
+			}
+			
+			.react-multi-select-list-option .react-multi-select-box-option:before {
+				content: ' ';
+				position: absolute;
+				text-align: center;
+				line-height: 1.1;
+				left: 2px;
+				top: 8px;
+				height: 12px;
+				width: 12px;
+				margin-right: 10px;
+				border: 1px solid #7B8E9B;
+				background: #f9f9f9;
+				vertical-align: middle;
+			}
+			
+			.react-multi-select-list-option .react-multi-select-box-option-selected:before {
+				content: '\2713';
+				color: #87c2e5;
+			}
+			
+			.react-multiple-select-type-name {
+				padding: 5px 0 4px 0;
+				border-bottom: 1px solid #eee;
+				color: #c5c5c5;
+			}
+			
+			.react-multi-select-btn {
+				padding: 4px 20px;
+				border-radius: 6px;
+				background-color: #307fc8;
+				display: inline-block;
+				margin-right: 10px;
+				margin-bottom: 0;
+				text-align: center;
+				vertical-align: middle;
+				touch-action: manipulation;
+				cursor: pointer;
+				background-image: none;
+				border: 1px solid transparent;
+				white-space: nowrap;
+				outline: 0;
+				text-decoration: none;
+				font-weight: normal;
+				font-size: 14px;
+				line-height: 1.42857143;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				color: #fff;
+				border-color: transparent;
+			}
+			
+			.react-multi-select-btn:last-child {
+				margin-right: 0;
+			}
+			
+			.react-multi-select-btn-white {
+				background-color: #fff;
+				color: #333;
+				border-color: #d5d5d5;
+			}
+			/******************* multiple select box ********************/
+			
+			.webim-chatwindow .webim-operations-icon {
+				top: 5px;
+				left: auto;
+				right: 10px;
+				bottom: 0px;
+			}
+			
+			.webim-chatwindow .webim-operations {
+				left: inherit;
+				right: 40px;
+				top: 10px;
+				bottom: auto;
+				z-index: 2;
+			}
+			
+			.webim-friend-options span.radio_span {
+				width: 80px;
+				display: inline-block;
+			}
+			
+			.webim-friend-options input.radio {
+				height: 10px;
+				width: 20px;
+			}
+			
+			.webim_isWindowSDK {
+				top: 0;
+				bottom: 0;
+			}
+			
+			.webim_isWindowSDK .webim-chat {
+				max-width: 100%;
+				min-width: 100%;
+				max-height: 100%;
+				width: 100%;
+			}
+			
+			.webim-friend-requests-windowSDK {
+				width: 500px;
+			}
+			
+			.webim-friend-requests-windowSDK span {
+				width: 100%;
+			}
+			
+			.webim-msg-value a.dir {
+				margin-left: 130px;
+				margin-top: -20px;
+			}
+			
+			.webim-leftbar .username {
+				width: 100%;
+				overflow: hidden;
+			}
+			
+			.webim-loading span {
+				position: absolute;
+				margin: auto;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 200px;
+				height: 80px;
+				text-align: center;
+			}
+			
+			span.red {
+				color: #ff2a00;
+			}
+			
+			.webim-contact-loading {
+				width: 24px;
+				margin: 0 auto;
+			}
+			
+			.webim-contact-loading img {
+				width: 24px;
+			}
+			
+			.webim-msg-value .img1{width: 100%; height: auto;}
+		</style>
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="chat" style="background: #fff;">
+
+				<!--登录导航-->
+				<div class="login-nav">
+					<a href="index.html">
+						<div class="login-return"><img src="images/left.png"></div>
+					</a>
+					<div class="login-logo"><img src="images/login-logo.png"></div>
+					<div class="login-nav-name">
+						<a href="login.html">
+							<div class="login-nav-active">登 录</div>
+						</a>
+						<a href="register.html">
+							<div>注 册</div>
+						</a>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<!--登录内容-->
+				<div class="login-main">
+					<div class="login-input"><img src="images/iconphone.png" class="login-img"><input type="text" class="border-none login-user" placeholder="请输入手机号码或者邮箱"></div>
+					<div class="login-input"><img src="images/iconkey.png" class="login-img"><input maxlength="12" type="password" class="border-none login-pwd" placeholder="请输入6-12位数字或字母组合的密码"></div>
+					<a href="resetPwd-email.html">
+						<div class="fr color-cys">忘记密码</div>
+					</a>
+					<div class="clear"></div>
+					<div class="login-inputs"><input type="submit" class=" login-btn border-none" value="登录"></div>
+				</div>
+
+				<div class="webim-chatwindow hide">
+
+					<ul tabindex="-1" class="webim-group-memeber hide"></ul>
+					<div id="" class="webim-chatwindow-msg">
+
+					</div>
+					<div class="webim-send-wrapper">
+
+						<ul class=" hide dqs">
+							<li key="[):]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_1.png"></li>
+							<li key="[:D]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_2.png"></li>
+							<li key="[;)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_3.png"></li>
+							<li key="[:-o]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_4.png"></li>
+							<li key="[:p]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_5.png"></li>
+							<li key="[(H)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_6.png"></li>
+							<li key="[:@]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_7.png"></li>
+							<li key="[:s]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_8.png"></li>
+							<li key="[:$]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_9.png"></li>
+							<li key="[:(]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_10.png"></li>
+							<li key="[:'(]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_11.png"></li>
+							<li key="[:|]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_12.png"></li>
+							<li key="[(a)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_13.png"></li>
+							<li key="[8o|]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_14.png"></li>
+							<li key="[8-|]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_15.png"></li>
+							<li key="[+o(]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_16.png"></li>
+							<li key="[<o)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_17.png"></li>
+							<li key="[|-)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_18.png"></li>
+							<li key="[*-)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_19.png"></li>
+							<li key="[:-#]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_20.png"></li>
+							<li key="[:-*]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_21.png"></li>
+							<li key="[^o)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_22.png"></li>
+							<li key="[8-)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_23.png"></li>
+							<li key="[(|)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_25.png"></li>
+							<li key="[(S)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_26.png"></li>
+							<li key="[(*)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_27.png"></li>
+							<li key="[(#)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_28.png"></li>
+							<li key="[(R)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_29.png"></li>
+							<li key="[({)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_30.png"></li>
+							<li key="[(})]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_31.png"></li>
+							<li key="[(k)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_32.png"></li>
+							<li key="[(F)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_33.png"></li>
+							<li key="[(W)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_34.png"></li>
+							<li key="[(D)]" class="webim-emoji-item"><img src="css/demo/images/faces/ee_35.png"></li>
+						</ul>
+						<div class="hide wj">
+							<div class="fl wj1 tp">
+								<div class="webim-picture-icon font">K</div>
+								<div class="name">图片</div>
+
+								<a href="javascript:;" class="file">选择文件
+									<input type="file" name="" id="image">
+								</a>
+							</div>
+							<div class="fl wj1 wjs">
+								<div class="webim-file-icon font ">S</div>
+								<div class="name">文件</div>
+								
+								<a href="javascript:;" class="file1">选择文件
+									<input type="file" name="" id="file">
+								</a>
+							</div>
+						</div>
+						<textarea class="cons" id="talkInputId"></textarea>
+						<div class="webim-chatwindow-options">
+							<span class="webim-emoji-icon font smaller"><img src="images/chat (5).png"></span>
+							<span class=" font smaller addfile"><img src="images/chat (1).png"></span>
+						</div>
+						<button class="webim-button bg-color webim-send-btn base-bgcolor disabled" onclick="sendText()">发送</button>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</body>
+	<script src="js/webim.config.js"></script>
+	<script src="js/strophe-1.2.8.min.js"></script>
+	<script src="js/websdk-1.4.10.min.js"></script>
+	<script src="js/adapter.js"></script>
+	<script src="js/webrtc-1.4.10.js"></script>
+	<!--<script src="js/webim/sdk/strophe.js"></script>
+	<script src="js/eeasemob.im-1.0.7.js"></script>
+	<script src="js/easemob.im.config.js"></script>
+	<script src="js/webim/sdk/swfupload/swfupload.js"></script>
+	<script src="js/webim/sdk/jplayer/jquery.jplayer.min.js"></script>-->
+	<script type="text/javascript" src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<!--<script src="js/ChatContent.js"></script>-->
+	<script>
+		var conn = {};
+		conn = new WebIM.connection({
+			isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
+			https: typeof WebIM.config.https === 'boolean' ? WebIM.config.https : location.protocol === 'https:',
+			url: WebIM.config.xmppURL,
+			isAutoLogin: true,
+			heartBeatWait: WebIM.config.heartBeatWait,
+			autoReconnectNumMax: WebIM.config.autoReconnectNumMax,
+			autoReconnectInterval: WebIM.config.autoReconnectInterval
+		});
+
+		// listern，添加回调函数
+		conn.listen({
+			onOpened: function(message) { //连接成功回调，连接成功后才可以发送消息
+				//如果isAutoLogin设置为false，那么必须手动设置上线，否则无法收消息
+				// 手动上线指的是调用conn.setPresence(); 在本例中，conn初始化时已将isAutoLogin设置为true
+				// 所以无需调用conn.setPresence();
+				console.log("opened");
+				handleOpen(conn);
+				//				alert("连接成功");
+
+			},
+			onTextMessage: function(message) {
+				// 在此接收和处理消息，根据message.type区分消息来源，私聊或群组或聊天室
+				//	console.log(message.type);
+				console.log(message);
+				console.log('Text');
+
+				$('<div class="webim-msg-container rel"><div data-reactroot="" class="rel left"><div class="webim-avatar-icon left small"><img class="w100" src="images/3.png"></div><div class="clearfix fl"><div class="webim-msg-value"><span class="webim-msg-icon font">H</span><pre>' + message.data + '</pre></div><div class="webim-msg-error hide"><span class="webim-file-icon font smaller red">k</span></div></div></div></div>').appendTo($(".webim-chatwindow-msg"))
+
+			}, //收到文本消息
+			onEmojiMessage: function(message) {
+				// 当为WebIM添加了Emoji属性后，若发送的消息含WebIM.Emoji里特定的字符串，connection就会自动将
+				// 这些字符串和其它文字按顺序组合成一个数组，每一个数组元素的结构为{type: 'emoji(或者txt)', data:''}
+				// 当type='emoji'时，data表示表情图像的路径，当type='txt'时，data表示文本消息
+				console.log('Emoji');
+				console.log(message);
+				var data = message.data;
+				var arr = [];
+				for(var i = 0, l = data.length; i < l; i++) {
+					console.log(data[i]);
+					arr.push(data[i]);
+				}
+				console.log(arr);
+				var a = '';
+				$.each(arr, function(i, v) {
+					if(v.type == "emoji") {
+						a += '<img src="' + v.data + '"/>'
+					} else if(v.type == "txt") {
+						a += '<span>' + v.data + '</span>'
+					}
+				});
+				$('<div class="webim-msg-container rel"><div data-reactroot="" class="rel left"><div class="webim-avatar-icon left small"><img class="w100" src="images/3.png"></div><div class="clearfix fl"><div class="webim-msg-value"><span class="webim-msg-icon font">H</span><pre>' + a + '</pre></div><div class="webim-msg-error hide"><span class="webim-file-icon font smaller red">k</span></div></div></div></div>').appendTo($(".webim-chatwindow-msg"))
+			}, //收到表情消息
+			onPictureMessage: function(message) {
+				console.log('Picture');
+
+				var options = {
+					url: message.url
+				};
+				$('<div class="webim-msg-container rel"><div data-reactroot="" class="rel left"><div class="webim-avatar-icon left small"><img class="w100" src="images/3.png"></div><div class="clearfix fl"><div class="webim-msg-value"><span class="webim-msg-icon font">H</span><pre><img class="img1" src="' + options.url + '"></pre></div><div class="webim-msg-error hide"><span class="webim-file-icon font smaller red">k</span></div></div></div></div>').appendTo($(".webim-chatwindow-msg"))
+				
+				options.onFileDownloadComplete = function() {
+					// 图片下载成功
+					console.log('Image download complete!');
+				};
+				options.onFileDownloadError = function() {
+					// 图片下载失败
+					console.log('Image download failed!');
+				};
+				WebIM.utils.download.call(conn, options); // 意义待查
+
+			}, //收到图片消息
+			onCmdMessage: function(message) {
+				console.log('CMD');
+			}, //收到命令消息
+			onAudioMessage: function(message) {
+				console.log("Audio");
+			}, //收到音频消息
+			onLocationMessage: function(message) {
+				console.log("Location");
+			}, //收到位置消息
+			onFileMessage: function(message) {
+				console.log("File");
+				console.log(message);
+				$('<div class="webim-msg-container rel"><div data-reactroot="" class="rel left"><div class="webim-avatar-icon left small"><img class="w100" src="images/3.png" style="border-radius:50%"></div><p class="left"></p><div class="clearfix" style="min-width: 280px;"><div class="webim-msg-value" style="min-width: 200px;"><span class="webim-msg-icon font">H</span><div><p class="webim-msg-header">文件</p><div id="file_'+message.id+'"><span class="webim-msg-header-icon font small">S</span><span class="webim-msg-name">'+message.filename+'</span><span class="webim-msg-fileSize"></span><a target="_blank" href="'+message.url+'">点击下载</a></div></div></div><div class="webim-msg-error hide"><span class="webim-file-icon font smaller red" title="">k</span></div></div></div></div>').appendTo($(".webim-chatwindow-msg"))
+				
+			}, //收到文件消息
+			onVideoMessage: function(message) {
+				var node = document.getElementById('privateVideo');
+				var option = {
+					url: message.url,
+					headers: {
+						'Accept': 'audio/mp4'
+					},
+					onFileDownloadComplete: function(response) {
+						var objectURL = WebIM.utils.parseDownloadResponse.call(conn, response);
+						node.src = objectURL;
+					},
+					onFileDownloadError: function() {
+						console.log('File down load error.')
+					}
+				};
+				WebIM.utils.download.call(conn, option);
+			}, //收到视频消息
+			onPresence: function(message) {
+				switch(message.type) {
+					case 'subscribe': // 对方请求添加好友
+						// 同意对方添加好友
+						document.getElementById('agreeFriends').onclick = function(message) {
+							conn.subscribed({
+								to: 'asdfghj',
+								message: "[resp:true]"
+							});
+							// 需要反向添加对方好友
+							conn.subscribe({
+								to: message.from,
+								message: "[resp:true]"
+							});
+						};
+						// 拒绝对方添加好友
+						document.getElementById('rejectFriends').onclick = function(message) {
+							conn.unsubscribed({
+								to: message.from,
+								message: "rejectAddFriend" // 拒绝添加好友回复信息
+							});
+						};
+
+						break;
+					case 'subscribed': // 对方同意添加好友，已方同意添加好友
+						break;
+					case 'unsubscribe': // 对方删除好友
+						break;
+					case 'unsubscribed': // 被拒绝添加好友，或被对方删除好友成功
+						break;
+					case 'joinChatRoomSuccess': // 成功加入聊天室
+						console.log('join chat room success');
+						break;
+					case 'joinChatRoomFaild': // 加入聊天室失败
+						console.log('join chat room faild');
+						break;
+					case 'joinPublicGroupSuccess': // 意义待查
+						console.log('join public group success', message.from);
+						break;
+				}
+			}, //收到联系人订阅请求（加好友）、处理群组、聊天室被踢解散等消息
+			onRoster: function(message) {
+				console.log('Roster');
+
+			}, //处理好友申请
+			onInviteMessage: function(message) {
+				console.log('Invite');
+			}, //处理群组邀请
+			onOnline: function() {
+				console.log('onLine');
+			}, //本机网络连接成功
+			onOffline: function() {
+				console.log('offline');
+			}, //本机网络掉线
+			onError: function(message) {
+				console.log('Error');
+				console.log(message);
+			}, //失败回调
+			onBlacklistUpdate: function(list) {
+					// 查询黑名单，将好友拉黑，将好友从黑名单移除都会回调这个函数，list则是黑名单现有的所有好友信息
+					console.log(list);
+				} // 黑名单变动
+		});
+		//连接成功时回调方法
+		var handleOpen = function(conn) {
+			//从连接中获取到当前的登录人注册帐号名
+			//  curUserId = conn.context.userId;
+			//启动心跳
+			if(conn.isOpened()) {
+				conn.heartBeat(conn);
+			}
+			conn.setPresence(); //设置上线
+			$(".login-nav").addClass("hide");
+			$(".login-main").addClass("hide");
+			$(".webim-chatwindow").removeClass("hide");
+
+		};
+
+		WebIM.Emoji = {
+			path: 'css/demo/images/faces/' /*表情包路径*/ ,
+			map: {
+				'[):]': 'ee_1.png',
+				'[:D]': 'ee_2.png',
+				'[;)]': 'ee_3.png',
+				'[:-o]': 'ee_4.png',
+				'[:p]': 'ee_5.png',
+				'[(H)]': 'ee_6.png',
+				'[:@]': 'ee_7.png',
+				'[:s]': 'ee_8.png',
+				'[:$]': 'ee_9.png',
+				'[:(]': 'ee_10.png',
+				"[:'(]": 'ee_11.png',
+				'[:|]': 'ee_12.png',
+				'[(a)]': 'ee_13.png',
+				'[8o|]': 'ee_14.png',
+				'[8-|]': 'ee_15.png',
+				'[+o(]': 'ee_16.png',
+				'[<o)]': 'ee_17.png',
+				'[|-)]': 'ee_18.png',
+				'[*-)]': 'ee_19.png',
+				'[:-#]': 'ee_20.png',
+				"[:-*]": 'ee_21.png',
+				'[^o)]': 'ee_22.png',
+				'[8-)]': 'ee_23.png',
+				'[(|)]': 'ee_25.png',
+				'[(S)]': 'ee_26.png',
+				'[(*)]': 'ee_27.png',
+				'[(#)]': 'ee_28.png',
+				'[(R)]': 'ee_29.png',
+				'[({)]': 'ee_30.png',
+				'[(})]': 'ee_31.png',
+				"[(k)]": 'ee_32.png',
+				'[(F)]': 'ee_33.png',
+				'[(W)]': 'ee_34.png',
+				'[(D)]': 'ee_35.png'
+
+			}
+		};
+	</script>
+	<script>
+		$(".login-btn").click(function() {
+			var username = $(".login-user").val();
+			var pwd = $(".login-pwd").val();
+			var pp = md5(pwd);
+			var regx = /^(13[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(18[0-9]{9})|(15[0-9]{9})$/;
+			var reem = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+			var patt = new RegExp('@');
+			if(username == "") {
+				$.toast("请输入手机号码或者邮箱", "text");
+			} else {
+				if(patt.test(username)) {
+					if(!reem.test(username)) {
+						$.toast("请输入正确的邮箱", "text");
+					} else if(pwd == "") {
+						$.toast("请输入6-12位数字或字母组合的密码", "text");
+					} else if(pwd.length < 6) {
+						$.toast("请输入6-12位数字或字母组合的密码", "text");
+					} else {
+						var user = username.replace("@", "");
+						console.log(user);
+						var options = {
+							apiUrl: WebIM.config.apiURL,
+							user: user,
+							pwd: pp,
+							appKey: WebIM.config.appkey
+						};
+						conn.open(options);
+						console.log(123456789);
+						console.log(options);
+					}
+				} else {
+					if(username.length < 11 || !regx.test(username) || username.length > 11) {
+						$.toast("请输入正确的手机号码", "text");
+					} else if(pwd == "") {
+						$.toast("请输入6-12位数字或字母组合的密码", "text");
+					} else if(pwd.length < 6) {
+						$.toast("请输入6-12位数字或字母组合的密码", "text");
+					} else {
+						var options = {
+							apiUrl: WebIM.config.apiURL,
+							user: username,
+							pwd: pp,
+							appKey: WebIM.config.appkey
+						};
+						conn.open(options);
+						console.log(123456789);
+						console.log(options);
+
+					}
+
+				}
+			}
+		})
+		$(".cons").keyup(function() {
+			if($(".cons").val() != "") {
+				$(".webim-send-btn").show();
+				$(".addfile").hide();
+			} else {
+				$(".addfile").show();
+				$(".webim-send-btn").hide();
+			}
+		})
+		$(".webim-emoji-icon").click(function() {
+			$(".dqs").removeClass("hide");
+			var h = $(".dqs").height();
+			$(".webim-chatwindow textarea").css("bottom", h + 15);
+			$(".webim-chatwindow-options").css("bottom", h + 15)
+			$(".webim-send-btn").css("bottom", h + 5)
+		})
+		$(".webim-chatwindow-msg").click(function() {
+			$(".dqs").addClass("hide");
+			$(".wj").addClass("hide");
+			$(".webim-chatwindow textarea").css("bottom", 10);
+			$(".webim-chatwindow-options").css("bottom", 10)
+			$(".webim-send-btn").css("bottom", 0)
+		})
+		$(".addfile").click(function() {
+			$(".wj").removeClass("hide");
+			$(".dqs").addClass("hide");
+			var h = $(".wj").height();
+			$(".webim-chatwindow textarea").css("bottom", h + 25);
+			$(".webim-chatwindow-options").css("bottom", h + 25)
+		})
+		var arr = [];
+		$(".dqs").on("click", "li", function() {
+			$(this).attr("key");
+			var src = $(this).children().attr("src");
+			console.log(src);
+			arr.push(src);
+			var conv = $(".cons").val();
+			var en = $(this).attr("key");
+			$(".cons").val(conv + en);
+			$(".webim-send-btn").show();
+			$(".addfile").hide();
+		})
+
+		$(".webim-send-btn").click(function() {
+				var msgs = $(".cons").val();
+				//	 sendPrivateText(msgs);
+				sendText();
+			})
+			//发送消息
+		function sendText() {
+
+			textSending = true;
+			var msgInput = document.getElementById('talkInputId');
+			var msg = msgInput.value;
+			if(msg == null || msg.length == 0) {
+				return;
+			}
+			var msgtext = msg.replace(/\n/g, '<br>');
+			var id = conn.getUniqueId(); // 生成本地消息id
+			var msg = new WebIM.message('txt', id); // 创建文本消息
+			msg.set({
+				msg: msgtext, // 消息内容
+				to: '18991360884', // 接收消息对象（用户id）
+				roomType: false,
+				success: function(id, serverMsgId) {
+					console.log('send private text Success');
+				}
+			});
+			msg.body.chatType = 'singleChat';
+			conn.send(msg.body);
+			appendMsg("121218837qq.com", "18991360884", msgtext);
+			//  turnoffFaces_box();
+			msgInput.value = "";
+			msgInput.focus();
+			setTimeout(function() {
+				textSending = false;
+			}, 1000);
+			$(".cons").keyup();
+		};
+//		function appendPic(curUserId, to, {
+//			data: [{type: 'pic',
+//                 filename: objUrl,
+//                 data: img}]
+//		})
+
+		function appendMsg(who, contact, message) {
+			// 消息体 {isemotion:true;body:[{type:txt,msg:ssss}{type:emotion,msg:imgdata}]}
+			var localMsg = null;
+			if(typeof message == 'string') {
+				localMsg = parseTextMessage(message, WebIM.Emoji.map);
+				localMsg = localMsg.body;
+			} else {
+				localMsg = message.data;
+			}
+			var a = "";
+			for(var i = 0; i < localMsg.length; i++) {
+				var msg = localMsg[i];
+				var type = msg.type;
+				var data = msg.data;
+				var src=msg.url;
+
+				console.log(msg);
+				if(type == "emoji") {
+					a += '<img src="' + data + '"/>'
+
+				} else if(type == "File" || type == 'audio' || type == 'video') {
+					a += '<img src="' + src + '"/>'
+				} else {
+					a = '<span>' + data + '</span>'
+				}
+
+			}
+
+			$('<div class="webim-msg-container rel"><div data-reactroot="" class="rel right"><div class="webim-avatar-icon right small"><img class="w100" src="images/3.png"></div><div class="clearfix fl"><div class="webim-msg-value"><span class="webim-msg-icon font">I</span><pre>' + a + '</pre></div><div class="webim-msg-error hide"><span class="webim-file-icon font smaller red">k</span></div></div></div></div>').appendTo($(".webim-chatwindow-msg"))
+
+		}
+
+		function parseTextMessage(message, faces) {
+			if(typeof message !== 'string') {
+				return;
+			}
+
+			if(Object.prototype.toString.call(faces) !== '[object Object]') {
+				return {
+					isemoji: false,
+					body: [{
+						type: 'txt',
+						data: message
+					}]
+				};
+			}
+
+			var receiveMsg = message;
+			var emessage = [];
+			var expr = /\[[^[\]]{2,3}\]/mg;
+			var emoji = receiveMsg.match(expr);
+			console.log(receiveMsg);
+
+			if(!emoji || emoji.length < 1) {
+				return {
+					isemoji: false,
+					body: [{
+						type: 'txt',
+						data: message
+					}]
+				};
+			}
+			var isemoji = false;
+			for(var i = 0; i < emoji.length; i++) {
+				var tmsg = receiveMsg.substring(0, receiveMsg.indexOf(emoji[i])),
+					existEmoji = WebIM.Emoji.map[emoji[i]];
+
+				if(tmsg) {
+					emessage.push({
+						type: 'txt',
+						data: tmsg
+					});
+				}
+				if(!existEmoji) {
+					emessage.push({
+						type: 'txt',
+						data: emoji[i]
+					});
+					continue;
+				}
+				var emojiStr = WebIM.Emoji.map ? WebIM.Emoji.path + existEmoji : null;
+
+				if(emojiStr) {
+					isemoji = true;
+					emessage.push({
+						type: 'emoji',
+						data: emojiStr
+					});
+				} else {
+					emessage.push({
+						type: 'txt',
+						data: emoji[i]
+					});
+				}
+				var restMsgIndex = receiveMsg.indexOf(emoji[i]) + emoji[i].length;
+				receiveMsg = receiveMsg.substring(restMsgIndex);
+			}
+			if(receiveMsg) {
+				emessage.push({
+					type: 'txt',
+					data: receiveMsg
+				});
+			}
+			if(isemoji) {
+				return {
+					isemoji: isemoji,
+					body: emessage
+				};
+			}
+			return {
+				isemoji: false,
+				body: [{
+					type: 'txt',
+					data: message
+				}]
+			};
+		}
+		$("#image").change(function(){
+			sendPrivateImg();
+		})
+		$("#file").change(function(){
+			sendPrivateFile();
+		})
+		// 单聊发送图片消息
+		function sendPrivateImg() {
+			alert(11);
+			var id = conn.getUniqueId(); // 生成本地消息id
+			var msg = new WebIM.message('img', id); // 创建图片消息
+			var input = document.getElementById('image'); // 选择图片的input
+			var file = WebIM.utils.getFileUrl(input); // 将图片转化为二进制文件
+			var allowType = {
+				'jpg': true,
+				'gif': true,
+				'png': true,
+				'bmp': true
+			};
+			if(file.filetype.toLowerCase() in allowType) {
+				var option = {
+					apiUrl: WebIM.config.apiURL,
+					file: file,
+					to: 18991360884, // 接收消息对象
+					roomType: false,
+					chatType: 'singleChat',
+					onFileUploadError: function() { // 消息上传失败
+						console.log('onFileUploadError');
+					},
+					onFileUploadComplete: function() { // 消息上传成功
+						console.log('onFileUploadComplete');
+					},
+					success: function() { // 消息发送成功
+						console.log('Success');
+						alert(111);
+						console.log(file);
+						var src=file.url;
+						$('<div class="webim-msg-container rel"><div data-reactroot="" class="rel right"><div class="webim-avatar-icon right small"><img class="w100" src="images/3.png"></div><div class="clearfix fl"><div class="webim-msg-value"><span class="webim-msg-icon font">I</span><pre><img src="' + src + '"></pre></div><div class="webim-msg-error hide"><span class="webim-file-icon font smaller red">k</span></div></div></div></div>').appendTo($(".webim-chatwindow-msg"))
+						
+					},
+					flashUpload: WebIM.flashUpload
+				};
+				msg.set(option);
+				conn.send(msg.body);
+			}
+		};
+		// 单聊发送文件消息
+		function sendPrivateFile() {
+			var id = conn.getUniqueId(); // 生成本地消息id
+			var msg = new WebIM.message('file', id); // 创建文件消息
+			var input = document.getElementById('file'); // 选择文件的input
+			var file = WebIM.utils.getFileUrl(input); // 将文件转化为二进制文件
+			var allowType = {
+				'jpg': true,
+				'gif': true,
+				'png': true,
+				'bmp': true,
+				'zip': true,
+				'txt': true,
+				'doc': true,
+				'pdf': true
+			};
+			if(file.filetype.toLowerCase() in allowType) {
+				var option = {
+					apiUrl: WebIM.config.apiURL,
+					file: file,
+					to: '18991360884', // 接收消息对象
+					roomType: false,
+					chatType: 'singleChat',
+					onFileUploadError: function() { // 消息上传失败
+						console.log('onFileUploadError');
+					},
+					onFileUploadComplete: function() { // 消息上传成功
+						console.log('onFileUploadComplete');
+					},
+					success: function() { // 消息发送成功
+						console.log('Success');
+						console.log(file);
+						var filename=file.filename;
+						var url=file.url;
+						$('<div class="webim-msg-container rel"><div data-reactroot="" class="rel right"><div class="webim-avatar-icon right small"><img class="w100" src="images/3.png"></div><p class="right"></p><div class="clearfix" style="min-width: 280px;"><div class="webim-msg-value" style="min-width: 200px;"><span class="webim-msg-icon font">I</span><div><p class="webim-msg-header">文件</p><div id="file_undefined"><span class="webim-msg-header-icon font small">S</span><span class="webim-msg-name">'+filename+'</span><span class="webim-msg-fileSize"></span><a target="_blank" href="'+url+'">点击下载</a></div></div></div><div class="webim-msg-error hide"><span class="webim-file-icon font smaller red">k</span></div></div></div></div>').appendTo($(".webim-chatwindow-msg"))
+					},
+					flashUpload: WebIM.flashUpload
+				};
+				msg.set(option);
+				conn.send(msg.body);
+			}
+		};
+	</script>
+
+</html>

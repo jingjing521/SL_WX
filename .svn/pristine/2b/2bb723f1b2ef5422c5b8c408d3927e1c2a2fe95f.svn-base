@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>修改密码</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body style="background: #fff;">
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<!--修改密码内容-->
+			<div class="login-main">
+				<div class="login-input"><img src="images/iconkey.png" class="login-img"><input type="password" class="border-none" placeholder="请输入旧密码"></div>
+				<div class="login-input"><img src="images/iconkey.png" class="login-img"><input type="password" class="border-none" placeholder="请输入新密码"></div>
+				<div class="login-input"><img src="images/iconkey.png" class="login-img"><input type="text" class="border-none" placeholder="请再次输入新密码"></div>
+				<div class="clear"></div>
+				<a href="set.html"><div class="login-inputs mt50"><input type="submit" class="border-none" value="完成"></div></a>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>我的订单</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+		<style>
+		.orderd-sh {
+		    width: 12%;
+		    color: #fff !important;
+		    background: #E43494 !important;
+		    line-height: 25px;
+		    position: absolute;
+		    top: 19px;
+		    right: 5%;
+		    text-align: center;
+		    border-radius: 3px;
+		}
+		.btns{padding-bottom: 10px;}
+		</style>
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="order">
+				<div class="order-left">
+					<a href="order.html">
+						<li class="on1" id="li-1">全部</li>
+					</a>
+					<a href="order1.html">
+						<li class="on2 active" id="li-2">待付款</li>
+					</a>
+					<a href="order2.html">
+						<li class="on3" id="li-3">待发货</li>
+					</a>
+					<a href="order3.html">
+						<li class="on4" id="li-4">待收货</li>
+					</a>
+				</div>
+
+				<div class="order-right">
+					<div class="help-right-box" id="div-1">
+						<!--全部-->
+						<div class="order-con">
+							<div class="order-con-title">
+								<a class="color6 goshop">韩都衣舍<img src="images/right.png" /></a>
+								<span class="fr colors" style="font-size: 13px;">待付款</span>
+							</div>
+							<a href="order-details.html" class="order_a">
+								<div class="products">
+									<div class="order-product" style="position: relative;">
+										<div class="fl order-product-img"><img src="images/2.png"></div>
+										<div class="fl order-product-con">
+											<div class="order-product-con-name">女士衬衫</div>
+											<div class="order-product-con-gg">白色_XXL</div>
+											<div class="order-product-con-price" style="color: #ccc !important">￥90<span style="margin-right: 80px;">1</span>
+												<a href="appraise.html">
+													<div class="order-pj order-sh" style=" width: 12%;color: #fff !important; background: #E43494 !important;line-height: 25px;position: absolute;bottom:50px;right: 5%; text-align: center;border-radius: 3px;">评价</div>
+												</a>
+											</div>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</a>
+							<div class="order-nums">
+								<span class="fl colore">共1件商品</span>合计：<span class="colors">￥100</span>(含运费 ￥10)
+								<div class="clear"></div>
+							</div>
+							<div class="btns">
+								<a href="pays1.html"><div class="order-btn fl payment" >立即支付</div></a>
+								<div class="order-del fl show-confirms">取消订单</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+
+						<div class="order-con">
+							<div class="order-con-title">
+								<a class="color6 goshop">韩都衣舍<img src="images/right.png" /></a>
+								<span class="fr colors" style="font-size: 13px;">待付款</span>
+							</div>
+							<a href="order-details.html" class="order_a">
+								<div class="products">
+									<div class="order-product" style="position: relative;">
+										<div class="fl order-product-img"><img src="images/2.png"></div>
+										<div class="fl order-product-con">
+											<div class="order-product-con-name">女士衬衫</div>
+											<div class="order-product-con-gg">白色_XXL</div>
+											<div class="order-product-con-price" style="color: #ccc !important">￥90<span style="margin-right: 80px;">1</span>
+												<a href="appraise.html">
+													<div class="order-pj order-sh" style=" width: 12%;color: #fff !important; background: #E43494 !important;line-height: 25px;position: absolute;bottom:50px;right: 5%; text-align: center;border-radius: 3px;">评价</div>
+												</a>
+											</div>
+										</div>
+										<div class="clear"></div>
+									</div>
+									<div class="order-product" style="position: relative;">
+										<div class="fl order-product-img"><img src="images/3.png"></div>
+										<div class="fl order-product-con">
+											<div class="order-product-con-name">女士衬衫</div>
+											<div class="order-product-con-gg">白色_XXL</div>
+											<div class="order-product-con-price" style="color: #ccc !important">￥90<span style="margin-right: 80px;">1</span>
+												<a href="appraise.html">
+													<div class="order-pj order-sh" style=" width: 12%;color: #fff !important; background: #E43494 !important;line-height: 25px;position: absolute;bottom:50px;right: 5%; text-align: center;border-radius: 3px;">评价</div>
+												</a>
+											</div>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</a>
+							<div class="order-nums">
+								<span class="fl colore">共2件商品</span>合计：<span class="colors">￥100</span>(含运费 ￥10)
+								<div class="clear"></div>
+							</div>
+							<div class="btns">
+								<a href="pays1.html"><div class="order-btn fl payment" >立即支付</div></a>
+								<div class="order-del fl show-confirms">取消订单</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+
+						<div class="order-con">
+							<div class="order-con-title">
+								<a class="color6 goshop">女装<img src="images/right.png" /></a>
+								<span class="fr colors" style="font-size: 13px;">待付款</span>
+							</div>
+							<a href="order-detailsFor.html">
+								<div class="products">
+									<div class="order-product" style="position: relative;">
+										<div class="fl order-product-img"><img src="images/2.png"></div>
+										<div class="fl order-product-con">
+											<div class="order-product-con-name">女士衬衫</div>
+											<div class="order-product-con-gg">白色_XXL</div>
+											<div class="order-product-con-price" style="color: #ccc !important">￥90<span style="margin-right: 80px;">1</span>
+												<a href="appraise.html">
+													<div class="order-pj order-sh" style=" width: 12%;color: #fff !important; background: #E43494 !important;line-height: 25px;position: absolute;bottom:50px;right: 5%; text-align: center;border-radius: 3px;">评价</div>
+												</a>
+											</div>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</a>
+							<div class="order-nums">
+								<span class="fl colore">共1件商品</span>合计：<span class="colors">￥90</span></span>(含运费 ￥5)<div class="clear"></div>
+							</div>
+							<div class="btns">
+								<div class="order-btn fl show-confirm">确认收货</div>
+								<a href="logistics.html"><div class="order-del fl" >查看物流</div></a>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="js/center.js"></script>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script>
+	$(function() {
+		FastClick.attach(document.body);
+	});
+	</script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		$(document).on("click", ".show-confirm", function() {
+			var order_id = $(this).attr("oid");
+			$.confirm("您是否确认收货？", "提示", function() {
+				$.toast("已确认收货", "text");
+			}, function() {
+				//取消操作
+			});
+		});
+		$(document).on("click", ".show-confirms", function() {
+			$.confirm("您是否确定取消订单？", "提示", function() {
+				$.toast("取消成功", "text");
+			}, function() {
+				//取消操作
+			});
+		});
+	</script>
+
+</html>

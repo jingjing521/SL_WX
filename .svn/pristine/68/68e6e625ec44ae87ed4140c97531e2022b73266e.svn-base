@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>商家认证</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="merchantsCert">
+				<div class="merchantsCert-sb">
+					<div class="merchantsCert-pass1"><img src="images/sb.png"></div>
+					<div class="merchantsCert-pass-text1">审核拒绝！</div>
+				</div>
+				<div class="merchantsCert-sb1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图片不清晰，请重新上传！图片不清晰，请重新上传！图片不清晰，请重新上传！图片不清晰，请重新上传！
+				</div>
+				<div class="about-phone"><img src="images/l-phone.png">一键咨询电话：400-12345678</div>
+				<a href="merchants-certification.html"><div class="btn">提交</div></a>
+			</div>
+		</div>
+	</body>
+</html>

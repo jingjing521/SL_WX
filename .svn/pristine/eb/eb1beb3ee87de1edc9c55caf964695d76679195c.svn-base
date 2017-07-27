@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>我的积分</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="integration">
+				<div class="integration-top">
+					<img src="images/jf-bg.png" />
+					<div class="integration-po-top">
+						<a href="center.html"><img src="images/left.png" class="integration-po-top-img "></a>
+						<div class="integration-po-top-name">我的积分</div>
+					</div>
+					<div class="integration-po-tops">
+						<img src="images/jfs.png">
+						<span class="integration-po-top-num">2004</span>
+					</div>
+				</div>
+				<div class="integration-con">
+					<div class="integration-con-title">
+						<div class="integration-con-title-name">积分明细</div>
+					</div>
+					<div class="integration-con-item">
+						<div class="integration-con-item-name">购物赠送商品名称商品名称商品名称</div>
+						<div class="integration-con-item-nums">+20</div>
+						<div class="integration-con-item-date">2016-4-16</div>
+					</div>
+					<div class="integration-con-item">
+						<div class="integration-con-item-name">购物赠送商品名称商品名称商品名称</div>
+						<div class="integration-con-item-nums">-20</div>
+						<div class="integration-con-item-date">2016-4-16</div>
+					</div>
+					<div class="integration-con-item">
+						<div class="integration-con-item-name">购物赠送商品名称商品名称商品名称</div>
+						<div class="integration-con-item-nums">+20</div>
+						<div class="integration-con-item-date">2016-4-16</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

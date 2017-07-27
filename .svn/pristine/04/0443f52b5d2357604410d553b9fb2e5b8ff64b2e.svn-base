@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>售后</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="afterSales">
+				<div class="afterSales-con">
+		            <div class="afterSales-con-title">
+		            	<a href="store.html" style="color: #666;">金蘑姑姑桃宝店<img src="images/right.png" /></a><span class="fr colors">处理中</span>
+		            </div>
+		            <a href="afterSales-details.html"><div class="afterSales-product">
+						<div class="fl afterSales-product-img"><img src="images/small-img.jpg"></div>
+						<div class="fl afterSales-product-con">
+							<div class="afterSales-product-con-name">粉红中长款V领针织外套</div>
+							<div class="afterSales-product-con-gg">颜色：粉红色；尺码：S</div>
+						</div>
+					<div class="clear"></div>
+					</div></a>
+				</div>
+				
+				<div class="afterSales-con">
+		            <div class="afterSales-con-title">
+		            	金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr">已完成</span>
+		            </div>
+		            <a href="afterSales-details.html"><div class="afterSales-product">
+						<div class="fl afterSales-product-img"><img src="images/small-img1.jpg"></div>
+						<div class="fl afterSales-product-con">
+							<div class="afterSales-product-con-name">黑色连帽毛领羽绒服</div>
+							<div class="afterSales-product-con-gg">颜色：黑色；尺码：S</div>
+						</div>
+					<div class="clear"></div>
+					</div></a>
+				</div>
+				
+				<div class="afterSales-con">
+		            <div class="afterSales-con-title">
+		            	金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr">已完成</span>
+		            </div>
+		            <a href="afterSales-details.html"><div class="afterSales-product">
+						<div class="fl afterSales-product-img"><img src="images/small-img.jpg"></div>
+						<div class="fl afterSales-product-con">
+							<div class="afterSales-product-con-name">粉红中长款V领针织外套</div>
+							<div class="afterSales-product-con-gg">颜色：粉红色；尺码：S</div>
+						</div>
+					<div class="clear"></div>
+					</div></a>
+				</div>
+				
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		var loading = false;
+		index();
+		var page=0;
+		function index(){
+		 var user_id=localStorage.getItem("user_id");
+		 var timestamp1 = Date.parse(new Date());
+   		 var values1=["user_id","page","timestamp"];
+		 var data1={"user_id":user_id,"page":page,"timestamp":timestamp1};
+		 var sign1 = doSign(values1,data1);
+		 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+		 $.ajax({
+			type:"post",
+			url: link_url+"orderAfterSalesScheduleQueryListByUser",
+			dataType: "json",
+		    data: {"user_id":user_id,"page":page,"key":keys,"timestamp":timestamp1,"sign":sign1},
+			success: function(data) {
+			    if(data.status == 1){
+			        console.log(data);	
+			        if(data.data==0){
+						$.toast("没有更多的预售商品！", "text");
+						loading = true;
+						$(document.body).infinite().on("infinite", function() {
+						if(loading) return;
+						loading = false;
+						setTimeout(function() {
+							page++;
+							index();
+							loading = true;
+						}, 500);
+					});
+				}else{
+			        $.each(data.data, function(i,v) {
+			        	if(v.order_status=="0"){
+			        		$('<div class="afterSales-con"><div class="afterSales-con-title"><a href="store.html?id='+v.shop_id+'" style="color: #666;">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr colors">处理中</span></div><div class="afterSales-product" order_sn="'+v.order_sn+'" time="'+v.add_time+'" img="'+v.order_goods.smeta.thumb+'" goods_name="'+v.goods_name+'" spec_key_name="'+v.spec_key_name+'" otype="处理中"><div class="fl afterSales-product-img"><img src="'+v.order_goods.smeta.thumb+'"></div><div class="fl afterSales-product-con"><div class="afterSales-product-con-name">'+v.goods_name+'</div><div class="afterSales-product-con-gg">'+v.spec_key_name+'</div></div><div class="clear"></div></div></div>').appendTo($("#afterSales"));
+				        }else if(v.order_status=="1"){
+			        		$('<div class="afterSales-con"><div class="afterSales-con-title"><a href="store.html?id='+v.shop_id+'" style="color: #666;">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr">已同意</span></div><div class="afterSales-product" order_sn="'+v.order_sn+'" time="'+v.add_time+'" img="'+v.order_goods.smeta.thumb+'" goods_name="'+v.goods_name+'" spec_key_name="'+v.spec_key_name+'" otype="已同意"><div class="fl afterSales-product-img"><img src="'+v.order_goods.smeta.thumb+'"></div><div class="fl afterSales-product-con"><div class="afterSales-product-con-name">'+v.goods_name+'</div><div class="afterSales-product-con-gg">'+v.spec_key_name+'</div></div><div class="clear"></div></div></div>').appendTo($("#afterSales"));
+				        }else if(v.order_status=="2"){
+			        		$('<div class="afterSales-con"><div class="afterSales-con-title"><a href="store.html?id='+v.shop_id+'" style="color: #666;">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr ">拒绝</span></div><div class="afterSales-product" order_sn="'+v.order_sn+'" time="'+v.add_time+'" img="'+v.order_goods.smeta.thumb+'" goods_name="'+v.goods_name+'" spec_key_name="'+v.spec_key_name+'" otype="拒绝"><div class="fl afterSales-product-img"><img src="'+v.order_goods.smeta.thumb+'"></div><div class="fl afterSales-product-con"><div class="afterSales-product-con-name">'+v.goods_name+'</div><div class="afterSales-product-con-gg">'+v.spec_key_name+'</div></div><div class="clear"></div></div></div>').appendTo($("#afterSales"));
+				        	
+				        }
+			        });
+//			       $(".afterSales-product").click(function(){
+//			       		var order_sn=$(this).attr("order_sn");
+//			       		var time=$(this).attr("time");
+//			       		var img=$(this).attr("img");
+//			       		var goods_name=$(this).attr("goods_name");
+//			       		var spec_key_name=$(this).attr("spec_key_name");
+//			       		var otype=$(this).attr(otype);
+//			       		localStorage.setItem("order_sn",order_sn);
+//			       		localStorage.setItem("time",time);
+//			       		localStorage.setItem("img",img);
+//			       		localStorage.setItem("goods_name",goods_name);
+//			       		localStorage.setItem("spec_key_name",spec_key_name);
+//			       		localStorage.setItem("otype",otype);
+//			       		window.location.href="afterSales-details.html";
+//			       })
+			       
+			       $(document.body).infinite().on("infinite", function() {
+						if(loading) return;
+						loading = true;
+						setTimeout(function() {
+							page++;
+							index();
+							loading = false;
+						}, 500);
+					});
+			       
+			    }
+			    }else{
+			    	console.log(data);	
+			    	$.toast(data.data, "text");
+			    }
+			},error:function(e){
+				
+			}
+		 });	
+		}
+	</script>
+</html>

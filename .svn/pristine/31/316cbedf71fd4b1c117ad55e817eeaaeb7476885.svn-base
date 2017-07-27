@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>售后订单详情</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="orderDetails">
+				<div class="orderd-con">
+					<div class="orderd-con-title">订单状态<span class="fr colors font16">处理中</span></div>
+					<div class="orderd-con-text"><span class="colore">退款编号：</span>548210217111258</div>
+					<div class="orderd-con-text"><span class="colore">申请时间：</span>2016-12-27 </div>
+				</div>
+				
+				<div class="orderd-con">
+					<div class="orderd-con-titles">商品信息</div>
+					<div class="orderd-product">
+						<div class="fl orderd-product-img"><img src="images/small-img.jpg"></div>
+						<div class="fl orderd-product-con">
+							<div class="orderd-product-con-name">粉红中长款V领针织外套</div>
+							<div class="orderd-product-con-gg">颜色：粉红色；尺码：S</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				
+				<div class="orderd-con">
+					<div class="orderd-con-titles bbn">售后回复</div>
+					<textarea class="afterSales-text" placeholder="" readonly="readonly"></textarea>
+				</div>
+
+			</div>
+		</div>
+	</body>
+
+</html>

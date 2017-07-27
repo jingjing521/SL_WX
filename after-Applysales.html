@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>申请售后</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/weui2.css" />
+		<link rel="stylesheet" href="css/jquery-weui.css" />
+		<style>
+	    .removeBtn{position: absolute; top: 0; right: 0; z-index: 11; border: 0px; border-radius: 50px; background: red; width: 22px; height: 22px; color: white;}
+	    .shadeImg{position: absolute;
+	                display: none;
+	                width: 100%;
+	                height: 100%;
+	                top: 0;
+	                left: 0;
+	                z-index: 15;
+	                text-align: center;
+	                background: rgba(0, 0, 0, 0.55);}
+	    .showImg{width: 400px; height: 500px; margin-top: 140px;}
+	    .weui_uploader_status .weui_uploader_status_content {
+		    position: absolute;
+		    top: -5px;
+		    right: 0px;
+		    -webkit-transform: translate(-5px, 0px);
+		    transform: translate(-5px, 0px);
+		    color: #fff;
+		}
+		.weui_uploader_status:before {
+		    content: " ";
+		    position: absolute;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    left: 0;
+		    background-color: rgba(0, 0, 0, 0) !important;
+		}
+		.weui_icon_cancel{position: absolute; right: -12px; top: -5px;} 
+	    </style>
+	    
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="afterSales">
+
+				<div class="afterSales-con">
+					<div class="afterSales-con-titles">申请售后原因：</div>
+					<textarea class="afterSales-text" placeholder=""></textarea>
+				</div>
+
+				 <div class="weui_cells weui_cells_form" style="margin-top: 10px;">
+     
+				    <div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				            <div class="weui_uploader">
+				                <div class="weui_uploader_hd weui_cell">
+				                    <div class="weui_cell_bd weui_cell_primary" style="color: #999;">请上传申请售后商品图片，最多三张</div>
+				                    <div class="weui_cell_ft"></div>
+				                </div>
+				                <div class="weui_uploader_bd">
+				                    <ul class="weui_uploader_files" id='img2'>
+				                    </ul>
+				                    <div class="weui_uploader_input_wrp" id="file2" style="border-radius: 8px; margin-top: 50px; border: 1px solid #eee;">
+				                        <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif"  id='headimgurl2' multiple />
+				                        
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				</div>    
+				<div class="btn">提交申请</div>
+				<!--<a href="after-sales.html"></a>-->
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script src="js/zepto.min.js"></script>
+	<script src="js/lrz.min.js"></script>
+	<script>
+		
+		$(function(){
+		    var f2 = document.querySelector('#headimgurl2');
+		    f2.onchange = function (e) {
+		        var files = e.target.files;
+		        var len = files.length;
+		        var lens=$("#img2").find("li").length;
+		        console.log(lens);
+		        if(lens>=2){
+		        	$("#file2").css("display","none");
+		        }else{
+		        	$("#file2").show()
+		        }
+		        for (var i=0; i < len; i++) {
+		            lrz(files[i],{width:640,fieldName:"file1"}).then(function (rst) {
+		                    var xhr = new XMLHttpRequest();
+		                     xhr.open('POST', 'http://qcap.hangtuosoft.com/index.php?g=asset&m=asset&a=swfupload');
+		                    xhr.onload = function () {
+		                        if (xhr.status === 200) {
+		                        var obj = eval('(' + xhr.responseText + ')');
+		                        console.log(obj);
+		                           $('#img2').append('<li onclick="" class="weui_uploader_file weui_uploader_status" img="'+obj.url+'" style="background-image:url('+obj.url+'); margin-top: 50px;"><div class="weui_uploader_status_content"><i class="weui_icon_cancel"></i></div></li>'); 
+		                        $('#file2').append('<input value="'+obj.url+'"  type="hidden"  name="files" />');
+		                        } else {
+		                            // 处理其他情况
+		                        }
+		                    };
+		
+		                    xhr.onerror = function () {
+		                        // 处理错误
+		                    };
+		
+		                    xhr.upload.onprogress = function (e) {
+		                        // 上传进度
+		                        var percentComplete = ((e.loaded / e.total) || 0) * 100;
+		                    };
+		
+		                    // 添加参数
+		                    rst.formData.append('size', rst.fileLen);
+		                    rst.formData.append('base64', rst.base64);
+		                    // 触发上传
+		                    xhr.send(rst.formData);
+		                    return rst;
+		                })
+		                .catch(function (err) {
+		                    alert(err);
+		                })
+		                .always(function () {// 不管是成功失败，这里都会执行
+		                });
+		
+		        }//for end
+		    }
+		})
+		$("#img2").on('click','li',function(){
+			var delimg=$(this);
+			$.confirm('您确定要删除吗?', '确认删除?', function() {
+				delimg.remove();
+				 var lens=$("#img2").find("li").length;
+		        console.log(lens);
+		        if(lens>2){
+		        	$("#file2").css("display","none");
+		        }else{
+		        	$("#file2").show()
+		        }
+			},function(){
+				$.toast('取消操作', 'cancel');
+			});
+		})
+		$(".btn").click(function(){
+		 var user_id=localStorage.getItem("user_id");
+		 var order_itemid=parseUrl().id;
+		 var desc=$(".afterSales-text").val()||"";
+		 var img1=$('#img2 li').eq(0).attr('img') || "";
+		 var img2=$('#img2 li').eq(1).attr('img') || "";
+		 var img3=$('#img2 li').eq(2).attr('img') || "";
+		 var fromtype = "pc";
+		 var timestamp1 = Date.parse(new Date());
+   		 var values1=["user_id","order_itemid","desc","fromtype","timestamp"];
+		 var data1={"user_id":user_id,"order_itemid":order_itemid,"desc":desc,"fromtype":fromtype,"timestamp":timestamp1};
+		 var sign1 = doSign(values1,data1);
+		 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+		 console.log(img1);
+		 console.log(img2);
+		 console.log(img3);
+		 if(desc==''){
+		 	$.toast("请填写申请原因！", "text");
+		 }else{
+		 	$.ajax({
+				type:"post",
+				url: link_url+"orderGoodsDoApplyAfterSales",
+				dataType: "json",
+			    data: {"user_id":user_id,"order_itemid":order_itemid,"desc":desc,"img1":img1,"img2":img2,"img3":img3,"fromtype":fromtype,"key":keys,"timestamp":timestamp1,"sign":sign1},
+				success: function(data) {
+				    if(data.status == 1){
+				        console.log(data);	
+				        window.location.href="after-sales.html";
+				    }else{
+				    	console.log(data);	
+				    	$.toast(data.data, "text");
+				    }
+				},error:function(e){
+					
+				}
+			 });	
+		 }
+		 
+		})
+	</script>
+</html>

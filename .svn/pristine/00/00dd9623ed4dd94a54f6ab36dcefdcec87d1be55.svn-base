@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>商品列表</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="store">
+				
+				<div class="store-con">
+					<div class="store-con-top">
+						<div class="fl">价格<img src="images/jts.png"></div>
+						<div class="fl">销量<img src="images/jts.png"></div>
+						<div class="fl"><a href="screening.html">筛选<img src="images/sx.png"></a></div>
+						<p class="clear"></p>
+					</div>
+					<div class="store-con-bottom">
+						<div class="store-con-bottom-item">
+							<a href="product.html"><div class="store-con-bottom-img"><img src="images/product.png"></div>
+							<div class="store-con-bottom-price">￥228</div>
+							<div class="store-con-bottom-text">粉红色长款V领针织外套</div></a>
+						</div>
+						<div class="store-con-bottom-item">
+							<a href="product.html"><div class="store-con-bottom-img"><img src="images/product.png"></div>
+							<div class="store-con-bottom-price">￥228</div>
+							<div class="store-con-bottom-text">粉红色长款V领针织外套</div></a>
+						</div>
+						<div class="store-con-bottom-item">
+							<a href="product.html"><div class="store-con-bottom-img"><img src="images/product.png"></div>
+							<div class="store-con-bottom-price">￥228</div>
+							<div class="store-con-bottom-text">粉红色长款V领针织外套</div></a>
+						</div>
+						<div class="store-con-bottom-item">
+							<a href="product.html"><div class="store-con-bottom-img"><img src="images/product.png"></div>
+							<div class="store-con-bottom-price">￥228</div>
+							<div class="store-con-bottom-text">粉红色长款V领针织外套</div></a>
+						</div>
+						<div class="store-con-bottom-item">
+							<a href="product.html"><div class="store-con-bottom-img"><img src="images/product.png"></div>
+							<div class="store-con-bottom-price">￥228</div>
+							<div class="store-con-bottom-text">粉红色长款V领针织外套</div></a>
+						</div>
+						<div class="store-con-bottom-item">
+							<a href="product.html"><div class="store-con-bottom-img"><img src="images/product.png"></div>
+							<div class="store-con-bottom-price">￥228</div>
+							<div class="store-con-bottom-text">粉红色长款V领针织外套</div></a>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	
+</html>

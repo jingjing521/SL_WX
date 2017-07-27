@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>重置密码</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body style="background: #fff;">
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<!--重置密码导航-->
+			<div class="login-nav">
+				<div>
+					<a href="login.html"><div class="login-return"><img src="images/left.png"></div></a>
+					<div class="reset-return-title">重置密码</div>
+				</div>
+				<div class="reset-logo">
+					<div class="fl tc">
+						<div class="reset-logo-img"><img src="images/resetPwd-1.png" /></div>
+						<div>验证身份</div>
+					</div>
+					<div class="fl reset-logo-imgjt"><img src="images/resetPwd-3.png"></div>
+					<div class="fl tc">
+						<div class="reset-logo-imgs"><img src="images/resetPwd-2s.png" /></div>
+						<div>重置密码</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="login-nav-name">
+					<a href="login.html"><div >邮箱验证</div></a>
+					<a href="register.html"><div class="login-nav-active">绑定手机</div></a>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<!--重置密码内容-->
+			<div class="login-main">
+				<div class="login-input"><img src="images/iconphone.png" class="login-img"><input type="text" class="border-none" placeholder="请输入注册的手机号码"></div>
+				<div>
+					<div class="reset-input fl"><img src="images/iconphone.png" class="login-img"><input type="text" class="border-none" placeholder="请输入验证码"></div>
+					<a href="#"><div class=" fl reset-hq"><img src="images/reset-hq.png"></div></a>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+				<a href="resetPwd.html"><div class="login-inputs mt50"><input type="submit" class="border-none" value="下一步"></div></a>
+			</div>
+		</div>
+	</body>
+
+</html>

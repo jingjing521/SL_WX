@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>重置密码</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+		<style>
+			.weui_toast_text {width: 20em !important;}
+		</style>
+	</head>
+
+	<body style="background: #fff;">
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<!--重置密码导航-->
+			<div class="login-nav">
+				<div>
+					<a href="javascript :;" onClick="javascript :history.back(-1);"><div class="login-return"><img src="images/left.png"></div></a>
+					<div class="reset-return-title">重置密码</div>
+				</div>
+				<div class="reset-logo">
+					<div class="fl tc">
+						<div class="reset-logo-imgs"><img src="images/resetPwd-1s.png" /></div>
+						<div>验证身份</div>
+					</div>
+					<div class="fl reset-logo-imgjt"><img src="images/resetPwd-3.png"></div>
+					<div class="fl tc">
+						<div class="reset-logo-img"><img src="images/resetPwd-2.png" /></div>
+						<div>重置密码</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+
+			</div>
+			<!--重置密码内容-->
+			<div class="login-main">
+				<div class="login-input"><img src="images/iconkey.png" class="login-img"><input type="password" maxlength="12" class="border-none pwd" placeholder="请输入新密码"></div>
+				<div class="login-input"><img src="images/iconkey.png" class="login-img"><input type="password" maxlength="12" class="border-none repwd" placeholder="请再次输入新密码"></div>
+				<div class="clear"></div>
+				<div class="login-inputs mt50"><input type="submit" class="border-none succbnt" value="完成"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/center.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		$(".succbnt").click(function(){
+			var phone=parseUrl().phone;
+			var yzm=parseUrl().yzm;
+			var pwd=$(".pwd").val();
+			var pp=md5(pwd);
+			var repwd=$(".repwd").val();
+			if(pwd==""||repwd==""){
+				$.toast("请输入6-12位数字或字母组合的密码", "text");
+			}else if(pwd.length<6||repwd.length<6){
+				$.toast("请输入6-12位数字或字母组合的密码", "text");
+			}else if(repwd!=pwd){
+				$.toast("两次密码不一致，请重新输入！", "text");
+			}else{
+				var timestamp = Date.parse(new Date());
+ 				         var values=["phone","user_pass","yzm","timestamp"];
+				         var data={"phone":phone,"user_pass":pp,"yzm":yzm,"timestamp":timestamp};
+				         var sign = doSign(values,data);
+						 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+						$.ajax({
+							type:"post",
+							url: link_url+"goFindPwd",
+							dataType: "json",
+				            data: {"phone":phone,"user_pass":pp,"yzm":yzm,"key":keys,"timestamp":timestamp,"sign":sign},
+				            success: function(data) {
+				            	 if(data.status == 1){
+				            	 	console.log("ok");
+				            	 	console.log(data);
+				            	 	window.location.href="login.html";
+				            	 }else{
+				            	 	$.toast(data.data, "text");
+				            	 	window.history.go(-1);
+				            	 }
+				            },
+				            error:function(){
+				            	console.log(link_url);
+//				            	alert(1);
+				            }
+						})
+			}
+		})
+	</script>
+</html>

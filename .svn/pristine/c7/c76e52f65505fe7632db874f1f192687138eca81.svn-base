@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>确认订单</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="confirmOrder">
+				<div class="confirm-con">
+					<div class="fl confirm-con-l">
+						<a href="shipping-Chooseaddr.html"><div class="confirm-con-text"><span class="colore">收货  人：</span>哈哈</div>
+						<div class="confirm-con-text"><span class="colore">手机号码：</span>15345678912</div>
+						<div class="confirm-con-text"><span class="colore">收货地址：</span>上海市虹口区广记路838号4楼</div></a>
+					</div>
+					<div class="fr confirm-con-r"><img src="images/lefts.png"></div>
+					<div class="clear"></div>
+				</div>
+				
+				<div class="confirm-cons">
+					<div class="orderd-con-title"><img src="images/store.png" class="store">金蘑姑姑桃宝店<img src="images/lefts.png" class="fr lefts"></div>
+					<div class="orderd-product">
+						<div class="fl orderd-product-img"><img src="images/small-img.jpg"></div>
+						<div class="fl orderd-product-con">
+							<div class="orderd-product-con-name">粉红中长款V领针织外套</div>
+							<div class="orderd-product-con-gg">颜色：粉红色；尺码：S</div>
+							<div class="orderd-product-con-price">￥285.00<span>x2</span></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="orderd-con-titles1">
+						<div><span class="colore">阶段1：</span>定金：<span class="colors">￥40.00</span></div>
+						<div><span class="colore">阶段2：</span>尾款：￥90.00</div>
+					</div>
+					<div class="orderd-con-title font14">2017.01.01 12:00:00 开始支付</div>
+					<textarea class="confirm-cons-textarea" placeholder="给我们留言（选填，45字以内）"></textarea>
+					<div class="orderd-con-titles bbn">共2件<span class="fr colors">￥49.00</span><span class="fr">合计：</span></div>
+				</div>
+				
+				<div class="confirm-cons" style="padding-bottom: 10px; margin-bottom: 0;">
+					<div class="orderd-con-text tr pd10"><span class="colore fl"> 商品金额：</span>￥99.00</div>
+					<div class="orderd-con-text tr" style="padding-bottom: 10px;"><span class="colore fl">配送费：</span>￥5.00</div>
+					<div class="orderd-nums">合计：<span class="colors">￥542.00</span></div>
+					<a href="pay.html"><div class="orderd-btn">提交订单</div></a>
+					<div class="clear"></div>
+				</div>
+				
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		//积分开关
+		var i=1;
+		$(".orderd-con-text").click(function(){
+			if(i%2!=0){
+				a();
+				i++;
+			}else if(i%2==0){
+				b();
+				i++;
+			}else{
+				alert("error");
+			};
+	//		alert(i)
+		})
+	
+		function a(){
+			$(".orderd-con-text img").attr("src","images/kg (1).png");
+		}
+		function b(){
+			$(".orderd-con-text img").attr("src","images/kg (2).png");
+		}
+	})
+	</script>
+</html>

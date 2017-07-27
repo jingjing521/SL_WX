@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>我的订单</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="order">
+				<div class="order-left">
+					<a href="order.html">
+						<li class="on1 active" id="li-1">全部</li>
+					</a>
+					<a href="order1.html">
+						<li class="on2" id="li-2">待付款</li>
+					</a>
+					<a href="order2.html">
+						<li class="on3" id="li-3">待发货</li>
+					</a>
+					<a href="order3.html">
+						<li class="on4" id="li-4">待收货</li>
+					</a>
+				</div>
+
+				<div class="order-right">
+					<div class="help-right-box" id="div-1">
+						<!--全部-->
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="js/center.js"></script>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script>
+	$(function() {
+		FastClick.attach(document.body);
+	});
+	</script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		//订单初始化
+		var page = 1;
+		indexData();
+		function indexData(){
+		
+		var user_id = localStorage.getItem("user_id");
+		var order_type = 4;
+		var timestamp1 = Date.parse(new Date());
+		var values1 = ["user_id", "order_type", "page", "timestamp"];
+		var data1 = {
+			"user_id": user_id,
+			"order_type": order_type,
+			"page": page,
+			"timestamp": timestamp1
+		};
+		var sign1 = doSign(values1, data1);
+		var keys = "idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+		$.post(link_url + "orderListByUser", {
+			"page": page,
+			"user_id": user_id,
+			"order_type": order_type,
+			"key": keys,
+			"timestamp": timestamp1,
+			"sign": sign1
+		}, function(data) {
+			var sceniclist = "";
+			var products = "";
+			if(data.status == 1) {
+				console.log(page, user_id, order_type);
+				var str = JSON.stringify(data.data);
+				sessionStorage.pline = str;
+				$.each(data.data, function(i, v) {
+					if(v.order_status == 5) { //无效订单
+						$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">无效订单</span></div><div class="products dj"></div><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div><div class="clear"></div></div>').appendTo($(".help-right-box"));
+					} else {
+						if(v.pay_status == 1) {
+							if(v.order_status == 3) {
+								$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">已取消</span></div><div class="products djs"></div><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div><div class="clear"></div></div>').appendTo($(".help-right-box"));
+							} else {
+								if(v.order_type == 0) {
+									$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">待付款</span></div><a href="order-details.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div><div class="btns"><div class="order-btn fl payment" money="' + v.total_amount + '">立即支付</div><div class="order-del fl show-confirms" oid="' + v.id + '">取消订单</div><div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+								} else {
+									$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">定金等待买家付款</span></div><a href="order-details1.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div><div class="btns"><div class="order-btn fl payment" money="' + v.total_amount + '">立即支付</div><div class="order-del fl show-confirms" oid="' + v.id + '">取消订单</div><div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+								}
+							}
+						} else if(v.pay_status == 2) {
+							if(v.order_goods[0].balance_paytime > timestamp1) {
+								$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">' + v.order_goods[0].balance_paytime_format + ' 开始支付尾款</span></div><a href="order-details2.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+							} else {
+								$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">尾款等待买家付款</span></div><a href="order-details3.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+							}
+						} else {
+							if(v.shipping_status == 0) {
+								$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">待发货</span></div><a href="order-detailsSend.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+							} else {
+								if(v.order_status == 4) {
+									$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">交易成功</span></div><a href="order-detailsSucc.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+								} else {
+									if(v.order_status == 2) {
+										$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">已收货</span></div><a href="order-detailsSucc.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span></span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+									} else {
+										$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">待收货</span></div><a href="order-detailsFor.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span></span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div><div class="btns"><div class="order-btn fl show-confirm">确认收货</div><a href="logistics.html?order_id=' + v.id + '&order_sn=' + v.order_sn + '"><div class="order-del fl" >查看物流</div></a><div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+									}
+								}
+							}
+						}
+					}
+
+					$.each(v.order_goods, function(z, x) {
+						$('<div class="order-product"><div class="fl order-product-img"><img src="' + x.smeta.thumb + '"></div><div class="fl order-product-con"><div class="order-product-con-name">' + x.goods_name + '</div><div class="order-product-con-gg">' + x.spec_key_name + '</div><div class="order-product-con-price">￥' + x.goods_price + '<span>x' + x.goods_num + '</span></div></div><div class="clear"></div></div>').appendTo($(".products").eq(i));
+					});
+
+				})
+				$(".dj").click(function() {
+					$.toast("该订单已无效！", "text");
+				})
+				$(".djs").click(function() {
+					$.toast("该订单已取消！", "text");
+				})
+
+				$(".payment").click(function() {
+					var total = $(this).attr("money");
+					var goods_id = $(this).attr("");
+					localStorage.setItem("msg", "");
+					window.location.href = "pays1.html?total=" + total;
+				})
+			}
+		}, "json").error(function(xhr, errorText, errorType) {
+			$.toast('网络错误，请稍后再试', 'text');
+		});
+	}
+		//加载更多
+		
+		var totalheight = 0;     //定义一个总的高度变量
+		function loaata()
+		{ 
+		    totalheight = parseInt($(window).height()) + parseInt($(window).scrollTop())+1;     //浏览器的高度加上滚动条的高度 
+			console.log(totalheight);
+		    if ($(document).height() <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+		    { 
+		        //加载数据
+		        page++;
+			var user_id = localStorage.getItem("user_id");
+			var order_type = 4;
+			var timestamp1 = Date.parse(new Date());
+			var values1 = ["user_id", "order_type", "page", "timestamp"];
+			var data1 = {
+				"user_id": user_id,
+				"order_type": order_type,
+				"page": page,
+				"timestamp": timestamp1
+			};
+			var sign1 = doSign(values1, data1);
+			var keys = "idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			//景区列表加载下一页
+			$.post(link_url + "orderListByUser", {
+				"page": page,
+				"user_id": user_id,
+				"order_type": order_type,
+				"key": keys,
+				"timestamp": timestamp1,
+				"sign": sign1
+			}, function(data) {
+				console.log(data);
+				var sceniclistmore = "";
+				if(data.status == 1) {
+					console.log(page, user_id, order_type);
+					var str1 = sessionStorage.pline;
+					var str2 = JSON.parse(str1);
+					var len = str2.length;
+
+					Array.prototype.push.apply(str2, data.data);
+					console.log(str2);
+					sessionStorage.pline = JSON.stringify(str2)
+					$.each(data.data, function(i, v) {
+						if(v.order_status == 5) { //无效订单
+							$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">无效订单</span></div><div class="products dj"></div><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div><div class="clear"></div></div>').appendTo($(".help-right-box"));
+						} else {
+							if(v.pay_status == 1) {
+								if(v.order_status == 3) {
+									$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">已取消</span></div><div class="products djs"></div><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div><div class="clear"></div></div>').appendTo($(".help-right-box"));
+								} else {
+									if(v.order_type == 0) {
+										$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">待付款</span></div><a href="order-details.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div><div class="btns"><div class="order-btn fl payment" money="' + v.total_amount + '">立即支付</div><div class="order-del fl show-confirms" oid="' + v.id + '">取消订单</div><div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+									} else {
+										$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">定金等待买家付款</span></div><a href="order-details1.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div><div class="btns"><div class="order-btn fl payment" money="' + v.total_amount + '">立即支付</div><div class="order-del fl show-confirms" oid="' + v.id + '">取消订单</div><div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+									}
+								}
+							} else if(v.pay_status == 2) {
+								if(v.order_goods[0].balance_paytime > timestamp1) {
+									$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">' + v.order_goods[0].balance_paytime_format + ' 开始支付尾款</span></div><a href="order-details2.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+								} else {
+									$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">尾款等待买家付款</span></div><a href="order-details3.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+								}
+							} else {
+								if(v.shipping_status == 0) {
+									$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">待发货</span></div><a href="order-detailsSend.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+								} else {
+									if(v.order_status == 4) {
+										$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">交易成功</span></div><a href="order-detailsSucc.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+									} else {
+										if(v.order_status == 2) {
+											$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">已收货</span></div><a href="order-detailsSucc.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span></span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+										} else {
+											$('<div class="order-con"><div class="order-con-title"><a href="store.html?id=' + v.shop_id + '" class="color6">' + v.shop_name + '<img src="images/right.png" /></a><span class="fr colors">待收货</span></div><a href="order-detailsFor.html?user_id=' + user_id + '&order_id=' + v.id + '"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共' + v.goods_count + '件商品</span>合计：<span class="colors">￥' + v.final_price + '</span></span>(含运费 ￥' + v.shipping_price + ')<div class="clear"></div></div><div class="btns"><div class="order-btn fl show-confirm">确认收货</div><a href="logistics.html?order_id=' + v.id + '&order_sn=' + v.order_sn + '"><div class="order-del fl" >查看物流</div></a><div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+										}
+									}
+								}
+							}
+						}
+					})
+					$(".products").empty();
+					$.each(str2, function(a,b) {
+						
+							$.each(b.order_goods, function(z, x) {
+								$('<div class="order-product"><div class="fl order-product-img"><img src="' + x.smeta.thumb + '"></div><div class="fl order-product-con"><div class="order-product-con-name">' + x.goods_name + '</div><div class="order-product-con-gg">' + x.spec_key_name + '</div><div class="order-product-con-price">￥' + x.goods_price + '<span>x' + x.goods_num + '</span></div></div><div class="clear"></div></div>').appendTo($(".products").eq(a));
+							});
+						});
+					$(".dj").click(function() {
+						$.toast("该订单已无效！", "text");
+					})
+					$(".djs").click(function() {
+						$.toast("该订单已取消！", "text");
+					})
+
+					$(".payment").click(function() {
+						var total = $(this).attr("money");
+						var goods_id = $(this).attr("");
+						localStorage.setItem("msg", "");
+						window.location.href = "pays1.html?total=" + total;
+					})
+
+					//						$(".J_sceniclist").append(sceniclistmore);
+				} else {
+					$.toast(data.data, 'text');
+				}
+			}, "json").error(function(xhr, errorText, errorType) {
+				$.toast('网络错误，请稍后再试', 'text');
+				//					$(".J_loadimg").css("visibility", "hidden");
+			});
+		    } 
+		} 
+		
+		$(window).scroll( function() { 
+		    console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop()); 
+		    console.log("页面的文档高度 ："+$(document).height());
+		    console.log('浏览器的高度：'+$(window).height());
+		    loaata();
+		}); 
+		
+
+		$(document).on("click", ".show-confirm", function() {
+			var order_id = $(this).attr("oid");
+			$.confirm("您是否确认收货？", "提示", function() {
+				var user_id = localStorage.getItem("user_id");
+				var timestamp1 = Date.parse(new Date());
+				var values1 = ["user_id", "order_id", "timestamp"];
+				var data1 = {
+					"user_id": user_id,
+					"order_id": order_id,
+					"timestamp": timestamp1
+				};
+				var sign1 = doSign(values1, data1);
+				var keys = "idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+				$.ajax({
+					type: "post",
+					url: link_url + "orderGoodsDoConfirmReceipt",
+					dataType: "json",
+					data: {
+						"user_id": user_id,
+						"order_id": order_id,
+						"key": keys,
+						"timestamp": timestamp1,
+						"sign": sign1
+					},
+					success: function(data) {
+						if(data.status == 1) {
+							console.log(data);
+							$.toast("已确认收货", "text");
+							$(".help-right-box").empty();
+							indexData();
+						} else {
+							console.log(data);
+							$.toast(data.data, "text");
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+				//       window.location.href="order-detailsSucc.html";
+			}, function() {
+				//取消操作
+			});
+		});
+		$(document).on("click", ".show-confirms", function() {
+			var order_id = $(this).attr("oid");
+
+			$.confirm("您是否确定取消订单？", "提示", function() {
+				var user_id = localStorage.getItem("user_id");
+				var timestamp1 = Date.parse(new Date());
+				var values1 = ["user_id", "order_id", "timestamp"];
+				var data1 = {
+					"user_id": user_id,
+					"order_id": order_id,
+					"timestamp": timestamp1
+				};
+				var sign1 = doSign(values1, data1);
+				var keys = "idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+				$.ajax({
+					type: "post",
+					url: link_url + "orderCancel",
+					dataType: "json",
+					data: {
+						"user_id": user_id,
+						"order_id": order_id,
+						"key": keys,
+						"timestamp": timestamp1,
+						"sign": sign1
+					},
+					success: function(data) {
+						if(data.status == 1) {
+							console.log(data);
+							$.toast("取消成功", "text");
+							$(".help-right-box").empty();
+							indexData();
+						} else {
+							console.log(data);
+							$.toast(data.data, "text");
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+				//       window.location.href="order-detailsSucc.html";
+			}, function() {
+				//取消操作
+			});
+		});
+	</script>
+
+</html>

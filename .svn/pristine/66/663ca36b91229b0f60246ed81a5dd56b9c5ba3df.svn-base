@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>个人资料</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="personalDate">
+				<div class="personalDate-top">
+					<div class="personalDate-top-item">
+						<div class="fl personalDate-top-item-name linh70">头像</div>
+						<div class="fr personalDate-top-item-con">
+							<div class="site-demo-upload">
+							    <img id="LAY_demo_upload" src="" onclick="myfile.click();">
+							    <div class="site-demo-upbar">
+							    	<input type="file" accept="image/*" id="myfile" style="display: none;">
+							    </div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="personalDate-top-item">
+						<div class="fl personalDate-top-item-name">昵称</div>
+						<div class="fr personalDate-top-item-con"><input type="text" class="nc"  placeholder="请输入昵称" value=""></div>
+						<div class="clear"></div>
+					</div>
+					<div class="personalDate-top-item">
+						<div class="fl personalDate-top-item-name">手机</div>
+						<div class="fr personalDate-top-item-r "><img src="images/right.png"></div>
+						<div class="fr personalDate-top-item-con pwid phones"><input type="text" class="phone" placeholder="请输入手机号码" readonly="readonly" value=""></div>
+						<div class="clear"></div>
+					</div>
+					<div class="personalDate-top-item">
+						<div class="fl personalDate-top-item-name">性别</div>
+						<div class="fl personalDate-top-item-con sss">
+							<div class="fr ml20 ssex">
+							
+ 								<div class="commodity fl" sid="2"></div>女
+							</div>
+							<div class="fr ssex">
+								
+ 								<div class="commodity fl" sid="1"></div>男
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="personalDate-top-item bbn">
+						<div class="fl personalDate-top-item-name">邮箱</div>
+						<div class="fr personalDate-top-item-con"><input type="text" class="email" readonly="readonly" placeholder="请输入邮箱" value=""></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="btn mt50">保存</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="plugins/layui/layui.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script> 
+	var uplpad_url ='http://qcap.hangtuosoft.com/';
+	layui.use('upload', function(){
+		layui.upload({
+		    url:'http://115.159.0.89/CarService/weixin/uploadImg.action', //上传接口
+		    success: function(res){ //上传成功后的回调
+		      console.log(res)
+		    },error:function(e){
+		    	console.log(e);
+		    }
+	  	});
+	});
+	
+	$(document).ready(function(){
+		//ajax
+			 var user_id=localStorage.getItem("user_id");
+			 var user_id1=parseInt(user_id);
+			 localStorage.setItem('user_id',user_id1);
+			 var timestamp1 = Date.parse(new Date());
+ 			 var values1=["user_id","timestamp"];
+			 var data1={"user_id":user_id1,"timestamp":timestamp1};
+			 var sign1 = doSign(values1,data1);
+			 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			 $.ajax({
+				type:"post",
+				url: link_url+"getSelfInfos",
+				dataType: "json",
+			    data: {"user_id":user_id1,"key":keys,"timestamp":timestamp1,"sign":sign1},
+				success: function(data) {
+				    if(data.status == 1){
+				        console.log(data);
+				        $(".phones").click(function(){
+					    	 window.location.href="change-phone.html?phone="+data.data.user_login;
+					    })
+				    
+				        $(".nc").val(data.data.user_nicename);
+						$("#LAY_demo_upload").attr("src",data.data.avatar);
+						$(".phone").val(data.data.user_login);
+						$(".email").val(data.data.user_email);
+						if(data.data.avatar==""){
+							$("#LAY_demo_upload").attr("src","images/3.png");
+						}
+						$.each($(".sss"), function(i,v) {
+							console.log(data.data.sex);
+							if(data.data.sex==2){
+								$("commodity").removeClass("select");
+								$(".commodity").eq(0).addClass("select");
+								console.log(i);
+							}else if(data.data.sex==1){
+								$("commodity").removeClass("select");
+								$(".commodity").eq(1).addClass("select");
+								console.log(i);
+							}else if(data.data.sex==""){
+								$(".commodity").eq(1).addClass("select");
+							}
+						});
+						
+				    }else{
+				       $.toast(data.data, "text");
+				       $("#LAY_demo_upload").attr("src","images/3.png");
+				    }
+				},
+				error:function(){
+				   
+				}
+			 })
+	
+
+	})
+	
+	$(".personalDate-top-item-con").on("click",".commodity",function(){
+		$(".commodity").removeClass("select");
+		$(this).addClass("select");				
+	});
+	$(".btn").click(function(){
+		jk();
+	})
+	function jk(){
+		var user_id=localStorage.getItem("user_id");
+		var user_nicename=$(".nc").val();
+		if($(".commodity").hasClass("select")){
+			var a=$(".select").attr("sid");
+		}
+		var avatar=$("#LAY_demo_upload").attr("src")||"";
+		console.log(user_id+" "+user_nicename+" "+avatar+" "+a);
+		var timestamp = Date.parse(new Date());
+   		var values=["user_id","user_nicename","avatar","sex","timestamp"];
+		var data={"user_id":user_id,"user_nicename":user_nicename,"avatar":avatar,"sex":a,"timestamp":timestamp};
+		var sign = doSign(values,data);
+		var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+		$.ajax({
+			type:"post",
+			url: link_url+"modifySelfInfos",
+			dataType: "json",
+			data: {"user_id":user_id,"user_nicename":user_nicename,"avatar":avatar,"sex":a,"key":keys,"timestamp":timestamp,"sign":sign},
+			success: function(data) {
+				if(data.status == 1){
+				    console.log("ok");
+				    console.log(data);
+				    
+				    window.location.href="center.html";
+				}else{
+					 console.log(data);
+				    $.toast(data.data, "text");
+				}
+			}, error:function(){
+				console.log(link_url);
+			}
+		})
+	}
+</script>
+</html>

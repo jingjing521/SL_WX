@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>选择收货地址</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="shippingAddr">
+				<div class="shippingAddr-top">
+					<div class="shippingAddr-items">
+						<div class="shipping-items-con">刘德华<span class="fr">15812345678</span></div>
+						<div class="shipping-items-title"><span class="colors">【默认】</span>上海 上海市虹口区88号A栋3楼3001</div>
+						<div class="clear"></div>
+					</div>
+					<div class="shippingAddr-items">
+						<div class="shipping-items-con">刘德华<span class="fr">15812345678</span></div>
+						<div class="shipping-items-title"><span class="colors"></span>上海 上海市虹口区88号A栋3楼3001</div>
+						<div class="clear"></div>
+					</div>
+					<div class="shippingAddr-items">
+						<div class="shipping-items-con">刘德华<span class="fr">15812345678</span></div>
+						<div class="shipping-items-title"><span class="colors"></span>上海 上海市虹口区88号A栋3楼3001</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<a href="#"><div class="btn">管理</div></a>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$(".shippingAddr-items").on("click",".shipping-items-title",function(){
+				$(".shipping-items-title span").text("");
+				$(this).children("span").text("【默认】");
+				
+			})
+		})
+    </script>
+</html>

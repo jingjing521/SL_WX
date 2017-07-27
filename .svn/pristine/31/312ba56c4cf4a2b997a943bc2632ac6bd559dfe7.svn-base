@@ -1,0 +1,28 @@
+ // 解析地址
+function parseUrl(){
+    var url=location.href;
+    var i=url.indexOf('?');
+    if(i==-1)return;
+    var querystr=url.substr(i+1);
+    var arr1=querystr.split('&');
+    var arr2=new Object();
+    for  (i in arr1){
+        var ta=arr1[i].split('=');
+        arr2[ta[0]]=ta[1];
+    }
+    return arr2;
+}
+// 签名
+function doSign(values,data){
+    values.sort();
+    var str="";
+    for(var i in values) {
+	   	str+=values[i]+'='+data[values[i]] +'&';       
+    }
+   str = str.substr(0,str.length-1);
+   var key = "idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+   var value="2FA4BE4A198B8F0CF1125E4A28F99095";
+   var str1 = value+str+'&key='+key+value;
+   var sign = (md5(str1)).toUpperCase();
+   return sign;
+}

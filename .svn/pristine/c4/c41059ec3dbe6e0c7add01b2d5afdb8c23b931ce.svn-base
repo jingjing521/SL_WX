@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>品牌分类</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="search">
+				<div class="search-top">
+					<div class="search-top-con">
+						<a href="search.html"><img src="images/fl (1).png"></a><a href="brand.html"><img src="images/fl (3).png"></a>
+					</div>
+				</div>
+				<div class="search-search">
+					<div class="fl search-search-img"><img src="images/searchs.png"></div>
+					<div class="fl search-search-text"><input type="text" placeholder="搜素品牌"></div>
+					<div class="clear"></div>
+				</div>
+				<div class="search-con">
+					<div class="brand-con">
+						<div class="brand-con-title">精选<a href="brand-more.html" class="colors"><span class="fr">更多 ></span></a></div>
+						<div class="brand-cons">
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (30).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (7).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (5).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (6).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (9).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (7).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (8).jpg" />
+								<div>品牌</div></a>
+							</div>
+							
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="brand-con">
+						<div class="brand-con-title">男装<a href="brand-more.html" class="colors"><span class="fr">更多 ></span></a></div>
+						<div class="brand-cons">
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (20).jpg" />
+								<div>骆驼</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (15).jpg" />
+								<div>奥康</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (11).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (12).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (16).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (19).jpg" />
+								<div>太平鸟</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (21).jpg" />
+								<div>AK</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (22).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (23).jpg" />
+								<div>九牧王</div></a>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="brand-con">
+						<div class="brand-con-title">女装<a href="brand-more.html" class="colors"><span class="fr">更多 ></span></a></div>
+						<div class="brand-cons">
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (22).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (24).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (25).jpg" />
+								<div>鸭鸭</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (28).jpg" />
+								<div>七匹狼</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (29).jpg" />
+								<div>意尔康</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (3).jpg" />
+								<div>韩都衣舍</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (4).jpg" />
+								<div>伊莲娜</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (30).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (31).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="brand-con">
+						<div class="brand-con-title">包包<a href="brand-more.html" class="colors"><span class="fr">更多 ></span></a></div>
+						<div class="brand-cons">
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (30).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (7).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (5).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (6).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (9).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (7).jpg" />
+								<div>品牌</div></a>
+							</div>
+							<div class="fl">
+								<a href="store.html"><img src="images/pp (8).jpg" />
+								<div>品牌</div></a>
+							</div>
+							
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				
+				<div class="zw50"></div>
+				<div class="weui_tabbar">
+			        <a href="index.html" class="weui_tabbar_item weui_bar_item_on">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/1 (2).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label ">首页</p>
+			        </a>
+			        <a href="favorites.html" class="weui_tabbar_item">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/2 (1).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">收藏夹</p>
+			        </a>
+			        <a href="cart.html" class="weui_tabbar_item">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/3 (1).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">购物车</p>
+			        </a>
+			        <a href="center.html" class="weui_tabbar_item">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/4 (1).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">我的皓歌</p>
+			        </a>
+			      </div>
+				
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script>
+	  $(function() {
+	    FastClick.attach(document.body);
+	  });
+	   
+	</script>
+	<script src="js/jquery-weui.js"></script>
+	
+</html>

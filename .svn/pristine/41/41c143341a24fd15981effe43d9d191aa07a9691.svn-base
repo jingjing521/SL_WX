@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>筛选</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-weui.css" />
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<style>
+			.weui_toast_text {width: 15em !important; margin: auto; min-height: 30px; border-radius: 5px;max-height: 200px; height: 43px !important;}
+		</style>
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="screening">
+				<div class="tr screening-con-titles">重置</div>
+
+				<div class="btn">确定</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		$(document).ready(function(){
+			var w=$(window).height();
+			console.log(w);
+			$("#screening").css("min-height",w-10);
+//			$(".btn").click(function(){
+//				window.location.href="product-list.html?id="+parseUrl().id;
+//			})
+			$(".screening-con-titles").click(function(){
+				$(".screening-con").children().children().removeClass("active");
+				$(".screening-con").children().children().removeClass("actives");
+			})
+			
+			var cat_id=parseInt(parseUrl().id);
+			console.log(cat_id)
+			var timestamp = Date.parse(new Date());
+ 			var values=["cat_id","timestamp"];
+			var data={"cat_id":cat_id,"timestamp":timestamp};
+			var sign = doSign(values,data);
+			var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			$.ajax({
+				type:"post",
+				url: link_url+"goodsFilterMenuFromCategory",
+				dataType: "json",
+				data: {"cat_id":cat_id,"key":keys,"timestamp":timestamp,"sign":sign},
+				success: function(data) {
+				    if(data.status == 1){
+				    	console.log("ok");
+				    	console.log(data);
+				    	$.each(data.data.spec, function(i,v) {
+				    		$('<div class="screening-con"><div class="screening-con-title">'+v.name+'</div><div class="screening-con-items"></div></div>').appendTo($("#screening"));
+				    		$.each(v.spec_item, function(a,b) {
+				    			$('<div class="screening-con-item fl" dataid="'+b.id+'">'+b.item+'</div>').appendTo($(".screening-con-items").eq(i));
+				    		});
+				    		$('<div class="clear"></div>').appendTo($(".screening-con-items"));
+				    		$(".screening-con-items").eq(i).on("click",".screening-con-item",function(){
+								$(".screening-con-items").eq(i).find(".screening-con-item").removeClass("active");
+								$(".screening-con-items").eq(i).find(".screening-con-item").removeClass("nn");
+								$(this).toggleClass("active"); 
+								$(this).toggleClass("nn"); 
+								console.log($(this).text());
+								console.log($(this).attr("dataid"));
+							})
+				    	});
+				    	
+				    	$(".btn").click(function(){
+				    		var arr=[];
+				    		$.each($(".nn"),function(){
+					    		var dataids=$(this).attr("dataid");
+					    		arr.push(dataids);
+					    	});
+					    	console.log(arr);
+					    	var str="";
+							var arrvalue;
+							$.each(arr,function(i,v){
+								arrvalue=arr[i]
+								if(i==0){
+									str+=arr[i];
+								}
+								else{
+									str+="_"+arr[i];
+								}	
+							})
+							console.log(str);
+							console.log(arr.length);
+							if(arr.length<=1){
+								$.toast("至少选择两种属性！","text");
+							}else{
+								window.location.href="product-list.html?id="+parseUrl().id+"&spec="+str;
+								str="";
+							}
+							
+						})
+				    	
+				    }else{
+				    	 console.log(data);
+				    	$.toast(data.data, "text");
+				    }
+				},error:function(){
+				 	console.log(link_url);
+				}
+			})
+		});
+	</script>
+</html>

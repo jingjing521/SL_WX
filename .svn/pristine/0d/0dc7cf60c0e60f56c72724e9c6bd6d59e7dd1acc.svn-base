@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>商品列表</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel=" stylesheet" type="text/css" href="css/jquery-weui.css" />
+		<link rel=" stylesheet" type="text/css" href="css/weui.min.css" />
+		<style>
+			.weui_toast_text {width: 15em !important; margin: auto; min-height: 30px; border-radius: 5px;max-height: 200px; height: 43px !important;}
+		</style>
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="store">
+				
+				<div class="store-con">
+					<div class="store-con-top">
+						<div class="fl jg">价格<img src="images/sx2.png"></div>
+						<div class="fl xl">销量<img src="images/sx2.png"></div>
+						<div class="fl sxs">筛选<img src="images/sx.png"></div>
+						<p class="clear"></p>
+					</div>
+					<div class="store-con-bottom">
+	
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		$(document).ready(function(){
+		$(".sxs").click(function(){
+			window.location.href="screening.html?id="+parseUrl().id;
+		})
+		//价格
+		var i=1;
+		$(".jg").click(function(){
+			if(i%2!=0){
+				a();
+				i++;
+			}else if(i%2==0){
+				b();
+				i++;
+			}else{
+				alert("error");
+			};
+	//		alert(i)
+		})
+
+		function a(){
+			$(".jg img").attr("src","images/sx1.png");
+			$(".jg").css("color","#E43494");
+		}
+		function b(){
+			$(".jg img").attr("src","images/sx2.png");
+			$(".jg").css("color","#333");
+		}		
+	
+		//销量
+		var j=1;
+		$(".xl").click(function(){
+			if(j%2!=0){
+				c();
+				j++;
+			}else if(j%2==0){
+				d();
+				j++;
+			}else{
+				alert("error");
+			};
+	//		alert(i)
+		})
+
+		function c(){
+			$(".xl img").attr("src","images/sx1.png");
+			$(".xl").css("color","#E43494");
+		}
+		function d(){
+			$(".xl img").attr("src","images/sx2.png");
+			$(".xl").css("color","#333");
+		}	
+	
+		//ajax
+		var loading = false;
+		indexData();
+		  var page=0;
+		  function indexData(){
+			page++;	 	
+		  		//ajax
+		  		 var cat_id=parseUrl().id;
+		  		 var spec=localStorage.getItem("spec")||"";
+		  		 var sortrule=localStorage.getItem("sortrule")||"";
+		  		 var sorttype=localStorage.getItem("sorttype")||"";
+				 var timestamp1 = Date.parse(new Date());
+	   			 var values1=["cat_id","spec","sortrule","sorttype","page","timestamp"];
+				 var data1={"cat_id":cat_id,"spec":spec,"sortrule":sortrule,"sorttype":sorttype,"page":page,"timestamp":timestamp1};
+				 var sign1 = doSign(values1,data1);
+				 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+				 $.ajax({
+					type:"post",
+					url: link_url+"goodsListByCategory",
+					dataType: "json",
+				    data: {"cat_id":cat_id,"spec":spec,"sortrule":sortrule,"sorttype":sorttype,"page":page,"key":keys,"timestamp":timestamp1,"sign":sign1},
+					success: function(data) {
+					    if(data.status == 1){
+					        console.log(data);
+					        var v=data.data
+					        if(v=""){
+					        	$.toast("没有更多相关商品！", "text");
+					        	 $(document.body).infinite().on("infinite", function() {
+							        if(loading) return;
+							        loading = true;
+							        setTimeout(function() {
+//							          page++;
+							          indexData();
+							          loading = false;
+							        }, 2000);
+						        });
+					        }else{
+					        	 $.each(data.data, function(i,j) {
+					        	 	 $('<div class="store-con-bottom-item"><a href="product.html?id='+j.id+'"><div class="store-con-bottom-img"></div><div class="store-con-bottom-price">￥'+j.price+'</div><div class="store-con-bottom-text">'+j.name+'</div></a></div>').appendTo($(".store-con-bottom"));
+						        	 var b=j.smeta
+						        	 $('<img src="'+b.thumb+'">').appendTo($(".store-con-bottom-img"));
+					        	 });
+					        	
+					        	 $(document.body).infinite().on("infinite", function() {
+							        if(loading) return;
+							        loading = false;
+							        setTimeout(function() {
+//							          page++;
+							          indexData();
+							          loading = true;
+							        }, 2000);
+						        });
+					        }
+					    }else{
+					    	console.log(data);
+					       $.toast(data.data, "text");
+					    }
+					},
+					error:function(){
+						   
+					}
+				 })
+		    }
+	 		
+	       
+	
+	
+	})
+	</script>
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>商家认证</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/webuploader.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="merchantsCert">
+				<div class="merchantsCert-top">
+					<div class="merchantsCert-item">
+						<div class="fl merchantsCert-item-name">店铺名称：</div>
+						<div class="fl merchantsCert-item-con"><input type="text" placeholder="请输入店铺名称" value="金蘑姑姑桃宝店" /></div>
+						<div class="clear"></div>
+					</div>
+					<div class="merchantsCert-item">
+						<div class="fl merchantsCert-item-name">联系人姓名：</div>
+						<div class="fl merchantsCert-item-con"><input type="text" placeholder="请输入联系人姓名" value="小淼" /></div>
+						<div class="clear"></div>
+					</div>
+					<div class="merchantsCert-item">
+						<div class="fl merchantsCert-item-name">公司地址：</div>
+						<div class="fl merchantsCert-item-con"><input type="text" placeholder="请输入公司地址" value="唐延南路10号中兴产业园C区301" /></div>
+						<div class="clear"></div>
+					</div>
+					<div class="merchantsCert-item bbn">
+						<div class="fl merchantsCert-item-name">联系电话：</div>
+						<div class="fl merchantsCert-item-con"><input type="text" placeholder="请输入联系电话" value="15647891457" /></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="merchantsCert-bottom mt10 pb">
+					<div class="merchantsCert-items">
+						<div class="fl">添加企业营业执照或三证合一证</div>
+						<div class="fl ml50">示例照片</div>
+						<div class="clear"></div>
+					</div>
+					<div class="merchantsCert-bottom-upload">
+						<div class="fl merchantsCert-bottom-uploadr">
+							<div class="dem">
+						        <div id="uploader" class="webuploader-container">
+						            <div class="queueList">
+						                <ul class="filelist">
+						                </ul>
+						            </div>
+						            <div id="dndArea" class="placeholder element-invisible" style="margin-top:0px;-webkit-tap-highlight-color:rgba(0,0,0,0);">
+						                <div id="filePicker" class="webuploader-container" style="-webkit-tap-highlight-color:rgba(0,0,0,0);">
+						                    <div class="webuploader-pick" style="-webkit-tap-highlight-color:rgba(0,0,0,0);"></div>
+						                    <div id="rt_rt_1b1ofmbub12qilg019c013cjngt6" style="position: absolute; top: 20px; left: 53px; height: 44px; overflow: hidden; bottom: auto; right: auto;-webkit-tap-highlight-color:rgba(0,0,0,0);">
+						                        <input type="file" name="file" class="webuploader-element-invisible" multiple="multiple" accept="image/*" style="-webkit-tap-highlight-color:rgba(0,0,0,0);">
+						                        <label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);-webkit-tap-highlight-color:rgba(0,0,0,0);"></label>
+						                    </div>
+						                </div>
+						                
+						            </div>
+						        <div id="rt_rt_1b1ofmbu11qtf9av1ujf5fg1gka1" style="position: absolute; top: -175px; left: 0px; width: 86px; height: 40px; overflow: hidden; bottom: auto; right: auto;"><input type="file" name="file" class="webuploader-element-invisible" multiple="multiple" accept="image/*"><label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label></div></div>
+						    </div>
+						</div>
+						<div class="fl merchantsCert-bottom-uploadr ml20"><img src="images/zyz.png" class="mings"></div>
+						<div class="clear"></div>
+					</div>
+					<div class="merchantsCert-bottom-phone">
+						<img src="images/l-phone.png" /><a href="tel:12345678">一键咨询电话：400-12345678</a>
+					</div>
+					<a href="merchants-pass.html"><div class="btn">提交</div></a>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/webuploader.min.js"></script>
+    <script type="text/javascript" src="js/upload.js?v=1.0"></script>
+    <script>
+//  		$(document).ready(function(){
+//  			var w = $(window).width();//获取页面可见宽度  
+//              var imgw=$(".webuploader-pick").height();
+//              var iw=$(".mings").height();
+//              console.log(iw);
+//              $(".webuploader-pick").css("height",iw);
+//              $(".imgWrap img").css("height",iw);
+//  		})
+    		window.onload=function(){  
+                 changeWindowWidth();  
+            }  
+            //当浏览器窗口大小改变时，设置显示内容的高度  
+            window.onresize=function(){  
+                 changeWindowWidth();  
+            }  
+            function changeWindowWidth(){               
+                var w = $(window).width();//获取页面可见宽度  
+                var imgw=$(".webuploader-pick").height();
+                var iw=$(".mings").height();
+                console.log(iw);
+                $(".webuploader-pick").css("height",iw);
+                $(".imgWrap img").css("height",iw);
+            }
+            $(document).ready(function(){
+            	var h=$(window).height();
+            	var hh=$(".merchantsCert-top").height();
+            	var hhh=parseInt(h-hh);
+            	$(".merchantsCert-bottom").css("min-height",hhh);
+            })
+    </script>
+</html>

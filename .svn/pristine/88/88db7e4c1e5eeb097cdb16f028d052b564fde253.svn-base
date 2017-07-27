@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>品牌分类</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel=" stylesheet" type="text/css" href="css/jquery-weui.css" />
+		<link rel=" stylesheet" type="text/css" href="css/weui.min.css" />
+		
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="search">
+				<div class="search-top">
+					<div class="search-top-con">
+						<a href="search.html"><img src="images/fl (1).png" style="width: 68px;"></a><a href="brand.html"><img src="images/fl (3).png"></a>
+					</div>
+				</div>
+				<div class="search-search">
+					<div class="fl search-search-img"><img src="images/searchs.png"></div>
+					<form action="search-con.html" id="form">
+					<div class="fl search-search-text"><input type="search" class="keyword" placeholder="搜素品牌"></div>
+					<input type="submit" />
+					</form>
+					<div class="clear"></div>
+				</div>
+				<div class="search-con">
+					<div class="brand-con">
+						<div class="brand-con-title" catid="0">精选<a href="brand-more.html?id=0" class="colors"><span class="fr">更多<img width="6px" style="margin-left: 2px; margin-top: -1px;" src="images/lefts.png"></span></a></div>
+						<div class="brand-cons jx">
+							
+						</div>
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#form").on("submit",function(){
+		   		var keywords=$(".keyword").val();
+		   		localStorage.setItem("keywords",keywords);
+		   	})
+
+			var timestamp = Date.parse(new Date());
+ 			var values=["timestamp"];
+			var data={"timestamp":timestamp};
+			var sign = doSign(values,data);
+			var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			$.ajax({
+				type:"post",
+				url: link_url+"shopAllList",
+				dataType: "json",
+				data: {"key":keys,"timestamp":timestamp,"sign":sign},
+				success: function(data) {
+				    if(data.status == 1){
+				    	console.log("ok");
+				    	console.log(data);
+				    	$.each(data.data.jx,function(i,v){
+				    		$('<div class="fl"><a href="store.html?id='+v.shop_id+'"><img src="'+v.logo+'" /><div>'+v.name+'</div></a></div>').appendTo($(".jx"));
+				    		$("<div class='clear'></div>").appendTo($(".jx"));
+				    	})
+				    	$.each(data.data.pt,function(a,b){
+				    		$('<div class="brand-con"><div class="brand-con-title" catid="'+b.id+'">'+b.name+'<a href="brand-more.html?id='+b.id+'" class="colors"><span class="fr">更多<img width="6px" style="margin-left: 2px; margin-top: -1px;" src="images/lefts.png"></span></a></div><div class="brand-cons hh"></div></div>').appendTo($(".search-con"))
+				    		$.each(b.companylist, function(c,d) {
+				    			$('<div class="fl"><a href="store.html?id='+d.shop_id+'"><img src="'+d.logo+'" /><div>'+d.name+'</div></a></div>').appendTo($(".hh").eq(a))
+				    		});
+				    		$("<div class='clear'></div>").appendTo($(".hh").eq(a));
+				    	})
+				    	
+				    }else{
+				    	 console.log(data);
+				    	$.toast(data.data, "text");
+				    }
+				},error:function(){
+				 	console.log(link_url);
+				}
+			})
+		})
+	</script>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>我的积分</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/jquery-weui.css" />
+		<link rel="stylesheet" href="css/weui.min.css" />
+		<style>
+			.weui_toast_text {width: 15em !important; margin-left: 1% !important;}
+		</style>	
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="integration">
+				<div class="integration-top">
+					<img src="images/jf-bg.png" />
+					<div class="integration-po-top">
+						<div class="integration-po-top-name">我的积分</div>
+					</div>
+					<div class="integration-po-tops">
+						<img src="images/jfs.png">
+						<span class="integration-po-top-num"></span>
+					</div>
+				</div>
+				<div class="integration-con">
+					<div class="integration-con-title">
+						<div class="integration-con-title-name">积分明细</div>
+					</div>
+					
+					<!--<div class="integration-con-item">
+						<div class="integration-con-item-name">购物赠送商品名称商品名称商品名称</div>
+						<div class="integration-con-item-nums">-20</div>
+						<div class="integration-con-item-date">2016-4-16</div>
+					</div>
+					<div class="integration-con-item">
+						<div class="integration-con-item-name">购物赠送商品名称商品名称商品名称</div>
+						<div class="integration-con-item-nums">+20</div>
+						<div class="integration-con-item-date">2016-4-16</div>
+					</div>-->
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="js/center.js" ></script>
+	<script type="text/javascript" src="js/md5.js" ></script>
+	<script type="text/javascript" src="js/jquery-weui.js" ></script>
+	 <script src="js/fastclick.js"></script>
+	<script>
+	  indexData();
+	  var page=0;
+	  function indexData(){
+		page++;	 	
+	  		//ajax
+	  		 var user_id=localStorage.getItem("user_id");
+	  		 console.log(user_id);
+			 var timestamp1 = Date.parse(new Date());
+   			 var values1=["user_id","page","timestamp"];
+			 var data1={"user_id":user_id,"page":page,"timestamp":timestamp1};
+			 var sign1 = doSign(values1,data1);
+			 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			 $.ajax({
+				type:"post",
+				url: link_url+"integralLogListByUser",
+				dataType: "json",
+			    data: {"user_id":user_id,"page":page,"key":keys,"timestamp":timestamp1,"sign":sign1},
+				success: function(data) {
+				    if(data.status == 1){
+				        console.log(data);
+				       	 console.log(data.data.log_lsit.length);
+				       	$(".integration-po-top-num").text(data.data.user_score);
+							$.each(data.data.log_lsit,function(i,v){
+					        	$('<div class="integration-con-item"><div class="integration-con-item-name">'+v.name+'</div><div class="integration-con-item-nums">'+v.integral+'</div><div class="integration-con-item-date">'+v.add_time+'</div></div>').appendTo($(".integration-con"));
+					       })
+				    }else{
+				    	$(".integration-po-top-num").text(0);
+				    	$.toast("没有更多相关明细!","text");
+				    	console.log(data);
+				    }
+				},
+				error:function(){
+					   
+				}
+			 })
+}
+	</script>
+</html>

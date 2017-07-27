@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>个人资料</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="plugins/layui/css/layui.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="personalDate">
+				<div class="personalDate-top">
+					<div class="personalDate-top-item">
+						<div class="fl personalDate-top-item-name linh70">头像</div>
+						<div class="fr personalDate-top-item-con">
+							<div class="site-demo-upload">
+							  <img id="LAY_demo_upload" src="images/3.png" onclick="myfile.click();">
+							  <div class="site-demo-upbar">
+							   <input type="file" accept="image/*" id="myfile" style="display: none;">
+							  </div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="personalDate-top-item">
+						<div class="fl personalDate-top-item-name">昵称</div>
+						<div class="fr personalDate-top-item-con"><input type="text" readonly="readonly" placeholder="请输入昵称" value="小淼"></div>
+						<div class="clear"></div>
+					</div>
+					<div class="personalDate-top-item">
+						<div class="fl personalDate-top-item-name">手机号码</div>
+						<a href="change-phone.html"><div class="fr personalDate-top-item-r"><img src="images/right.png"></div>
+						<div class="fr personalDate-top-item-con pwid"><input type="text" placeholder="请输入手机号码" readonly="readonly" value="15312456784"></div></a>
+						<div class="clear"></div>
+					</div>
+					<div class="personalDate-top-item">
+						<div class="fl personalDate-top-item-name">性别</div>
+						<div class="fl personalDate-top-item-con">
+							
+							<div class="fr ml20">
+								<input type="radio" id="big" checked="checked" name="atype" value="1">
+ 								<label name="atype1" class="checked" for="big">女</label>
+							</div>
+							<div class="fr">
+								<input type="radio" id="small"  name="atype" value="0">
+ 								<label name="atype1"  for="small">男</label>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="personalDate-top-item bbn">
+						<div class="fl personalDate-top-item-name">邮箱</div>
+						<div class="fr personalDate-top-item-con"><input type="text" readonly="readonly" placeholder="请输入邮箱" value="123456@qq.com"></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<a href="center.html"><div class="btn mt50">保存</div></a>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script src="plugins/layui/layui.js"></script>
+	<script>
+	$(function() {
+	  $('label').click(function(){
+	    var radioId = $(this).attr('name');
+	    $('label').removeAttr('class') && $(this).attr('class', 'checked');
+	    $('input[type="radio"]').removeAttr('checked') && $('#' + radioId).attr('checked', 'checked');
+	  });
+	});
+	</script>
+	<script>
+	layui.use('upload', function(){
+	  layui.upload({
+	    url: ''
+	    ,elem: '#test' //指定原始元素，默认直接查找class="layui-upload-file"
+	    ,method: 'get' //上传接口的http类型
+	    ,success: function(res){
+	      LAY_demo_upload.src = res.url;
+	    }
+	  });
+	});
+</script>
+</html>

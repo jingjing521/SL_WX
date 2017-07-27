@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>登录</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+		<style>
+			.weui_toast_text {
+				width: 15em !important;
+			}
+		</style>
+		
+	</head>
+
+	<body style="background: #fff;">
+		<div class="index-bg">
+			<!--登录导航-->
+			<div class="login-nav">
+				<a href="index.html">
+					<div class="login-return"><img src="images/left.png"></div>
+				</a>
+				<div class="login-logo"><img src="images/login-logo.png"></div>
+				<div class="login-nav-name">
+					<a href="login.html">
+						<div class="login-nav-active">登 录</div>
+					</a>
+					<a href="register.html">
+						<div>注 册</div>
+					</a>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<!--登录内容-->
+			<div class="login-main">
+				<div class="login-input"><img src="images/iconphone.png" class="login-img"><input type="text" class="border-none login-user" placeholder="请输入手机号码或者邮箱"></div>
+				<div class="login-input"><img src="images/iconkey.png" class="login-img"><input maxlength="12" type="password" class="border-none login-pwd" placeholder="请输入6-12位数字或字母组合的密码"></div>
+				<a href="resetPwd-email.html">
+					<div class="fr color-cys">忘记密码</div>
+				</a>
+				<div class="clear"></div>
+				<div class="login-inputs"><input type="submit" class=" login-btn border-none" value="登录"></div>
+			</div>
+		</div>
+	</body>
+	<script src="js/webim.config.js"></script>
+	<script src="js/strophe-1.2.8.min.js"></script>
+	<script src="js/websdk-1.4.10.min.js"></script>
+	<script src="js/adapter.js"></script>
+	<script src="js/webrtc-1.4.10.js"></script>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/common.js"></script>
+
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/center.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+
+		$(".login-btn").click(function() {
+			var username = $(".login-user").val();
+			var pwd = $(".login-pwd").val();
+			var pp = md5(pwd);
+			var regx = /^(13[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(18[0-9]{9})|(15[0-9]{9})$/;
+			var reem = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+			var patt = new RegExp('@');
+			//			console.log(username.match('@').length);
+			if(username == "") {
+				$.toast("请输入手机号码或者邮箱", "text");
+			} else {
+				if(patt.test(username)) {
+					if(!reem.test(username)) {
+						$.toast("请输入正确的邮箱", "text");
+					} else if(pwd == "") {
+						$.toast("请输入6-12位数字或字母组合的密码", "text");
+					} else if(pwd.length < 6) {
+						$.toast("请输入6-12位数字或字母组合的密码", "text");
+					} else {
+						var timestamp = Date.parse(new Date());
+						var values = ["phone", "user_pass", "timestamp"];
+						var data = {
+							"phone": username,
+							"user_pass": pp,
+							"timestamp": timestamp
+						};
+						var sign = doSign(values, data);
+						var keys = "idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+						$.ajax({
+							type: "post",
+							url: link_url + "goLogin",
+							dataType: "json",
+							data: {
+								"phone": username,
+								"user_pass": pp,
+								"key": keys,
+								"timestamp": timestamp,
+								"sign": sign
+							},
+							success: function(data) {
+								if(data.status == 1) {
+									
+									console.log("ok");
+									console.log(data);
+									var v = data.data;
+									localStorage.setItem("user_id", v.id);
+									localStorage.setItem("address_id", v.address_id);
+									console.log(v.avatar);
+									localStorage.setItem("melogo",v.avatar);
+									var user=username.replace("@","");
+									console.log(user);
+									localStorage.setItem("username", user);
+									localStorage.setItem("pp", v.user_pass);
+									login();
+									console.log(v.user_pass,user);
+									window.location.href="index.html";
+								} else {
+									$.toast(data.data, "text");
+								}
+							},
+							error: function() {
+								console.log(link_url);
+							}
+						})
+					}
+				} else {
+					if(username.length < 11 || !regx.test(username) || username.length > 11) {
+						$.toast("请输入正确的手机号码", "text");
+					} else if(pwd == "") {
+						$.toast("请输入6-12位数字或字母组合的密码", "text");
+					} else if(pwd.length < 6) {
+						$.toast("请输入6-12位数字或字母组合的密码", "text");
+					} else {
+						var timestamp = Date.parse(new Date());
+						var values = ["phone", "user_pass", "timestamp"];
+						var data = {
+							"phone": username,
+							"user_pass": pp,
+							"timestamp": timestamp
+						};
+						var sign = doSign(values, data);
+						var keys = "idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+						$.ajax({
+							type: "post",
+							url: link_url + "goLogin",
+							dataType: "json",
+							data: {
+								"phone": username,
+								"user_pass": pp,
+								"key": keys,
+								"timestamp": timestamp,
+								"sign": sign
+							},
+							success: function(data) {
+								if(data.status == 1) {
+									console.log("ok");
+									console.log(data);
+									var v = data.data;
+									localStorage.setItem("user_id", v.id);
+									localStorage.setItem("address_id", v.address_id);
+									localStorage.setItem("username", username);
+									localStorage.setItem("pp", v.user_pass);
+									login();
+									window.location.href="index.html";
+									
+								} else {
+									console.log(data);
+									$.toast(data.data, "text");
+								}
+							},
+							error: function() {
+								console.log(link_url);
+								//				            	alert(1);
+							}
+						})
+					}
+
+				}
+			}
+		})
+	</script>
+
+</html>

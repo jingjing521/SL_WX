@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>我的订单</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="order">
+				<div class="order-left">
+		            <li class="on1 active"  id="li-1" onclick="fun(5,'1');">全部</li>
+		            <li class="on2" id="li-2" onclick="fun(5,'2');">待付款</li>
+		            <li class="on3" id="li-3" onclick="fun(5,'3');">待发货</li>
+		            <li class="on4" id="li-4" onclick="fun(5,'4');">待收货</li>
+		        </div>
+		        
+		        <div class="order-right">
+		            <div class="help-right-box"  id="div-1">
+		            	<!--全部-->
+		            	
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr colors">交易成功</span>
+		            		</div>
+		            		<a href="order-detailsSucc.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-detailsSucc.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            	</div>
+		            	
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr colors">待收货</span>
+		            		</div>
+		            		<a href="order-detailsFor.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-detailsFor.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            		<div class="btns">
+			            		<div class="order-btn fl">确认收货</div>
+			            		<div class="order-del fl">查看物流</div>
+			            		<div class="clear"></div>
+		            		</div>
+		            	</div>
+		            	
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr colors">待付款</span>
+		            		</div>
+		            		<a href="order-details.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-details.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            		<div class="btns">
+			            		<a href="order-details.html"><div class="order-btn fl">立即支付</div></a>
+			            		<div class="order-del fl">取消订单</div>
+			            		<div class="clear"></div>
+		            		</div>
+		            	</div>
+		            	
+		            </div>
+		            <div class="help-right-box"  id="div-2" style="display:none;">  
+		            	<!--待付款-->
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr colors">待付款</span>
+		            		</div>
+		            		<a href="order-details.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-details.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            		<div class="btns">
+			            		<a href="order-details.html"><div class="order-btn fl">立即支付</div></a>
+			            		<div class="order-del fl">取消订单</div>
+			            		<div class="clear"></div>
+		            		</div>
+		            	</div>
+		            	
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr colors">定金等待买家付款</span>
+		            		</div>
+		            		<a href="order-details1.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-details1.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            		<div class="btns">
+			            		<a href="order-details1.html"><div class="order-btn fl">立即支付</div></a>
+			            		<div class="order-del fl">取消订单</div>
+			            		<div class="clear"></div>
+		            		</div>
+		            	</div>
+		            	
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr colors">12.31 15:00开始支付尾款</span>
+		            		</div>
+		            		<a href="order-details2.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-details2.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            		<div class="btns">
+			            		<a href="order-details2.html"><div class="order-btn fl">立即支付</div></a>
+			            		<div class="order-del fl">取消订单</div>
+			            		<div class="clear"></div>
+		            		</div>
+		            	</div>
+		            	
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr colors">尾款等待买家付款</span>
+		            		</div>
+		            		<a href="order-details3.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-details3.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            		<div class="btns">
+			            		<a href="order-details3.html"><div class="order-btn fl">立即支付</div></a>
+			            		<div class="order-del fl">取消订单</div>
+			            		<div class="clear"></div>
+		            		</div>
+		            	</div>
+		            	
+		            </div>
+		            <div class="help-right-box"  id="div-3" style="display:none;">  
+		            	<!--待发货-->
+		            	
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr colors">待发货</span>
+		            		</div>
+		            		<a href="order-detailsSend.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-detailsSend.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            	</div>
+		            	
+		            </div>
+		            <div class="help-right-box"  id="div-4" style="display:none;">  
+		            	<!--待收货-->
+		            	<div class="order-con">
+		            		<div class="order-con-title">
+		            			金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr colors">待收货</span>
+		            		</div>
+		            		<a href="order-detailsFor.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">粉红中长款V领针织外套</div>
+									<div class="order-product-con-gg">颜色：粉红色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<a href="order-detailsFor.html"><div class="order-product">
+								<div class="fl order-product-img"><img src="images/small-img1.jpg"></div>
+								<div class="fl order-product-con">
+									<div class="order-product-con-name">黑色连帽毛领羽绒服</div>
+									<div class="order-product-con-gg">颜色：黑色；尺码：S</div>
+									<div class="order-product-con-price">￥285.00<span>x2</span></div>
+								</div>
+								<div class="clear"></div>
+							</div></a>
+							<div class="order-nums"><span class="fl colore">共2件商品</span>合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)<div class="clear"></div></div>
+		            		<div class="btns">
+			            		<div class="order-btn fl">确认收货</div>
+			            		<div class="order-del fl">查看物流</div>
+			            		<div class="clear"></div>
+		            		</div>
+		            	</div>
+		            	
+		            </div>
+		        </div>
+	        </div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<!-- tab选项卡JS启动 -->
+<script type="text/javascript">
+function fun(allNum,num){
+	for(var i=1;i<=allNum;i++){
+		$("#div-"+i).hide();
+	}
+	$("#div-"+num).show();
+}
+</script>
+<!-- 点击按钮颜色转换JS启动 -->
+<script type="text/javascript">
+    $(function(){
+        $('.on1').click(function(){
+            $('.on1').addClass('active');
+            $('.on2').removeClass('active');
+			$('.on3').removeClass('active');
+			$('.on4').removeClass('active');
+        });
+        $('.on2').click(function(){
+            $('.on2').addClass('active');
+            $('.on1').removeClass('active');
+			$('.on3').removeClass('active');
+			$('.on4').removeClass('active');
+        });
+		$('.on3').click(function(){
+            $('.on3').addClass('active');
+            $('.on1').removeClass('active');
+			$('.on2').removeClass('active');
+			$('.on4').removeClass('active');
+        });
+        $('.on4').click(function(){
+            $('.on4').addClass('active');
+            $('.on1').removeClass('active');
+			$('.on2').removeClass('active');
+			$('.on3').removeClass('active');
+        });
+	});
+ </script>
+</html>

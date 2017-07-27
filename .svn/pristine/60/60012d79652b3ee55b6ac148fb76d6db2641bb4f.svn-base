@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>预售商品详情</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<!-- Link Swiper's CSS -->
+    	<link rel="stylesheet" href="css/swiper.min.css">
+    	<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="product">
+				<div class="products">
+				<div class="product-banner">
+					  <!-- Swiper -->
+				    <div class="swiper-container">
+				        <div class="swiper-wrapper">
+				            <div class="swiper-slide"><a href="video.html"><img src="images/product-banner (4).png"><img src="images/video (2).png" class="product-play"></a></div>
+				            <div class="swiper-slide"><img src="images/product-banner (2).png"></div>
+				            <div class="swiper-slide"><img src="images/product-banner (3).png"></div>
+				            <div class="swiper-slide"><img src="images/product-banner (1).png"></div>
+				            <div class="swiper-slide"><img src="images/product-banner (4).png"></div>
+				            
+				        </div>
+				        <!-- Add Pagination -->
+				        <div class="swiper-pagination"></div>
+				    </div>
+				</div>
+				<div class="product-details">
+					<div class="product-details-top">
+						<div class="fl product-details-l">阿依莲2016冬装新品时尚休闲棒球外套中长款毛呢棒球衣大衣</div>
+						<div class="fl product-details-r shares"><img src="images/share.png"></div>
+						<div class="clear"></div>
+					</div>
+					<div class="product-details-price"><span>定价:￥</span>560.00<span class="color3 ml10">总价:￥860.00</span><span class="old-price">￥860.00</span></div>
+					<div class="product-details-bottom">
+						<div class="fl"><img src="images/jf.png">赠送积分75</div>
+						<div class="fl tc"><img src="images/ok.png" class="bottom-img">已预订200</div>
+						<div class="fl tr"><img src="images/addr.png">浙江温州</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="product-time">
+					<div class="fl product-time-img"><img src="images/djs.png"></div>
+					<div class="fl product-time-con">
+					<div class="days fl">
+							<div class="days-con"><img src="images/ti (1).png"><span></span></div>
+							<div class="tr linh0 mt2">天</div>
+						</div>
+						<div class="fl f"><img src="images/ti (2).png"></div>
+						<div class="days fl">
+							<div class="hours-con"><img src="images/ti (1).png"><span></span></div>
+							<div class="tr linh0 mt2">时</div>
+						</div>
+						<div class="fl f"><img src="images/ti (2).png"></div>
+						<div class="days fl">
+							<div class="minutes-con"><img src="images/ti (1).png"><span></span></div>
+							<div class="tr linh0 mt2">分</div>
+						</div>
+						<div class="fl f"><img src="images/ti (2).png"></div>
+						<div class="days fl">
+							<div class="seconds-con"><img src="images/ti (1).png"><span></span></div>
+							<div class="tr linh0 mt2">秒</div>
+						</div>
+					</div>
+					<div class="fl product-time-text">后结束</div>
+					<div class="clear"></div>
+				</div>
+				
+				<div class="product-con">
+					<div class="product-con-item join">
+						<div class="fl product-con-item-name">尺寸颜色</div>
+						<div class="fr product-con-item-img"><img src="images/lefts.png"></div>
+						<div class="fr product-con-item-text"></div>
+						<div class="clear"></div>
+					</div>
+					<div class="product-con-item">
+						<a href="store.html" class="color3"><div class="fl product-con-item-name">萌萌哒桃宝店</div>
+						<div class="fr product-con-item-img"><img src="images/lefts.png"></div>
+						<div class="fr product-con-item-text"></div></a>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="product-tishi">继续向上拖动可以查看详情</div>
+				</div>
+				<a href="cart.html"><div class="product-cart"><img src="images/cart.png"></div></a>
+				
+				<div class="zw50"></div>
+				<div class="weui_tabbar" style="padding: 0;">
+			        <a href="chat.html" class="weui_tabbar_items ">
+			          <div class="weui_tabbar_icon" style="width: 20px; height: 20px;margin-top: 4px;">
+			            <img src="images/kf.png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label ">客服</p>
+			        </a>
+			        <a class="weui_tabbar_items show-img">
+			          <div class="weui_tabbar_icon" style="width: 20px; height: 20px; margin-top: 4px;">
+			            <img src="images/sc.png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">收藏</p>
+			        </a>
+			        <a href="#" class="weui_tabbar_items3 joins">
+			          <!--<div class="weui_tabbar_icon">
+			            <img src="images/4 (1).png" alt="">
+			          </div>-->
+			          <p class="weui_tabbar_label"><span class="mr10">01-01 12:00结束</span>立即支付定金</p>
+			        </a>
+			      </div>
+				
+			</div>
+		</div>
+		
+		<!--选择规格颜色-->
+		<div class="cart" style="display: none;">
+			<div class="cart-top">
+				<div class="fl cart-img"><img src="images/product.png"></div>
+				<div class="fl cart-r">
+					<div class="cart-price"><span>定金</span>￥200<span class="color3 ml10">总价 ￥68.80</span></div>
+					<div class="cart-name">库存25件</div>
+					<div class="cart-tishi">请选择尺码 颜色</div>
+					<div class="cart-close"><img src="images/close.png"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="cart-z">
+				<div class="cart-names pl">尺码</div>
+				<div class="cart-li">
+					<ul class="cart-ul">
+						<li class="cart-line cart-active">粉红色</li>
+						<li class="cart-line">黑色</li>
+						<li class="cart-line">蓝色</li>
+						<li class="cart-line">白色</li>
+					</ul>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="cart-z">
+				<div class="cart-names pl">规格</div>
+				<div class="cart-li">
+					<ul class="cart-uls">
+						<li class="cart-lines cart-actives">155/S</li>
+						<li class="cart-lines">160/M</li>
+						<li class="cart-lines">165/L</li>
+						<li class="cart-lines">170/XL</li>
+						<li class="cart-lines">XXL</li>
+						<li class="cart-lines">XXXL</li>
+						<li class="cart-lines">XXXXL</li>
+					</ul>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="cart-b">
+				<div class="cart-names1 pl fl linh30">商品数量:</div>
+				<div class="fr cart-jj">
+					<div class="reduce borders">-</div>
+					<input type="number" class="inputs borders" value="1">
+					<div class="add borders">+</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="cart-btn">确认</div>
+		</div>
+		<!--分享-->
+		<div class="shareh" style="display:none;">
+			<div class="shareh-item-con">
+				<div class="shareh-item fl">
+					<img src="images/share (5).png" />
+					<div>微信好友</div>
+				</div>
+				<div class="shareh-item fl">
+					<img src="images/share (4).png" />
+					<div>朋友圈</div>
+				</div>
+				<div class="shareh-item fl">
+					<img src="images/share (1).png" />
+					<div>新浪微博</div>
+				</div>
+				<div class="shareh-item fl">
+					<img src="images/share (2).png" />
+					<div>QQ好友</div>
+				</div>
+				<div class="shareh-item fl">
+					<img src="images/share (3).png" />
+					<div>QQ空间</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="shareh-bnt">取消</div>
+		</div>
+		<div id="overlay"></div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script src="js/jquery.downCount.js"></script>
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationType: 'fraction'
+    });
+    $(function() {
+	    FastClick.attach(document.body);
+	  });
+	  var loading = false;
+      $(document.body).infinite().on("infinite", function() {
+        if(loading) return;
+        loading = false;
+        setTimeout(function() {
+          $(".products").append("<img src='images/product-de.png' class='product-deimg' style='z-index: 2;' />");
+          loading = false;
+        }, 1000);
+      });
+    </script>
+    
+	<script class="source" type="text/javascript">
+	$('.product-time-con').downCount({
+			date: '3/03/2017 09:00:00',
+			offset: +10
+		}, function () {
+			alert('倒计时结束!');
+		});
+	$(document).ready(function(){
+		setInterval(function(){
+			var a=$(".days-con span").text();
+			var b=$(".hours-con span").text();
+			var c=$(".minutes-con span").text();
+			var d=$(".seconds-con span").text();
+		if(a!=""){
+			var str=a.replace(/(\d{1})/g,'$1 ').replace(/\s*$/,'');
+			var strb=b.replace(/(\d{1})/g,'$1 ').replace(/\s*$/,'');
+			var strc=c.replace(/(\d{1})/g,'$1 ').replace(/\s*$/,'');
+			var strd=d.replace(/(\d{1})/g,'$1 ').replace(/\s*$/,'');
+//			console.log(str);
+			$(".days-con span").text(str);
+			$(".hours-con span").text(strb);
+			$(".minutes-con span").text(strc);
+			$(".seconds-con span").text(strd);
+		}
+		
+		},1)
+	//分享
+	$(".shares").click(function(){
+		$('#overlay').css('display','block');
+	   		var docHeight = $(document).height(); //获取窗口高度  
+
+        $('#overlay')  
+		    .height(docHeight)  
+		    .css({  
+		      'opacity': .5, //透明度  
+		      'position': 'absolute',  
+		      'top': 0,  
+		      'left': 0,  
+		      'background-color': 'black',  
+		      'width': '100%',  
+		      'z-index': 99 //保证这个悬浮层位于其它内容之上  
+		 });  
+		$(".shareh").show();
+		$('#overlay').click(function(){
+			$(".shareh").hide();
+			$('#overlay').css('display','none');
+		})
+		
+	})
+	$(".shareh-bnt").click(function(){
+		$(".shareh").hide();
+		$('#overlay').css('display','none');
+	});
+	
+	//购物车
+	$(".cart-ul").on("click",".cart-line",function(){
+		$(".cart-line").removeClass("cart-active");
+		$(this).addClass("cart-active");
+		console.log($(this).text());
+	})
+	$(".cart-uls").on("click",".cart-lines",function(){
+		$(".cart-lines").removeClass("cart-actives");
+		$(this).addClass("cart-actives");
+		console.log($(this).text());
+	})
+
+	var num=$(".inputs").val();
+	var price=$(".cart-price span").html();
+	$(".add").click(function(){
+		num++;
+		$(".inputs").val(num);
+//		$(".cart-price span").html(price*num);
+	})
+	$(".reduce").click(function(){
+		if(num>1){
+			num--;
+		}else{alert("商品不能为0");}
+		$(".inputs").val(num);
+//		$(".cart-price span").html(price*num);
+	})
+
+	$(".cart-btn").click(function(){
+		$(".cart").hide();
+		$('#overlay').css('display','none');
+	});
+	$(".cart-close").click(function(){
+		$(".cart").hide();
+		$('#overlay').css('display','none');
+	});
+	$(".join").click(function(){
+		$('#overlay').css('display','block');
+	   		var docHeight = $(document).height(); //获取窗口高度  
+
+        $('#overlay')  
+		    .height(docHeight)  
+		    .css({  
+		      'opacity': .5, //透明度  
+		      'position': 'absolute',  
+		      'top': 0,  
+		      'left': 0,  
+		      'background-color': 'black',  
+		      'width': '100%',  
+		      'z-index': 99 //保证这个悬浮层位于其它内容之上  
+		 });  
+		$(".cart").show();
+	})
+	$(".joins").click(function(){
+		$('#overlay').css('display','block');
+	   		var docHeight = $(document).height(); //获取窗口高度  
+
+        $('#overlay')  
+		    .height(docHeight)  
+		    .css({  
+		      'opacity': .5, //透明度  
+		      'position': 'absolute',  
+		      'top': 0,  
+		      'left': 0,  
+		      'background-color': 'black',  
+		      'width': '100%',  
+		      'z-index': 99 //保证这个悬浮层位于其它内容之上  
+		 });  
+		$(".cart").show();
+		$(".cart-btn").click(function(){
+			$(".cart").hide();
+			$('#overlay').css('display','none');
+			window.location.href="confirm-porder.html";
+		});
+		$('#overlay').click(function(){
+			$(".cart").hide();
+			$('#overlay').css('display','none');
+		})
+	})
+	//收藏
+	var i=1;
+	$(".show-img").click(function(){
+		if(i%2!=0){
+			a();
+			i++;
+		}else if(i%2==0){
+			b();
+			i++;
+		}else{
+			alert("error");
+		};
+//		alert(i)
+	})
+
+		function a(){
+		$(".show-img div img").attr("src","images/sc (2).png");
+		$(".show-img p").text("已收藏");
+	}
+	function b(){
+		$(".show-img div img").attr("src","images/sc.png");
+		$(".show-img p").text("收藏");
+	}
+	})
+	</script>
+</html>

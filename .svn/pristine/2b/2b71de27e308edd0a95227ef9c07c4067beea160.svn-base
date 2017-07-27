@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>管理地址</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="shippingAddr">
+			</div>
+			<div class="btn-add">新增</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script>
+	  $(function() {
+	    FastClick.attach(document.body);
+	  });
+	</script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+			//ajax
+			function address(){
+			
+			 var user_id=localStorage.getItem("user_id");
+			 var user_id1=parseInt(user_id);
+			 var timestamp1 = Date.parse(new Date());
+ 			 var values1=["user_id","timestamp"];
+			 var data1={"user_id":user_id1,"timestamp":timestamp1};
+			 var sign1 = doSign(values1,data1);
+			 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			 $.ajax({
+				type:"post",
+				url: link_url+"consigneeAddressByUser",
+				dataType: "json",
+			    data: {"user_id":user_id1,"key":keys,"timestamp":timestamp1,"sign":sign1},
+				success: function(data) {
+				    if(data.status == 1){
+				        $.each(data.data,function(i,v){
+				        	if(v.is_default==1){
+				        		console.log(111);
+				        		console.log(data);
+				        		$('<div class="shippingAddr-con" addrid="'+v.id+'"><div class="shippingAddr-items"><div class="shipping-items-con"><span class="consignee">'+v.consignee+'</span><span class="fr phone">'+v.phone+'</span></div><div class="shipping-items-title" pid="'+v.province+'" cid="'+v.city+'" did="'+v.district+'" pname="'+v.province_name+'" cname="'+v.city_name+'" dname="'+v.district_name+'" addr="'+v.address+'" zcode="'+v.zipcode+'">'+v.province_name+' '+v.city_name+v.district_name+v.address+'</div><div class="clear"></div></div><div class="address-b"><div class="fl"><div class="commodity fl select" onclick="alert(this)"></div><span>默认地址</span></div><div class="fr"><img src="images/add (2).png" id="show-confirm"></div><div class="fr"><img src="images/add (1).png" onclick="update(this)"></div><div class=" clear"></div></div></div>').appendTo($("#shippingAddr"))
+				        		localStorage.setItem("address_id",v.id);
+				        		console.log(v.id);
+				        	}else{
+				        		console.log(2222);
+				        		console.log(data);
+				        		$('<div class="shippingAddr-con" addrid="'+v.id+'"><div class="shippingAddr-items"><div class="shipping-items-con"><span class="consignee">'+v.consignee+'</span><span class="fr phone">'+v.phone+'</span></div><div class="shipping-items-title" pid="'+v.province+'" cid="'+v.city+'" did="'+v.district+'" pname="'+v.province_name+'" cname="'+v.city_name+'" dname="'+v.district_name+'" addr="'+v.address+'" zcode="'+v.zipcode+'">'+v.province_name+' '+v.city_name+v.district_name+v.address+'</div><div class="clear"></div></div><div class="address-b"><div class="fl"><div class="commodity fl" onclick="alert(this)" ></div><span>设为默认</span></div><div class="fr"><img src="images/add (2).png" id="show-confirm"></div><div class="fr"><img src="images/add (1).png" onclick="update(this)"></div><div class=" clear"></div></div></div>').appendTo($("#shippingAddr"))
+				        	}
+				        })
+				       
+				    }else{
+				    	 console.log(data);
+				       $.toast(data.data, "text");
+				    }
+				},
+				error:function(){
+				   
+				}
+			 }) 
+			 	
+				
+				
+			}
+			 address();
+			 function alert(str){
+				 var user_id=localStorage.getItem("user_id");
+				 var user_id1=parseInt(user_id);
+				 var addr_id1=parseInt($(str).parent().parent().parent(".shippingAddr-con").attr("addrid"));
+				 var timestamp1 = Date.parse(new Date());
+	 			 var values1=["user_id","addr_id","timestamp"];
+				 var data1={"user_id":user_id1,"addr_id":addr_id1,"timestamp":timestamp1};
+				 var sign1 = doSign(values1,data1);
+				 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+				 $.ajax({
+					type:"post",
+					url: link_url+"consigneeAddressSetdefault",
+					dataType: "json",
+				    data: {"user_id":user_id1,"addr_id":addr_id1,"key":keys,"timestamp":timestamp1,"sign":sign1},
+					success: function(data) {
+					    if(data.status == 1){
+					       console.log(data);
+					       $(".commodity").removeClass("select");
+						   $(".commodity").parent().children("span").text("设为默认");
+						   $(str).toggleClass("select");
+						   $(str).parent().children("span").text("默认地址");
+							
+					    }else{
+					       console.log(data);
+					       $.toast(data.data, "text");
+					    }
+					},
+					error:function(){
+					   
+					}
+				 })
+			 }
+		
+			function update(str){
+				var addr_id=parseInt($(str).parent().parent().parent(".shippingAddr-con").attr("addrid"));
+				var consignee=$(str).parent().parent().siblings().children().children(".consignee").text();
+				var phone=$(str).parent().parent().siblings().children().children(".phone").text();
+				var pid=$(str).parent().parent().siblings().find(".shipping-items-title").attr("pid");
+				var cid=$(str).parent().parent().siblings().find(".shipping-items-title").attr("cid");
+				var did=$(str).parent().parent().siblings().find(".shipping-items-title").attr("did");
+				var pname=$(str).parent().parent().siblings().find(".shipping-items-title").attr("pname");
+				var cname=$(str).parent().parent().siblings().find(".shipping-items-title").attr("cname");
+				var dname=$(str).parent().parent().siblings().find(".shipping-items-title").attr("dname");
+				var addr=$(str).parent().parent().siblings().find(".shipping-items-title").attr("addr");
+				var zcode=$(str).parent().parent().siblings().find(".shipping-items-title").attr("zcode");
+				localStorage.setItem("user_id",parseUrl().id);
+				localStorage.setItem("addr_id",addr_id);
+				localStorage.setItem("consignee",consignee);
+				localStorage.setItem("phone",phone);
+				localStorage.setItem("province",pid);
+				localStorage.setItem("city",cid);
+				localStorage.setItem("district",did);
+				localStorage.setItem("province_name",pname);
+				localStorage.setItem("city_name",cname);
+				localStorage.setItem("district_name",dname);
+				localStorage.setItem("address",addr);
+				localStorage.setItem("zipcode",zcode);
+				
+				window.location.href="shipping-Updateaddr.html";
+			}
+		$(".btn-add").click(function(){
+			window.location.href='shipping-Addaddr.html?id='+localStorage.getItem("user_id");
+		})
+	     $(document).on("click", "#show-confirm", function() {
+	     	var addr_id=parseInt($(this).parent().parent().parent(".shippingAddr-con").attr("addrid"));
+	        $.confirm("您确定要删除此收货地址吗？", "确认删除?", function() {
+//	          $.toast("删除成功!","text");
+			   var user_id=localStorage.getItem("user_id");
+			   var user_id1=parseInt(user_id);
+			   var timestamp1 = Date.parse(new Date());
+ 			   var values1=["user_id","addr_id","timestamp"];
+			   var data1={"user_id":user_id1,"addr_id":addr_id,"timestamp":timestamp1};
+			   var sign1 = doSign(values1,data1);
+			   var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			   $.ajax({
+				  type:"post",
+				  url: link_url+"consigneeAddressDelete",
+				  dataType: "json",
+			      data: {"user_id":user_id1,"addr_id":addr_id,"key":keys,"timestamp":timestamp1,"sign":sign1},
+				  success: function(data) {
+				      if(data.status == 1){
+				         console.log(data);
+				         $.toast("删除成功", "text");
+				         $('#shippingAddr').empty();
+				         address();
+				      }else{
+				    	 console.log(data);
+				         $.toast(data.data, "text");
+				      }
+				  },
+				  error:function(){
+				   alert(111);
+				  }
+			   }) 
+	        }, function() {
+	          //取消操作
+	        });
+//	        $(this).parent().parent().parent().remove();
+	      });
+	</script>
+
+</html>

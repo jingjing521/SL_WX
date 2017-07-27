@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>查看物流</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="logistics">
+				
+				<div class="logistics-cons">
+					<div class="logistics-con-title">物流跟踪</div>
+					<div class="about4_main">
+						<div class="line fl"></div>
+						<ul>
+							<!--<li>
+								<div class="line-active fl"><img src="images/xz (2).png"></div>
+								<div class="fl logistics-cons-text">
+									[西安高新一部]派件已签收，签收人是拍照签收签收网点是西安高新一部
+									<p>2016-1-13 16:05:30</p>
+								</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="line-active fl"><img src="images/xz (2).png"></div>
+								<div class="fl logistics-cons-text">
+									[西安高新一部]派件已签收，签收人是哈
+									<p>2016-1-13 16:05:30</p>
+								</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="line-active fl"><img src="images/xz (2).png"></div>
+								<div class="fl logistics-cons-text">
+									[西安高新一部]派件已签收，签收人是拍照签收签收网点是西安高新一部
+									<p>2016-1-13 16:05:30</p>
+								</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="line-active fl"><img src="images/xz (2).png"></div>
+								<div class="fl logistics-cons-text">
+									[西安高新一部]派件已签收，签收人是拍照签收签收网点是西安高新一部
+									<p>2016-1-13 16:05:30</p>
+								</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="line-active fl"><img src="images/xz (2).png"></div>
+								<div class="fl logistics-cons-text">
+									[西安高新一部]派件已签收，签收人是拍照签收签收网点是西安高新一部
+									<p>2016-1-13 16:05:30</p>
+								</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="line-active fl"><img src="images/xz (2).png"></div>
+								<div class="fl logistics-cons-text">
+									您的包裹已出库
+									<p>2016-1-13 16:05:30</p>
+								</div>
+								<div class="clear"></div>
+							</li>-->
+						</ul>
+					</div>
+				</div>
+
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-2.2.1.js" ></script>
+	<script type="text/javascript" src="js/center.js" ></script>
+	<script type="text/javascript" src="js/md5.js" ></script>
+	<script>
+		$(document).ready(function(){
+			 var user_id=localStorage.getItem("user_id");
+			 var order_id=parseUrl().order_id;
+			 var order_sn=parseUrl().order_sn;
+			 var timestamp1 = Date.parse(new Date());
+	   		 var values1=["user_id","order_id","timestamp"];
+			 var data1={"user_id":user_id,"order_id":order_id,"timestamp":timestamp1};
+			 var sign1 = doSign(values1,data1);
+			 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			 console.log(user_id,order_id,order_sn);
+			 $.ajax({
+				type:"post",
+				url: link_url+"orderQueryExpress",
+				dataType: "json",
+			    data: {"user_id":user_id,"order_id":order_id,"key":keys,"timestamp":timestamp1,"sign":sign1},
+				success: function(data) {
+				    if(data.status == 1){
+				        console.log(data);
+				        $('<div class="logistics-con"><div class="logistics-con-text">物流公司：<span>百世汇通</span></div><div class="logistics-con-text">订&nbsp;单&nbsp; 号：<span>'+order_sn+'</span></div></div>').before($(".logistics-cons"));
+				        $.each(data.data, function(i,v) {
+				        	$('<li><div class="line-active fl"><img src="images/xz (2).png"></div><div class="fl logistics-cons-text">'+v.context+'<p>'+v.time+'</p></div><div class="clear"></div></li>').appendTo($(".about4_main ul"));
+				        });
+				        $(".about4_main").find("ul li").first().find("img").attr("src","images/xz (1).png");
+						$(".about4_main").find("ul li").first().find("img").css({"width":"18px","height":"18px","margin-left":"-3px"});
+				    }else{
+				    	console.log(data);	
+				    }
+				},error:function(e){
+					
+				}
+			 });	
+		})
+	</script>
+</html>

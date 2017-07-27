@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>皓歌服饰-女装</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<!-- Link Swiper's CSS -->
+    	<link rel="stylesheet" href="css/swiper.min.css">
+    	<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="index">
+				
+				<div class="index-top">
+					<a href="search.html"><div class="fl index-top-img"><img src="images/search.png"></div></a>
+					<div class="fl index-top-logo"><img src="images/logos.png"></div>
+					<a href="information.html"><div class="fr index-top-img"><img src="images/msg.png"></div></a>
+					<div class="clear"></div>
+				</div>
+				
+				<div class="index-nav">
+					<div class="swiper-container">
+				        <div class="swiper-wrapper navs">
+				            <div class="swiper-slide"><a href="index.html">今日上新</a></div>
+				            <div class="swiper-slide swiper-slide-w"><a href="presell.html">预售商品</a></div>
+				            
+				        </div>
+				    </div>
+				</div>
+				
+				<div class="index-banner">
+					 <!-- Swiper -->
+				     <div class="swiper-containers">
+				        <div class="swiper-wrapper banners">
+				           
+				        </div>
+				        <!-- Add Pagination -->
+				        <div class="swiper-pagination" style="background: none !important; left: 15px !important; "></div>
+				        <div class="clear"></div>
+				    </div>
+				    <div class="clear"></div>
+				</div>
+				
+				<div class="zw50"></div>
+				<div class="weui_tabbar">
+			        <a onclick="window.location.href='index.html'" class="weui_tabbar_item weui_bar_item_on">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/1 (2).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label ">首页</p>
+			        </a>
+			        <a onclick="window.location.href='favorites.html'" class="weui_tabbar_item">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/2 (1).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">收藏夹</p>
+			        </a>
+			        <a onclick="window.location.href='cart.html'" class="weui_tabbar_item">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/3 (1).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">购物车</p>
+			        </a>
+			        <a  onclick="window.location.href='center.html'" class="weui_tabbar_item">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/4 (1).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">我的皓歌</p>
+			        </a>
+			      </div>
+				
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<!-- Swiper JS -->
+    <script src="js/swiper.min.js"></script>
+    <script src="js/fastclick.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+	$(document).ready(function(){
+	   		var timestamp = Date.parse(new Date());
+ 			var values=["timestamp"];
+			var data={"timestamp":timestamp};
+			var sign = doSign(values,data);
+			var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			$.ajax({
+				type:"post",
+				url: link_url+"goodsCategoryOneList",
+				dataType: "json",
+				data: {"key":keys,"timestamp":timestamp,"sign":sign},
+				success: function(data) {
+				    if(data.status == 1){
+				        console.log("ok");
+				        console.log(data);
+				        $.each(data.data,function(i,v){
+				        	$(' <div class="swiper-slide swiper-slide-ws" lid="'+v.id+'"><a href="suit-dress.html?lid='+v.id+'">'+v.name+'</a></div>').appendTo($(".navs"));   	
+				        })
+				        $('<div class="swiper-slide swiper-slide-ws"><a href="notice.html">公告</a></div>').appendTo($(".navs"));
+				    }else{
+				     	$.toast(data.data, "text");
+				    }
+				    var swiper = new Swiper('.swiper-container', {
+					        pagination: '.swiper-pagination',
+					        slidesPerView: 'auto',
+					        paginationClickable: false,
+					        spaceBetween: 0
+					    });
+				    var swiper = new Swiper('.swiper-containers', {
+				        pagination: '.swiper-pagination',
+				        nextButton: '.swiper-button-next',
+				        prevButton: '.swiper-button-prev',
+				        paginationClickable: true,
+				        spaceBetween: 0,
+				        centeredSlides: true,
+				        autoplay: 3000,
+				        autoplayDisableOnInteraction: false
+				    });
+				},
+				error:function(){
+				    console.log(link_url);
+				}
+			})
+	   })
+	var loading = false;
+	  $(function() {
+	    FastClick.attach(document.body);
+	  });
+	  indexData();
+	  var page=0;
+	  function indexData(){
+		page++;	 	
+	  		//ajax
+	  		 var mtype=2;
+			 var timestamp1 = Date.parse(new Date());
+   			 var values1=["page","mtype","timestamp"];
+			 var data1={"page":page,"mtype":mtype,"timestamp":timestamp1};
+			 var sign1 = doSign(values1,data1);
+			 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			 $.ajax({
+				type:"post",
+				url: link_url+"appIndexData",
+				dataType: "json",
+			    data: {"page":page,"mtype":mtype,"key":keys,"timestamp":timestamp1,"sign":sign1},
+				success: function(data) {
+				    if(data.status == 1){
+				        console.log(data);
+				        $.each(data.data.slide_posts,function(i,v){
+				        	if(i==0){
+								$('<div class="swiper-slide ml0"><a href="'+v.slide_url+'"><img src="'+v.slide_pic+'"></a></div>').appendTo($(".banners"));	
+				        	}else{
+								$('<div class="swiper-slide"><a href="'+v.slide_url+'"><img src="'+v.slide_pic+'"></a></div>').appendTo($(".banners"));	
+				        	}
+				        })
+				        console.log(data.data.ad_posts.length);
+				         if(data.data.ad_posts.length==0){
+				         	$.toast("没有更多的数据！", "text");
+				         	 loading = true;
+				         	 $(document.body).infinite().on("infinite", function() {
+						        if(loading) return;
+						        loading = false;
+						        setTimeout(function() {
+						          page++;
+						          indexData();
+						          loading = true;
+						        }, 500);
+						     });
+				         }else{
+					        $.each(data.data.ad_posts,function(i,v){
+					        	if(i==0){
+									$('<div class="index-con mt20"><div class="index-con-title"><img src="images/8 (1).png"><span>'+v.desc+'</span></div><a href="store.html"><div class="index-con-banner"><img src="'+link_url1+v.img+'"></div></a><div class="index-con-text"><div class="fl colors font16">'+v.discount+'折起</div><div class="fl ml10 index-con-name">'+v.desc+'</div><div class="fr colore"><img src="images/9.png"><span class="linh52">剩'+v.days+'天</span></div><div class="clear"></div></div></div>').appendTo($("#index"));	
+					        	}else{
+									$('<div class="index-con"><div class="index-con-title"><img src="images/8.png"></div><a href="store.html"><div class="index-con-banner"><img src="'+link_url1+v.img+'"></div></a><div class="index-con-text"><div class="fl colors font16">'+v.discount+'折起</div><div class="fl ml10 index-con-name">'+v.desc+'</div><div class="fr colore"><img src="images/9.png"><span class="linh52">剩'+v.days+'天</span></div><div class="clear"></div></div></div>').appendTo($("#index"));	
+										
+					        	}
+					        })
+					    	 $("#index").append($('<div class="zw50"></div>'));
+				         		$(document.body).infinite().on("infinite", function() {
+							        if(loading) return;
+							        loading = true;
+							        setTimeout(function() {
+							          page++;
+							          indexData();
+							          loading = false;
+							        }, 500);
+						      });
+						      
+				         }
+				         
+				    }else{
+				    	console.log(data);
+				       $.toast(data.data, "text");
+				    }
+				},
+				error:function(){
+					   
+				}
+			 })
+}
+//	 var loading = false;
+//    $(document.body).infinite().on("infinite", function() {
+//      if(loading) return;
+//      loading = true;
+//      setTimeout(function() {
+//        page++;
+//        indexData();
+//        loading = false;
+//      }, 2000);
+//    });
+
+	</script>
+</html>

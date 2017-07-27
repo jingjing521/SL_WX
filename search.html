@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>搜索分类</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-weui.css" />
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+	</head>
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="search">
+				<div class="search-top">
+					<div class="search-top-con">
+						<a href="search.html"><img src="images/fl (4).png" style="width: 68px;"></a><a href="brand.html"><img src="images/fl (2).png"></a>
+					</div>
+				</div>
+				<div class="search-search">
+					<div class="fl search-search-img"><img src="images/searchs.png"></div>
+					<form action="search-con.html" id="form">
+					<div class="fl search-search-text"><input type="search" class="keyword" placeholder="搜索品牌"></div>
+					<input type="submit" />
+					</form>
+					<div class="clear"></div>
+				</div>
+				<div class="search-con">
+					<div class="search-con-l fl">
+						<div class="search-con-l-active on1" onclick="fun(20,1);">品质女装</div>
+						<div class="on2" onclick="fun(20,2);">潮流男装</div>
+					</div>
+					<div class="search-con-r fr">
+						<div class="pp" id="div-1">
+							<div class="search-con-r-title">女上装</div>
+							<div class="search-con-r-con">
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/sy (3).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/sy (4).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/sy (5).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/sy (6).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/sy (7).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">女鞋</div>
+							<div class="search-con-r-con">
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nx (13).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nx (14).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nx (15).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nx (16).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nx (17).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nx (18).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">女裤</div>
+							<div class="search-con-r-con">
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nk (1).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nk (2).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nk (1).png">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="clear"></div>
+							</div>
+							
+							<div class="search-con-r-title">女外套</div>
+							<div class="search-con-r-con">
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nsy (1).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nsy (4).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nsy (3).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nsy (2).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="pp" id="div-2" style="display:none;">
+							<div class="search-con-r-title">男上装</div>
+							<div class="search-con-r-con">
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/dds (1).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/dds (2).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/dds (3).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/dds (4).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/dds (5).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">男鞋</div>
+							<div class="search-con-r-con">
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nx (1).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nx (4).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nx (5).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nx (6).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nx (7).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nx (2).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">男裤</div>
+							<div class="search-con-r-con">
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nk (1).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nk (2).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nk (1).png">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">男外套</div>
+							<div class="search-con-r-con">
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nsy (1).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nsy (4).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nsy (3).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="fl">
+									<a href="product-list.html?id=9">
+										<img src="images/nsy (2).jpg">
+										<div>连衣裙</div>
+									</a>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+//		<!-- tab选项卡JS启动 -->
+		function fun(allNum,num){
+			for(var i=0;i<=allNum;i++){
+				$("#div-"+i).hide();
+			}
+			$("#div-"+num).show();
+		}
+	
+	   $(function() {
+		   	var h=$(window).height();
+		   	var th=$(".search-top").height();
+		   	var sh=$(".search-search").height();
+		   	var zh=parseInt(h-th-sh);
+		   	$(".search-con-r").css("max-height",zh);
+		   	$(".search-con-l").css("max-height",zh);
+
+		   	$("#form").on("submit",function(){
+		   		var keywords=$(".keyword").val();
+		   		console.log(keywords);
+		   		localStorage.setItem("keywords",keywords);
+		   	})
+		   	
+	   })
+	   $('.on1').click(function(){
+            $('.on1').addClass('search-con-l-active');
+            $('.on0').removeClass('search-con-l-active');
+			$('.on2').removeClass('search-con-l-active');
+			$('.on3').removeClass('search-con-l-active');
+			$('.on4').removeClass('search-con-l-active');
+			$('.on5').removeClass('search-con-l-active');
+			$('.on6').removeClass('search-con-l-active');
+			$('.on7').removeClass('search-con-l-active');
+         });
+         $('.on2').click(function(){
+            $('.on2').addClass('search-con-l-active');
+            $('.on0').removeClass('search-con-l-active');
+			$('.on1').removeClass('search-con-l-active');
+			$('.on3').removeClass('search-con-l-active');
+			$('.on4').removeClass('search-con-l-active');
+			$('.on5').removeClass('search-con-l-active');
+			$('.on6').removeClass('search-con-l-active');
+			$('.on7').removeClass('search-con-l-active');
+         });
+	 
+	</script>
+
+</html>

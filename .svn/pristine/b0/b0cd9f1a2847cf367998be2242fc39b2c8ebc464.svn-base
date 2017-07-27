@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>购物车</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="cart">
+				<a href="cart-update.html" class="color3"><div class="tr cart-edit">编辑</div></a>
+				<div class="cart-con" id="cart-con1">
+					<div class="cart-con-title"><div class="commodity fl" ></div><a href="store.html"><img src="images/store.png" class="store">金蘑姑姑桃宝店</a><img src="images/lefts.png" class="fr lefts"></div>
+					<div>
+						<div class="cart-product">
+							<div class=" fl commodity"></div>
+							<a href="product.html"><div class="fl cart-product-img"><img src="images/small-img.jpg"></div></a>
+							<a href="product.html"><div class="fl cart-product-con">
+								<div class="cart-product-con-name">粉红中长款V领针织外套</div>
+								<div class="cart-product-con-gg">颜色：粉红色；尺码：S</div>
+								<div class="cart-product-con-price">￥<span class="price">285.00</span><span class="num">x<span>2</span></span></div>
+								
+							</div></a>
+							<div class="clear"></div>
+						</div>
+						<div class="cart-product">
+							<div class=" fl commodity"></div>
+							<a href="product.html"><div class="fl cart-product-img"><img src="images/small-img1.jpg"></div></a>
+							<a href="product.html"><div class="fl cart-product-con">
+								<div class="cart-product-con-name">黑色连帽毛领羽绒服</div>
+								<div class="cart-product-con-gg">颜色：黑色；尺码：S</div>
+								<div class="cart-product-con-price">￥<span class="price">285.00</span><span class="num">x<span>2</span></span></div>
+								
+							</div></a>
+							<div class="clear"></div>
+						</div>
+						<div class="cart-product">
+							<div class=" fl commodity"></div>
+							<a href="product.html"><div class="fl cart-product-img"><img src="images/small-img1.jpg"></div></a>
+							<a href="product.html"><div class="fl cart-product-con">
+								<div class="cart-product-con-name">黑色连帽毛领羽绒服</div>
+								<div class="cart-product-con-gg">颜色：黑色；尺码：S</div>
+								<div class="cart-product-con-price">￥<span class="price">285.00</span><span class="num">x<span>2</span></span></div>
+								
+							</div></a>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="cart-con" id="cart-con2">
+					<div class="cart-con-title"><div class="commodity fl"></div><a href="store.html"><img src="images/store.png" class="store">金蘑姑姑桃宝店</a><img src="images/lefts.png" class="fr lefts"></div>
+					<div>
+						<div class="cart-product">
+							<div class=" fl commodity"></div>
+							<a href="product.html"><div class="fl cart-product-img"><img src="images/small-img.jpg"></div></a>
+							<a href="product.html"><div class="fl cart-product-con">
+								<div class="cart-product-con-name">粉红中长款V领针织外套</div>
+								<div class="cart-product-con-gg">颜色：粉红色；尺码：S</div>
+								<div class="cart-product-con-price">￥<span class="price">285.00</span><span class="num">x<span>2</span></span></div>
+								
+							</div></a>
+							<div class="clear"></div>
+						</div>
+						<div class="cart-product">
+							<div class=" fl commodity"></div>
+							<a href="product.html"><div class="fl cart-product-img"><img src="images/small-img1.jpg"></div></a>
+							<a href="product.html"><div class="fl cart-product-con">
+								<div class="cart-product-con-name">黑色连帽毛领羽绒服</div>
+								<div class="cart-product-con-gg">颜色：黑色；尺码：S</div>
+								<div class="cart-product-con-price">￥<span class="price">285.00</span><span class="num">x<span>2</span></span></div>
+								
+							</div></a>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="zw50"></div>
+				<div class="cart-footer">
+					<div class="fl linh50">
+						<div class="fl commodity"></div>
+						全选
+					</div>
+					<a href="confirm-order.html"><div class="fr cart-btns ml10">结算</div></a>
+					<div class="fr cart-text">合计：<span>￥542.00</span></div>
+					<div class="clear"></div>
+				</div>
+				 <div class="zw50"></div>
+				<div class="weui_tabbar">
+			        <a href="index.html" class="weui_tabbar_item">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/1 (1).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label ">首页</p>
+			        </a>
+			        <a href="favorites.html" class="weui_tabbar_item">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/2 (1).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">收藏夹</p>
+			        </a>
+			        <a href="cart.html" class="weui_tabbar_item weui_bar_item_on">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/3 (2).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">购物车</p>
+			        </a>
+			        <a href="center.html" class="weui_tabbar_item">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/4 (1).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">我的皓歌</p>
+			        </a>
+			      </div>
+				
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			if($(".cart-footer .commodity").hasClass("select")){
+				$(".cart-con").find(".commodity").addClass("select");
+			}
+			
+			$(".cart-footer .dels").click(function(){
+				$(".cart-con").remove();
+			})
+			$(".cart-footer .commodity").click(function(){
+				if($(this).hasClass("select")){
+					$(this).removeClass("select");
+					$(".cart-con").find(".commodity").removeClass("select");
+				}else{
+					$(this).addClass("select");
+					$(".cart-con").find(".commodity").addClass("select");
+				}
+				
+			})
+			$("#cart").on("click",".cart-con-title",function(){
+//				console.log($(this).siblings().children(".commodity").length);
+//				$(this).toggleClass("select");
+				if($(this).find(".commodity").hasClass("select")){
+					$(this).children(".commodity").removeClass("select");
+					$(this).siblings().children().children(".commodity").removeClass("select");
+				}else{
+					$(this).children(".commodity").addClass("select");
+					$(this).siblings().children().children(".commodity").addClass("select");
+					var price=$(this).siblings().children().find(".price").text();
+					var num=$(this).siblings().children().find(".num").children().text();
+					
+					console.log(price+"==="+num);
+				}
+				var a=$(".cart-con").children().find(".commodity").length;
+				var b=$(".cart-con").children().find(".select").length;
+				if(a==b){
+					$(".cart-footer .commodity").addClass("select");
+				}else{
+					$(".cart-footer").find(".commodity").removeClass("select");
+				}
+
+			})
+			$("#cart").on("click",".cart-product .commodity",function(){
+				var num=$(this).parent().siblings().children(".commodity").length+1;
+				console.log(num);
+				var a=$(this).parent().siblings().children(".select").length+1;
+				console.log(a);
+				if($(this).hasClass("select")){
+					$(this).removeClass("select");
+					$(this).parent().siblings(".cart-con-title").children(".commodity").removeClass("select");
+					if(a==num){
+						a--;
+						$(this).parent().parent().siblings(".cart-con-title").children(".commodity").removeClass("select");	
+						console.log(5555);
+					}
+				}else{
+					$(this).addClass("select");
+
+				}
+				if(a==num){
+					$(this).parent().parent().siblings(".cart-con-title").children(".commodity").addClass("select");	
+					console.log(11111);
+				}
+//				console.log($(".cart-product .select").length);
+				var a=$(".cart-con").children().find(".commodity").length;
+				var b=$(".cart-con").children().find(".select").length;
+				if(a==b){
+					$(".cart-footer .commodity").addClass("select");
+				}else{
+					$(".cart-footer").find(".commodity").removeClass("select");
+				}
+			})
+			
+		})
+
+	</script>
+</html>

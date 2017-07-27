@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+	<title>收藏品牌</title>
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/weui.min.css">
+	<link rel="stylesheet" href="css/jquery-weui.css">
+	
+</head>
+<body>
+         <div id="favorites">
+		          <div data-role="page">
+		          	<div class="search-top">
+						<div class="search-top-con">
+							<img src="images/sc4.png" style="width: 69px;" class="one"><img src="images/sc6.png" class="two">
+				
+							<!--<a href="favorites.html"><img src="images/sc4.png" style="width: 69px;"></a><a href="favorites-brand.html"><img src="images/sc6.png"></a>-->
+						</div>
+						<div class="favorites-clean">清空</div>
+					</div>
+		            <div data-role="content">
+		              <ul data-role="listview" class="swipe-delete">
+		                <li>
+		                  <div class="behind">
+		                    <a href="#" class="ui-btn delete-btn" style=" width: 80px; height: 100%; background: #bbb; line-height: 25px;">
+		                    	<div style="margin-top: 35px;">取消</div>
+		                    	<div>收藏</div>
+		                    </a>
+		                  </div>
+		                  <a href="">
+		                  	<div class="favorites-con-item">
+									<div class="fl orderd-product-img"><img src="images/sc2.png"></div>
+									<div class="fl orderd-product-con">
+										<div class="orderd-product-con-name">品牌名称品牌名称</div>
+										<div class="orderd-product-con-gg">上海市浦东新区</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+		                  </a>
+		                </li>
+		                <li>
+		                  <div class="behind">
+		                    <a href="#" class="ui-btn delete-btn" style=" width: 80px; height: 100%; background: #bbb; line-height: 25px;">
+		                    	<div style="margin-top: 35px;">取消</div>
+		                    	<div>收藏</div>
+		                    </a>
+		                  </div>
+		                  <a href="">
+		                  	<div class="favorites-con-item">
+									<div class="fl orderd-product-img"><img src="images/sc2.png"></div>
+									<div class="fl orderd-product-con">
+										<div class="orderd-product-con-name">品牌名称品牌名称</div>
+										<div class="orderd-product-con-gg">上海市浦东新区</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+		                  </a>
+		                </li>
+		                
+		                <li>
+		                  <div class="behind">
+		                    <a href="#" class="ui-btn delete-btn" >
+		                    	<div style="margin-top: 35px;">取消</div>
+		                    	<div>收藏</div>
+		                    </a>
+		                  </div>
+		                  <a href="">
+		                  	<div class="favorites-con-item">
+									<div class="fl orderd-product-img"><img src="images/sc2.png"></div>
+									<div class="fl orderd-product-con">
+										<div class="orderd-product-con-name">品牌名称品牌名称</div>
+										<div class="orderd-product-con-gg">上海市浦东新区</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+		                  </a>
+		                </li>
+		              </ul>
+		            </div>
+		            
+		            <div class="zw50"></div>
+				<div class="weui_tabbar">
+			        <a  onclick="window.location.href='index.html'" class="weui_tabbar_item">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/1 (1).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label ">首页</p>
+			        </a>
+			        <a href="favorites.html" class="weui_tabbar_item weui_bar_item_on">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/2 (2).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">收藏夹</p>
+			        </a>
+			        <a href="cart.html" class="weui_tabbar_item">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/3 (1).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">购物车</p>
+			        </a>
+			        <a onclick="window.location.href='center.html'" class="weui_tabbar_item">
+			          <div class="weui_tabbar_icon">
+			            <img src="images/4 (1).png" alt="">
+			          </div>
+			          <p class="weui_tabbar_label">我的皓歌</p>
+			        </a>
+			      </div>
+		            
+		          </div>
+       		</div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.3.min.js"></script>
+    <script>
+    	$(".favorites-clean").click(function(){
+    		$(".swipe-delete li").remove();
+    	})
+								$(".one").on("click",function(){
+									window.location.href="favorites.html";
+								})
+								$(".two").on("click",function(){
+									window.location.href="favorites-brand.html";
+								})
+							</script>
+    <script>
+    
+    $(document).ready(function(){
+    	var h=$(".favorites-con-item").height();
+    	console.log(h);
+    	$(".behind a").css("min-height",h);
+    })
+       
+        $(function() {
+        function prevent_default(e) {
+            e.preventDefault();
+        }
+ 
+        function disable_scroll() {
+            $(document).on('touchmove', prevent_default);
+        }
+
+        function enable_scroll() {
+            $(document).unbind('touchmove', prevent_default)
+        }
+
+        var x;
+        $('.swipe-delete li > a')
+            .on('touchstart', function(e) {
+                $('.swipe-delete li > a').css('left', '0px') // close em all
+                $(e.currentTarget).addClass('open')
+                x = e.originalEvent.targetTouches[0].pageX // anchor point
+            })
+            .on('touchmove', function(e) {
+                var change = e.originalEvent.targetTouches[0].pageX - x
+                change = Math.min(Math.max(-80, change), 0) // restrict to -100px left, 0px right
+                e.currentTarget.style.left = change + 'px'
+                if (change < -10) disable_scroll() // disable scroll once we hit 10px horizontal slide
+            })
+            .on('touchend', function(e) {
+                var left = parseInt(e.currentTarget.style.left)
+                var new_left;
+                if (left < -35) {
+                    new_left = '-80px'
+                } else if (left > 35) {
+                    new_left = '80px'
+                } else {
+                    new_left = '0px'
+                }
+                $(e.currentTarget).animate({left: new_left}, 200)
+                enable_scroll()
+            });
+            $('li .delete-btn').on('touchend', function(e) {
+                e.preventDefault()
+                $(this).parents('li').slideUp('fast', function() {
+                    $(this).remove()
+                })
+              })  
+            });
+    </script>
+</body>
+</html> 

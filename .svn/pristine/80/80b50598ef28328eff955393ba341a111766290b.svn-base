@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>图文详情</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="store">
+				<img src="images/product-de.png" class="product-deimg" />
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<!--<script type="text/javascript" src="js/jquery.downCount.js"></script> 
+	<script class="source" type="text/javascript">
+	$('.store-time-con').downCount({
+		date: '1/03/2017 09:00:00',
+		offset: +10
+	}, function () {
+		alert('倒计时结束!');
+	});
+	$(document).ready(function(){
+		setInterval(function(){
+			var a=$(".days-con span").text();
+			var b=$(".hours-con span").text();
+			var c=$(".minutes-con span").text();
+			var d=$(".seconds-con span").text();
+		if(a!=""){
+			var str=a.replace(/(\d{1})/g,'$1 ').replace(/\s*$/,'');
+			var strb=b.replace(/(\d{1})/g,'$1 ').replace(/\s*$/,'');
+			var strc=c.replace(/(\d{1})/g,'$1 ').replace(/\s*$/,'');
+			var strd=d.replace(/(\d{1})/g,'$1 ').replace(/\s*$/,'');
+			console.log(str);
+			$(".days-con span").text(str);
+			$(".hours-con span").text(strb);
+			$(".minutes-con span").text(strc);
+			$(".seconds-con span").text(strd);
+		}
+		
+		},500)
+		
+	})
+	function stop(){
+			clearInterval(a);
+		}
+	</script>-->
+
+</html>

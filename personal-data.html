@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>个人资料</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="personalDate">
+				<div class="personalDate-top">
+					<div class="personalDate-top-item">
+						<div class="fl personalDate-top-item-name linh70">头像</div>
+						<div class="fr personalDate-top-item-con">
+							<div class="con4 fr" style="margin-top: 10px !important;">
+								<canvas id="cvs" width="200" height="200" class="fr"></canvas>
+								<form id="forms" enctype="multipart/form-data" target="id_iframe" method="post" action="http://qcap.hangtuosoft.com/index.php?g=asset&m=asset&a=swfupload">
+									<span class="btn upload"><input type="file" name="img" class="upload_pic" id="upload" /></span>
+									<div class="clear"></div>
+									<input type="submit" value="提交" style="display: none;">
+								</form>
+								<iframe id="id_iframe" name="id_iframe" style="display:none;"></iframe>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="personalDate-top-item">
+						<div class="fl personalDate-top-item-name">昵称</div>
+						<div class="fr personalDate-top-item-con"><input type="text" class="nc"  placeholder="请输入昵称" value=""></div>
+						<div class="clear"></div>
+					</div>
+					<div class="personalDate-top-item sj">
+						<div class="fl personalDate-top-item-name">手机</div>
+						<div class="fr personalDate-top-item-r "><img src="images/right.png"></div>
+						<div class="fr personalDate-top-item-con pwid phones"><input type="text" class="phone" placeholder="请输入手机号码" readonly="readonly" value=""></div>
+						<div class="clear"></div>
+					</div>
+					<div class="personalDate-top-item">
+						<div class="fl personalDate-top-item-name">性别</div>
+						<div class="fl personalDate-top-item-con sss">
+							<div class="fr ml20 ssex">
+							
+ 								<div class="commodity fl" sid="2"></div>女
+							</div>
+							<div class="fr ssex">
+								
+ 								<div class="commodity fl" sid="1"></div>男
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="personalDate-top-item bbn yx">
+						<div class="fl personalDate-top-item-name">邮箱</div>
+						<div class="fr personalDate-top-item-con"><input type="text" class="email" readonly="readonly" placeholder="请输入邮箱" value=""></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="btn1 mt50">保存</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script> 
+	
+	$(document).ready(function(){
+		$(".phones").click(function(){
+	    	 window.location.href="change-phone.html";
+	    }); 
+	})
+	
+	$(".personalDate-top-item-con").on("click",".commodity",function(){
+		$('.personalDate-top-item-con .commodity').removeClass("select");	
+		$(this).toggleClass("select");				
+	});
+	function images(src){
+		var image = new Image();
+		// 设置src属性 
+			image.src = src;
+			var max=200;
+			// 绑定load事件处理器，加载完成后执行，避免同步问题
+			image.onload = function(){ 
+				// 获取 canvas DOM 对象 
+				var canvas = document.getElementById("cvs"); 
+				var ctx = canvas.getContext("2d"); 
+				// canvas清屏 
+				ctx.clearRect(0, 0, canvas.width, canvas.height); 
+				ctx.drawImage(image, 0, 0, 200, 200);
+				// 注意，此时image没有加入到dom之中
+				$("#forms").submit();
+				
+			};  
+	}
+	var input1 = document.getElementById("upload");
+		if(typeof FileReader === 'undefined') {
+			//result.innerHTML = "抱歉，你的浏览器不支持 FileReader"; 
+			input1.setAttribute('disabled', 'disabled');
+		} else {
+			input1.addEventListener('change', readFile, false);
+
+		}
+
+		function readFile() {
+			var file = this.files[0]; //获取上传文件列表中第一个文件
+			if(!/image\/\w+/.test(file.type)) {
+				//图片文件的type值为image/png或image/jpg
+				alert("文件必须为图片！");
+				return false;
+			}
+			// console.log(file);
+			var reader = new FileReader(); //实例一个文件对象
+			reader.readAsDataURL(file); //把上传的文件转换成url
+			//当文件读取成功便可以调取上传的接口
+
+			reader.onload = function(e) {
+				var image = new Image();
+				// 设置src属性 
+				image.src = e.target.result;
+				var max = 200;
+				// 绑定load事件处理器，加载完成后执行，避免同步问题
+				image.onload = function() {
+					// 获取 canvas DOM 对象 
+					var canvas = document.getElementById("cvs");
+					var ctx = canvas.getContext("2d");
+					// canvas清屏 
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+					ctx.drawImage(image, 0, 0, 200, 200);
+					// 注意，此时image没有加入到dom之中
+					$("#forms").submit();
+
+				};
+			}
+		};
+</script>
+<ml>

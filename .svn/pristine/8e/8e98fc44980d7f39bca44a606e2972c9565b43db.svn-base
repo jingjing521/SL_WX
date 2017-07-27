@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>搜索分类</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="search">
+				<div class="search-top">
+					<div class="search-top-con">
+						<a href="search.html"><img src="images/fl (4).png" style="width: 68px;"></a><a href="brand.html"><img src="images/fl (2).png"></a>
+					</div>
+				</div>
+				<div class="search-search">
+					<div class="fl search-search-img"><img src="images/searchs.png"></div>
+					<form action="search-con.html">
+					<div class="fl search-search-text"><input type="search" placeholder="搜素品牌"></div>
+					<input type="submit" />
+					</form>
+					<div class="clear"></div>
+				</div>
+				<div class="search-con">
+					<div class="search-con-l fl">
+						<div class="search-con-l-active on1" onclick="fun(10,'1');">女装</div>
+						<div class="on2" onclick="fun(10,'2');">男装</div>
+						<div class="on3" onclick="fun(10,'3');">鞋靴</div>
+						<div class="on4" onclick="fun(10,'4');">箱包</div>
+						<div class="on5" onclick="fun(10,'5');">珠宝</div>
+						<div class="on6" onclick="fun(10,'6');">母婴</div>
+						<div class="on7" onclick="fun(10,'7');">运动户外</div>
+						<div class="on8" onclick="fun(10,'8');">家电数码</div>
+					</div>
+					<div class="search-con-r fr">
+						<div id="div-1">
+							<div class="search-con-r-title">上衣</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/sy (1).png"><div>针织衫</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/sy (1).jpg"><div>短外套</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/sy (2).jpg"><div>T恤</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/sy (3).jpg"><div>皮草</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/sy (4).jpg"><div>气质大衣</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/sy (5).jpg"><div>衬衫</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/sy (6).jpg"><div>打底衫</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/sy (7).jpg"><div>羽绒服</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/sy (8).jpg"><div>卫衣</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">裙装</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/qz (1).jpg"><div>套装裙</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/qz (2).jpg"><div>半身裙</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/qz (3).jpg"><div>连衣裙</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">裤子</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/nk (1).png"><div>加绒裤</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nk (1).jpg"><div>牛仔裤</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nk (2).jpg"><div>休闲裤</div></a></div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div id="div-2" style="display: none;">
+							<div class="search-con-r-title">上衣</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/nsy (1).jpg"><div>皮衣</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nsy (2).jpg"><div>棉服</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nsy (3).jpg"><div>羽绒服</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nsy (4).jpg"><div>马甲</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nsy (5).jpg"><div>毛呢大衣</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nsy (6).jpg"><div>夹克</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nsy (7).jpg"><div>大衣</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nsy (8).jpg"><div>单西</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nsy (9).jpg"><div>西装套服</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">打底衫</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/dds (1).jpg"><div>卫衣</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/dds (2).jpg"><div>毛衣</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/dds (3).jpg"><div>长袖衬衫</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/dds (4).jpg"><div>针织衫</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/dds (5).jpg"><div>短袖T恤</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/dds (6).jpg"><div>长袖T恤</div></a></div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						
+						<div id="div-3" style="display: none;">
+							<div class="search-con-r-title">流行男鞋</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/nx (1).jpg"><div>精品男鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nx (2).jpg"><div>帆布鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nx (3).jpg"><div>商务休闲鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nx (4).jpg"><div>休闲鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nx (5).jpg"><div>工装鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nx (6).jpg"><div>男靴</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nx (7).jpg"><div>拖鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nx (8).jpg"><div>增高鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nx (9).jpg"><div>正装鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nx (10).jpg"><div>板鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nx (11).jpg"><div>休闲户外鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nnx (10).jpg"><div>豆豆鞋</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">时尚女鞋</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/nnx (1).jpg"><div>女靴</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nnx (2).jpg"><div>防水台</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nnx (3).jpg"><div>圆头单鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nnx (4).jpg"><div>尖头单鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nnx (5).jpg"><div>深口单鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nnx (6).jpg"><div>高跟鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nnx (7).jpg"><div>休闲鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nnx (8).jpg"><div>鞋</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/nnx (9).jpg"><div>中跟单鞋</div></a></div>
+								
+								<div class="fl"><a href="product-list.html"><img src="images/nnx (11).jpg"><div>雪地靴</div></a></div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div id="div-4" style="display: none;">
+							<div class="search-con-r-title">女包</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/b (2).jpg"><div>女包</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/b (3).jpg"><div>女包</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/b (4).jpg"><div>女包</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/b (12).jpg"><div>女包</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">男包</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/b (5).jpg"><div>男包</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/b (6).jpg"><div>男包</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/b (7).jpg"><div>男包</div></a></div>
+							
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">行李箱</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/b (10).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/b (11).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/b (8).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/b (9).jpg"><div>行李箱</div></a></div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div id="div-5" style="display: none;">
+							<div class="search-con-r-title">时尚饰品</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/zb (15).jpg"><div>时尚饰品</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (16).jpg"><div>时尚饰品</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (20).jpg"><div>时尚饰品</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (21).jpg"><div>时尚饰品</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (22).jpg"><div>时尚饰品</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (23).jpg"><div>时尚饰品</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">黄金</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/zb (10).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (14).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (19).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (5).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (8).jpg"><div>黄金</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">银饰品</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/zb (1).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (17).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (2).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (4).jpg"><div>行李箱</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">翡翠玉石</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/zb (11).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (12).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (9).jpg"><div>行李箱</div></a></div>
+								
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">钻石</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/zb (13).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (18).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (3).jpg"><div>行李箱</div></a></div>
+								
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">珍珠</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/zb (6).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/zb (7).jpg"><div>行李箱</div></a></div>
+								
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div id="div-6" style="display: none;">
+							<div class="search-con-r-title">奶粉</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/my (11).jpg"><div>时尚饰品</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/my (2).jpg"><div>时尚饰品</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/my (3).jpg"><div>时尚饰品</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">营养辅食</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/my (10).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/my (8).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/my (9).jpg"><div>黄金</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">尿不湿</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/my (1).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/my (12).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/my (13).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/my (14).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/my (5).jpg"><div>行李箱</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">喂养用品</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/my (4).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/my (6).jpg"><div>行李箱</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/my (7).jpg"><div>行李箱</div></a></div>
+								
+								<div class="clear"></div>
+							</div>
+							
+						</div>
+						<div id="div-7" style="display: none;">
+							<div class="search-con-r-title">运动鞋</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/yds (1).jpg"><div>时尚饰品</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/yds (2).jpg"><div>时尚饰品</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/yds (3).jpg"><div>时尚饰品</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">运动装</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/yds (4).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/yds (5).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/yds (6).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/yds (7).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/yds (8).jpg"><div>黄金</div></a></div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div id="div-8" style="display: ;">
+							<div class="search-con-r-title">电视</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/jy (1).jpg"><div>时尚饰品</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/jy (11).jpg"><div>时尚饰品</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/jy (8).jpg"><div>时尚饰品</div></a></div>
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">空调</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/jy (12).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/jy (2).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/jy (3).jpg"><div>黄金</div></a></div>
+								
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">洗衣机</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/jy (4).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/jy (5).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/jy (9).jpg"><div>黄金</div></a></div>
+								
+								<div class="clear"></div>
+							</div>
+							<div class="search-con-r-title">冰箱</div>
+							<div class="search-con-r-con">
+								<div class="fl"><a href="product-list.html"><img src="images/jy (10).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/jy (13).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/jy (6).jpg"><div>黄金</div></a></div>
+								<div class="fl"><a href="product-list.html"><img src="images/jy (7).jpg"><div>黄金</div></a></div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="clear"></div>
+				</div>
+			
+				
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script>
+	   $(function() {
+	   	var h=$(window).height();
+	   	var th=$(".search-top").height();
+	   	var sh=$(".search-search").height();
+	   	var zh=parseInt(h-th-sh);
+	   	$(".search-con-r").css("max-height",zh);
+	   	$(".search-con-l").css("max-height",zh);
+	   })
+	</script>
+	<!-- tab选项卡JS启动 -->
+	<script type="text/javascript">
+	function fun(allNum,num){
+		for(var i=1;i<=allNum;i++){
+			$("#div-"+i).hide();
+		}
+		$("#div-"+num).show();
+	}
+	</script>
+	<!-- 点击按钮颜色转换JS启动 -->
+	<script type="text/javascript">
+	    $(function(){
+	        $('.on1').click(function(){
+	            $('.on1').addClass('search-con-l-active');
+	            $('.on2').removeClass('search-con-l-active');
+				$('.on3').removeClass('search-con-l-active');
+				$('.on4').removeClass('search-con-l-active');
+				$('.on5').removeClass('search-con-l-active');
+				$('.on6').removeClass('search-con-l-active');
+				$('.on7').removeClass('search-con-l-active');
+				$('.on8').removeClass('search-con-l-active');
+	        });
+	        $('.on2').click(function(){
+	            $('.on2').addClass('search-con-l-active');
+	            $('.on1').removeClass('search-con-l-active');
+				$('.on3').removeClass('search-con-l-active');
+				$('.on4').removeClass('search-con-l-active');
+				$('.on5').removeClass('search-con-l-active');
+				$('.on6').removeClass('search-con-l-active');
+				$('.on7').removeClass('search-con-l-active');
+				$('.on8').removeClass('search-con-l-active');
+	        });
+			$('.on3').click(function(){
+	            $('.on3').addClass('search-con-l-active');
+	            $('.on1').removeClass('search-con-l-active');
+				$('.on2').removeClass('search-con-l-active');
+				$('.on4').removeClass('search-con-l-active');
+				$('.on5').removeClass('search-con-l-active');
+				$('.on6').removeClass('search-con-l-active');
+				$('.on7').removeClass('search-con-l-active');
+				$('.on8').removeClass('search-con-l-active');
+	        });
+	        $('.on4').click(function(){
+	            $('.on4').addClass('search-con-l-active');
+	            $('.on2').removeClass('search-con-l-active');
+				$('.on3').removeClass('search-con-l-active');
+				$('.on8').removeClass('search-con-l-active');
+				$('.on5').removeClass('search-con-l-active');
+				$('.on6').removeClass('search-con-l-active');
+				$('.on7').removeClass('search-con-l-active');
+				$('.on1').removeClass('search-con-l-active');
+	        });
+	        $('.on5').click(function(){
+	            $('.on5').addClass('search-con-l-active');
+	            $('.on1').removeClass('search-con-l-active');
+				$('.on3').removeClass('search-con-l-active');
+				$('.on4').removeClass('search-con-l-active');
+				$('.on8').removeClass('search-con-l-active');
+				$('.on6').removeClass('search-con-l-active');
+				$('.on7').removeClass('search-con-l-active');
+				$('.on2').removeClass('search-con-l-active');
+	        });
+			$('.on6').click(function(){
+	            $('.on6').addClass('search-con-l-active');
+	            $('.on1').removeClass('search-con-l-active');
+				$('.on2').removeClass('search-con-l-active');
+				$('.on4').removeClass('search-con-l-active');
+				$('.on5').removeClass('search-con-l-active');
+				$('.on8').removeClass('search-con-l-active');
+				$('.on7').removeClass('search-con-l-active');
+				$('.on3').removeClass('search-con-l-active');
+	        });
+	        $('.on7').click(function(){
+	            $('.on7').addClass('search-con-l-active');
+	            $('.on2').removeClass('search-con-l-active');
+				$('.on3').removeClass('search-con-l-active');
+				$('.on4').removeClass('search-con-l-active');
+				$('.on5').removeClass('search-con-l-active');
+				$('.on6').removeClass('search-con-l-active');
+				$('.on1').removeClass('search-con-l-active');
+				$('.on8').removeClass('search-con-l-active');
+	        });
+	        $('.on8').click(function(){
+	            $('.on8').addClass('search-con-l-active');
+	            $('.on1').removeClass('search-con-l-active');
+				$('.on3').removeClass('search-con-l-active');
+				$('.on4').removeClass('search-con-l-active');
+				$('.on5').removeClass('search-con-l-active');
+				$('.on6').removeClass('search-con-l-active');
+				$('.on7').removeClass('search-con-l-active');
+				$('.on2').removeClass('search-con-l-active');
+	        });
+			
+		});
+	 </script>
+</html>

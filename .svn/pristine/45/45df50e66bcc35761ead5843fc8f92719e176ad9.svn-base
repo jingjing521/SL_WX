@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>订单详情</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="orderDetails">
+				<div class="orderd-con">
+					<div class="orderd-con-title">订单状态<span class="fr colors font16">待发货</span></div>
+					<div class="orderd-con-text"><span class="colore">订单编号：</span>548210217111258</div>
+					<div class="orderd-con-text"><span class="colore">下单时间：</span>2016年12月27日 12:12:12</div>
+				</div>
+				
+				<div class="orderd-con">
+					<div class="orderd-con-title">收货信息</div>
+					<div class="orderd-con-text"><span class="colore">收&nbsp;货&nbsp; 人：</span>哈哈</div>
+					<div class="orderd-con-text"><span class="colore">手机号码：</span>15345678912</div>
+					<div class="orderd-con-text"><span class="colore">收货地址：</span>上海市虹口区广记路838号4楼</div>
+				</div>
+				
+				<div class="orderd-con">
+					<div class="orderd-con-titles">商品信息</div>
+					<div class="orderd-product">
+						<div class="fl orderd-product-img"><img src="images/small-img.jpg"></div>
+						<div class="fl orderd-product-con">
+							<div class="orderd-product-con-name">粉红中长款V领针织外套</div>
+							<div class="orderd-product-con-gg">颜色：粉红色；尺码：S</div>
+							<div class="orderd-product-con-price">￥285.00<span>x2</span></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="orderd-product">
+						<div class="fl orderd-product-img"><img src="images/small-img1.jpg"></div>
+						<div class="fl orderd-product-con">
+							<div class="orderd-product-con-name">黑色连帽毛领羽绒服</div>
+							<div class="orderd-product-con-gg">颜色：黑色；尺码：S</div>
+							<div class="orderd-product-con-price">￥285.00<span>x2</span></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="orderd-bz">
+						备注：平台客服后台新增对产品折扣的一些说明，用户在前台可以看见。
+					</div>
+				</div>
+				
+				<div class="orderd-con">
+					<div class="orderd-con-text tr pd10"><span class="colore fl"> 商品金额：</span>￥99.00</div>
+					<div class="orderd-con-text tr"><span class="colore fl">配&nbsp;送&nbsp; 费：</span>￥5.00</div>
+					<div class="orderd-con-text tr mb10"><span class="colore fl">积分抵扣：</span>-￥10.00</div>
+					<div class="orderd-nums bbn">合计：<span class="colors">￥542.00</span>(含运费 ￥5.00)</div>
+					<div class="clear"></div>
+				</div>
+
+			</div>
+		</div>
+	</body>
+
+</html>

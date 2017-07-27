@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>我的积分</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="integration">
+				<div class="integration-top">
+					<img src="images/jf-bg.png" />
+					<div class="integration-po-top">
+						<div class="integration-po-top-name">我的积分</div>
+					</div>
+					<div class="integration-po-tops">
+						<img src="images/jfs.png">
+						<span class="integration-po-top-num">2004</span>
+					</div>
+				</div>
+				<div class="integration-con">
+					<div class="integration-con-title">
+						<div class="integration-con-title-name">积分明细</div>
+					</div>
+					<div class="integration-con-item">
+						<div class="integration-con-item-name">购物赠送商品名称商品名称商品名称</div>
+						<div class="integration-con-item-nums">+20</div>
+						<div class="integration-con-item-date">2016-4-16</div>
+					</div>
+					<div class="integration-con-item">
+						<div class="integration-con-item-name">购物赠送商品名称商品名称商品名称</div>
+						<div class="integration-con-item-nums">-20</div>
+						<div class="integration-con-item-date">2016-4-16</div>
+					</div>
+					<div class="integration-con-item">
+						<div class="integration-con-item-name">购物赠送商品名称商品名称商品名称</div>
+						<div class="integration-con-item-nums">+20</div>
+						<div class="integration-con-item-date">2016-4-16</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="js/center.js" ></script>
+	<script type="text/javascript" src="js/md5.js" ></script>
+	<script>
+		var loading = false;
+	  indexData();
+	  var page=0;
+	  function indexData(){
+		page++;	 	
+	  		//ajax
+	  		 var user_id=localStorage.getItem("user_id");
+	  		 console.log(user_id);
+			 var timestamp1 = Date.parse(new Date());
+   			 var values1=["user_id","page","timestamp"];
+			 var data1={"user_id":user_id,"page":page,"timestamp":timestamp1};
+			 var sign1 = doSign(values1,data1);
+			 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			 $.ajax({
+				type:"post",
+				url: link_url+"integralLogListByUser",
+				dataType: "json",
+			    data: {"user_id":user_id,"page":page,"key":keys,"timestamp":timestamp1,"sign":sign1},
+				success: function(data) {
+				    if(data.status == 1){
+				        console.log(data);
+//				       	 console.log(data.data.goods_posts.length);
+//				         if(data.data.goods_posts.length==0){
+//				         	$.toast("没有更多的相关商品！", "text");
+//				         	loading = true;
+//				         	 $(document.body).infinite().on("infinite", function() {
+//						        if(loading) return;
+//						        loading = false;
+//						        setTimeout(function() {
+//						          page++;
+//						          indexData();
+//						          loading = true;
+//						        }, 50);
+//						     });
+//				         }else{
+//				         	 $("#index").append($('<div class="zw50"></div>'));
+//							
+//							$.each(data.data.goods_posts,function(i,v){
+//					        	var start=v.start_time;
+//					        	var start_times=start.replace("-",".");
+//					        	var start_time=start_times.replace("-",".");
+//					        	var end=v.end_time;
+//					        	var end_times=end.replace("-",".");
+//					        	var end_time=end_times.replace("-",".");
+//					        	$('<a href="product.html?id='+v.id+'"><div class="index-item"><div class="fl index-item-img"><img src="images/4.png"></div><div class="fl index-item-r"><div class="index-item-title">'+v.name+'</div><div class="index-item-price">预售价:<span>￥'+v.price+'</span></div><div class="index-item-prices">定金:￥'+v.bookprice+'</div><div class="index-item-date">预售期：'+start_time+'-'+end_time+'</div></div><div class="clear"></div></div></a>').appendTo($(".index-con"));
+//					        })
+//				         	 
+//				         	$(document.body).infinite().on("infinite", function() {
+//						        if(loading) return;
+//						        loading = true;
+//						        setTimeout(function() {
+//						          page++;
+//						          indexData();
+//						          loading = false;
+//						        }, 500);
+//						      });
+//						      
+//				         }
+			
+				    }else{
+				    	console.log(data);
+				    }
+				},
+				error:function(){
+					   
+				}
+			 })
+}
+	</script>
+</html>

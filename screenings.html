@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>筛选</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-weui.css" />
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<style>
+			.weui_toast_text {width: 15em !important; margin: auto; min-height: 30px; border-radius: 5px;max-height: 200px; height: 43px !important;}
+			.btn{position: fixed; bottom: 0;}		
+		</style>
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="screening">
+				<div class="tr screening-con-titles">重置</div>
+				<div class="screening-con" data-attrval="">
+					<div class="screening-con-title">颜色</div>
+					<div class="screening-con-items top">
+						<div class="screening-con-item2 mm fl screening-con-item">白色</div>
+						<div class="screening-con-item2 mm fl screening-con-item">黑色</div>
+						<div class="screening-con-item2 mm fl screening-con-item">天蓝色</div>
+						<div class="clear"></div>
+					</div>
+					<div class="screening-con-title">尺寸</div>
+					<div class="screening-con-items top">
+						<div class="screening-con-item mm fl screening-con-item3">L</div>
+						<div class="screening-con-item mm fl screening-con-item3">XL</div>
+						<div class="screening-con-item mm fl screening-con-item3">XXL</div>
+						<div class="screening-con-item mm fl screening-con-item3">S</div>
+						<div class="screening-con-item mm fl screening-con-item3">38</div>
+						<div class="screening-con-item mm fl screening-con-item3">39</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="screening-con-b"></div>
+				<div class="zw50"></div>
+				<a href="store.html"><div class="btn">确定</div></a>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		$(document).ready(function(){
+			
+			var w=$(window).height();
+			console.log(w);
+			$("#screening").css("min-height",w-10);
+			
+			$(".screening-con-titles").click(function(){
+				$(".screening-con").children().children().removeClass("active");
+				$(".screening-con").children().children().removeClass("actives");
+				$(".screening-con").children().children().removeClass("nn");
+			})
+			$(".screening-con-items").on("click",".screening-con-item3",function(){
+				$(".screening-con-item3").removeClass("active");
+				$(".screening-con-item3").removeClass("nn");
+				$(this).toggleClass("active"); 
+				$(this).toggleClass("nn"); 
+				 
+			})
+			$(".screening-con-items").on("click",".screening-con-item2",function(){
+				$(".screening-con-item2").removeClass("active");
+				$(".screening-con-item2").removeClass("nn");
+				$(this).toggleClass("active"); 
+				$(this).toggleClass("nn"); 
+				 
+			})
+		})	 
+	</script>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>更换绑定手机</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+		<style>
+			.weui_toast_text {width: 15em !important;}
+		</style>
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="changephone">
+				<div class="changephone-nav">
+					<div class="fl mlr nav-active">验证身份</div>
+					<div class="fl">></div>
+					<div class="fl mlr">修改已验证手机</div>
+					<div class="fl">></div>
+					<div class="fl mlr">更换完成</div>
+					<div class="clear"></div>
+				</div>
+				<div class="changephone-con">
+					<div class="changephone-con-top">当前绑定手机号158****5478</div>
+					<div class="changephone-con-bottom">
+						<input placeholder="请输入短信验证码" class="fl" /><div class="fl yzms">获取验证码</div><div class="clear"></div>
+					</div>
+				</div>
+				<a href="change-phone1.html"><div class="btn">下一步</div></a>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/center.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		$(function  () {
+			
+	    //获取短信验证码
+	    var validCode=true;
+	    $(".yzms").click (function  () {
+	        var time=60;
+	        var code=$(this);
+	        if (validCode) {
+	            validCode=false;
+	            code.addClass("msgs1");
+	        var t=setInterval(function  () {
+	            time--;
+	            code.html(time+"秒后重发");
+	            if (time==0) {
+	                clearInterval(t);
+	            code.html("重新获取");
+	                validCode=true;
+	            code.removeClass("msgs1");
+	
+	            }
+	        },1000)
+	        }
+	    })
+	})
+		
+	</script>
+</html>

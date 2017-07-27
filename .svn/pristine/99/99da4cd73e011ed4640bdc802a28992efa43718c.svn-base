@@ -1,0 +1,67 @@
+ // 解析地址
+function parseUrl(){
+    var url=location.href;
+    var i=url.indexOf('?');
+    if(i==-1)return;
+    var querystr=url.substr(i+1);
+    var arr1=querystr.split('&');
+    var arr2=new Object();
+    for  (i in arr1){
+        var ta=arr1[i].split('=');
+        arr2[ta[0]]=ta[1];
+    }
+    return arr2;
+}
+
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+    return currentdate;
+}
+// 签名
+function doSign(values,data){
+    values.sort();
+    var str="";
+    for(var i in values) {
+	   	str+=values[i]+'='+data[values[i]] +'&';       
+    }
+   str = str.substr(0,str.length-1);
+   var key ="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+   var value="idf5nsi5t0qbemwo124213198as";
+   var str1 = value+str+'&key='+key+value;
+   var sign = (md5(str1)).toUpperCase();
+   return sign;
+}
+var link_url="http://qcap.hangtuosoft.com/index.php?g=app&m=index&a=index&op=";
+var link_url1="http://qcap.hangtuosoft.com";
+
+//转换日期
+function dateToStr(datetime){ 
+	var year = datetime.getFullYear();
+	var month = datetime.getMonth()+1;//js从0开始取 
+	var date = datetime.getDate(); 
+	var hour = datetime.getHours(); 
+	var minutes = datetime.getMinutes(); 
+	var second = datetime.getSeconds();					 
+	if(month<10){month = "0" + month;}
+	if(date<10){date = "0" + date;}
+	if(hour <10){hour = "0" + hour;}
+	if(minutes <10){ minutes = "0" + minutes;}
+	if(second <10){second = "0" + second ;}					 
+//	var time = year+"."+month+"."+date+" "+hour+":"+minutes+":"+second; 
+	var time=+month+"-"+date+" "+hour+":"+minutes;
+	return time;
+}
+

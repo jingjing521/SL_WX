@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>设置</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="set">
+				<div class="set-con">
+					<a onclick="window.location.href='updatePwd.html?id='+parseUrl().id"><div class="set-con-item">
+						<div class="set-con-item-img fl"><img src="images/set (5).png"></div>
+						<div class="set-con-item-name fl">登录密码修改</div>
+						<div class="set-con-item-l fr"><img src="images/lefts.png"></div>
+						<div class="clear"></div>
+					</div></a>
+					<a onclick="window.location.href='address.html?id='+parseUrl().id"><div class="set-con-item">
+						<div class="set-con-item-img fl"><img src="images/set (1).png"></div>
+						<div class="set-con-item-name fl">地址管理</div>
+						<div class="set-con-item-l fr"><img src="images/lefts.png"></div>
+						<div class="clear"></div>
+					</div></a>
+				</div>
+				<div class="set-con">
+					<a href="help.html"><div class="set-con-item">
+						<div class="set-con-item-img fl"><img src="images/set (2).png"></div>
+						<div class="set-con-item-name fl">帮助中心</div>
+						<div class="set-con-item-l fr"><img src="images/lefts.png"></div>
+						<div class="clear"></div>
+					</div></a>
+					<div class="set-con-item about" >
+						<div class="set-con-item-img fl"><img src="images/set (3).png"></div>
+						<div class="set-con-item-name fl">关于我们</div>
+						<div class="set-con-item-l fr"><img src="images/lefts.png"></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="set-con">
+					<div class="set-con-item fw">
+						<div class="set-con-item-img fl"><img src="images/set (4).png"></div>
+						<div class="set-con-item-name fl">服务条款</div>
+						<div class="set-con-item-l fr"><img src="images/lefts.png"></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="set-tc">退出当前账号</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/webim.config.js"></script>
+	<script src="js/strophe-1.2.8.min.js"></script>
+	<script src="js/websdk-1.4.10.min.js"></script>
+	<script src="js/adapter.js"></script>
+	<script src="js/webrtc-1.4.10.js"></script>
+	<script type="text/javascript" src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/md5.js"></script>
+	<script>
+		$(".set-tc").click(function(){
+			localStorage.clear();
+			conn.close();
+			window.location.href="login.html";
+		})
+		$(".fw").click(function(){
+			var timestamp = Date.parse(new Date());
+		    var values=['timestamp','type'];
+		    var data={'timestamp':timestamp,'type':6};
+		    var sign = doSign(values,data);
+		    var key="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+		    $.ajax({
+		        type : "post",
+		        url : link_url+'goSinglePage', 
+		        data:{'type':6,'timestamp':timestamp,'key':key,'sign':sign}, 
+		        dataType : "json",
+		        success : function(data){
+		            if( data.status == 1){
+		                console.log(data);
+		                window.location.href=data.data;
+		            }
+		        }  
+		    })
+		})
+		$(".about").click(function(){
+			var timestamp = Date.parse(new Date());
+		    var values=['timestamp','type'];
+		    var data={'timestamp':timestamp,'type':5};
+		    var sign = doSign(values,data);
+		    var key="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+		    $.ajax({
+		        type : "post",
+		        url : link_url+'goSinglePage', 
+		        data:{'type':5,'timestamp':timestamp,'key':key,'sign':sign}, 
+		        dataType : "json",
+		        success : function(data){
+		            if( data.status == 1){
+		                console.log(data);
+		                window.location.href=data.data;
+		            }
+		        }  
+		    })
+		})
+	</script>
+</html>

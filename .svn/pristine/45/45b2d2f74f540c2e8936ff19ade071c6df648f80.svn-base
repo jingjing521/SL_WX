@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>商家认证</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="merchantsCert">
+				<div class="merchantsCert-sb">
+					<div class="merchantsCert-pass1"><img src="images/sb.png"></div>
+					<div class="merchantsCert-pass-text1">审核拒绝！</div>
+				</div>
+				<div class="merchantsCert-sb1">
+					
+				</div>
+				<div class="about-phone"><img src="images/l-phone.png">一键咨询电话：400-12345678</div>
+				<a href="merchants-certifications.html"><div class="btn1">提交</div></a>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-2.2.1.js" ></script>
+	<script type="text/javascript" src="js/center.js" ></script>
+	<script type="text/javascript" src="js/md5.js" ></script>
+	<script>
+		$(document).ready(function(){
+			var user_id=localStorage.getItem("user_id");
+			var timestamp1 = Date.parse(new Date());
+	 		var values1=["user_id","timestamp"];
+			var data1={"user_id":user_id,"timestamp":timestamp1};
+			var sign1 = doSign(values1,data1);
+			var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			$.ajax({
+				type:"post",
+				url: link_url+"shopAuthDetail",
+				dataType: "json",
+				data: {"user_id":user_id,"key":keys,"timestamp":timestamp1,"sign":sign1},
+				success: function(data) {
+				    if(data.status == 1){
+				        console.log(data);
+				        $(".merchantsCert-sb1").text("    "+data.data.result_desc);
+				    }else{
+				       console.log(data);
+				    }
+				},
+				error:function(){
+				   
+				}
+			})
+		})
+	</script>
+</html>

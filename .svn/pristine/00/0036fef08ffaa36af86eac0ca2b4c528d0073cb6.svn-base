@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>支付</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="pay">
+				<div class="pay-con">
+					<div class="pay-con-item">
+						<div class="fl pay-con-item-img"><img src="images/pay (3).png"></div>
+						<div class="fl pay-con-item-con">
+							<div class="pay-con-item-name">支付宝</div>
+							<div class="pay-con-item-text">推荐支付宝用户使用</div>
+						</div>
+						<div class="fr commodity"></div>
+						<div class="clear"></div>
+					</div>
+					<div class="pay-con-item">
+						<div class="fl pay-con-item-img"><img src="images/pay (1).png"></div>
+						<div class="fl pay-con-item-con">
+							<div class="pay-con-item-name">微信</div>
+							<div class="pay-con-item-text">推荐微信用户使用</div>
+						</div>
+						<div class="fr commodity select"></div>
+						<div class="clear"></div>
+					</div>
+					<div class="pay-con-item">
+						<div class="fl pay-con-item-img"><img src="images/pay (2).png"></div>
+						<div class=" fl pay-con-item-names">银联支付</div>
+						<div class="fr commodity"></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="pay-footer">
+					<div class="fl pay-text">订单金额：<span>￥542.00</span></div>
+					<a href="pay-fin.html"><div class="fr pay-btn">立即支付</div></a>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script>
+	 $(".pay-con-item").on("click",".commodity",function(){
+	 	$(".commodity").removeClass("select");
+	 	$(this).addClass("select");
+	 });
+	</script>
+</html>

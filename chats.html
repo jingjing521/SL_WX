@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>聊天</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="chat">
+				<div class="chat-con">
+					<div class="chat-con-item">
+						<div class="fl chat-con-item-tx"><img src="images/3.png"></div>
+						<div class="fl chat-con-item-text">请问你有什么需要帮助的吗？</div>
+						<div class="clear"></div>
+					</div>
+					<div class="chat-con-items">
+						<div class="fr chat-con-item-tx"><img src="images/3.png"></div>
+						<div class="fr chat-con-item-texts">价格太高</div>
+						<div class="clear"></div>
+					</div>
+					<div class="chat-con-item">
+						<div class="fl chat-con-item-tx"><img src="images/3.png"></div>
+						<div class="fl chat-con-item-text">这个价格还好吧。</div>
+						<div class="clear"></div>
+					</div>
+					<div class="chat-con-items">
+						<div class="fr chat-con-item-tx"><img src="images/3.png"></div>
+						<div class="fr chat-con-item-texts">能低一点吗？</div>
+						<div class="clear"></div>
+					</div>
+					<div class="chat-con-item">
+						<div class="fl chat-con-item-tx"><img src="images/3.png"></div>
+						<div class="fl chat-con-item-text">好的。</div>
+						<div class="clear"></div>
+					</div>
+					<div class="chat-con-items">
+						<div class="fr chat-con-item-tx"><img src="images/3.png"></div>
+						<div class="fr chat-con-item-texts">谢谢亲</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="chat-footer">
+					<div class="fl chat-footer-img"><img src="images/chat (4).png"></div>
+					<div class="fl chat-footer-input"><input type="text" placeholder="请输入内容"></div>
+					<div class="fl chat-footer-img"><img src="images/chat (5).png"></div>
+					<div class="fl chat-footer-img"><img src="images/chat (1).png"></div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script type='text/javascript' src='js/webim.config.js'></script>
+	<script type='text/javascript' src='js/strophe-1.2.8.min.js'></script>
+	<script type='text/javascript' src='js/websdk-1.4.10.min.js'></script>
+	<script>
+		$(document).ready(function(){
+			var w=$(window).height();
+			var h=$(".chat-footer").height();
+			var num=parseInt(w-h);
+			$(".chat-con").css("min-height",num);
+		})
+	  
+	</script>
+</html>

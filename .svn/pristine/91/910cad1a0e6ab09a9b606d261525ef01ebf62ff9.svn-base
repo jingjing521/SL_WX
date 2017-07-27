@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>我的订单</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/jquery-weui.css" />
+		<link rel="stylesheet" href="css/weui.min.css" />
+		<style>
+			.weui_toast_text {width: 10em !important; margin-left: 2% !important;}
+		</style>
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="order">
+				<div class="order-left">
+		             <a href="order.html"><li class="on1"  id="li-1" >全部</li></a>
+		             <a href="order1.html"><li class="on2" id="li-2">待付款</li></a>
+		             <a href="order2.html"><li class="on3 active" id="li-3">待发货</li></a>
+		             <a href="order3.html"><li class="on4" id="li-4">待收货</li></a>
+		        </div>
+		        
+		        <div class="order-right">
+		           
+		            <div class="help-right-box"  id="div-3">  
+		            	<!--待发货-->
+		            	
+		            </div>
+		           
+		        </div>
+	        </div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="js/center.js" ></script>
+	<script type="text/javascript" src="js/jquery-weui.js" ></script>
+	<script type="text/javascript" src="js/md5.js" ></script>
+	<script>
+		var loading = false;
+		indexData();
+		var page=0;
+		function indexData(){
+			page++;	 	
+		  	//ajax
+		  	 var user_id=localStorage.getItem("user_id");
+		  	 var order_type=2;
+			 var timestamp1 = Date.parse(new Date());
+	   		 var values1=["user_id","order_type","page","timestamp"];
+			 var data1={"user_id":user_id,"order_type":order_type,"page":page,"timestamp":timestamp1};
+			 var sign1 = doSign(values1,data1);
+			 var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			 $.ajax({
+				type:"post",
+				url: link_url+"orderListByUser",
+				dataType: "json",
+			    data: {"user_id":user_id,"order_type":order_type,"page":page,"key":keys,"timestamp":timestamp1,"sign":sign1},
+				success: function(data) {
+				    if(data.status == 1){
+				        console.log(data);
+	//			       	 console.log(data.data.length);
+				         if(data.data.length==0){
+				         	$.toast("没有更多的相关商品！", "text");
+				         	loading = true;
+				         	 $(document.body).infinite().on("infinite", function() {
+						        if(loading) return;
+						        loading = false;
+						        setTimeout(function() {
+			 		            	page++;
+						        	indexData();
+							    	loading = true;
+							    }, 50);
+							 });
+					     }else{
+					     	//order_status订单状态: 0待确认 1已确认 2已收货 3已取消 4已完成 5无效订单  
+					     	//shipping_status[发货状态0未发货 1已发货]
+					     	//pay_status[支付状态1未付款 2已付定金3已付全款]
+							$.each(data.data,function(i,v){
+						       if(v.order_status==5){//无效订单
+						       		$('<div class="order-con"><div class="order-con-title"><a href="store.html?id='+v.shop_id+'" class="color6">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr colors">无效订单</span></div><div class="products"></div><div class="order-nums"><span class="fl colore">共<span class="goodsnum"></sapn>件商品</span>合计：<span class="colors">￥'+v.final_price+'</span>(含运费 ￥'+v.shipping_price+')<div class="clear"></div></div><div class="clear"></div></div>').appendTo($(".help-right-box"));
+						       }else{
+						       		if(v.pay_status==1){
+						       			if(v.order_status==3){
+						       				$('<div class="order-con"><div class="order-con-title"><a href="store.html?id='+v.shop_id+'" class="color6">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr colors">已取消</span></div><div class="products"></div><div class="order-nums"><span class="fl colore">共<span class="goodsnum"></sapn>件商品</span>合计：<span class="colors">￥'+v.final_price+'</span>(含运费 ￥'+v.shipping_price+')<div class="clear"></div></div><div class="clear"></div></div>').appendTo($(".help-right-box"));
+						       			}else{
+						       				if(v.order_type==0){
+						       					$('<div class="order-con"><div class="order-con-title"><a href="store.html?id='+v.shop_id+'" class="color6">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr colors">待付款</span></div><a href="order-details.html?user_id='+user_id+'&order_id='+v.id+'"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共<span class="goodsnum"></sapn>件商品</span>合计：<span class="colors">￥'+v.final_price+'</span>(含运费 ￥'+v.shipping_price+')<div class="clear"></div></div><div class="btns"><div class="order-btn fl payment" money="'+v.total_amount+'">立即支付</div><div class="order-del fl show-confirms" oid="'+v.id+'">取消订单</div><div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+						       				}else{
+						       					$('<div class="order-con"><div class="order-con-title"><a href="store.html?id='+v.shop_id+'" class="color6">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr colors">定金等待买家付款</span></div><a href="order-details1.html?user_id='+user_id+'&order_id='+v.id+'"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共<span class="goodsnum"></sapn>件商品</span>合计：<span class="colors">￥'+v.final_price+'</span>(含运费 ￥'+v.shipping_price+')<div class="clear"></div></div><div class="btns"><div class="order-btn fl payment" money="'+v.total_amount+'">立即支付</div><div class="order-del fl show-confirms" oid="'+v.id+'">取消订单</div><div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+						       				}
+						       			}
+						       		}else if(v.pay_status==2){
+						       			if(v.order_goods[0].balance_paytime>timestamp1){
+						       				$('<div class="order-con"><div class="order-con-title"><a href="store.html?id='+v.shop_id+'" class="color6">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr colors">'+v.order_goods[0].balance_paytime_format+' 开始支付尾款</span></div><a href="order-details2.html?user_id='+user_id+'&order_id='+v.id+'"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共<span class="goodsnum"></sapn>件商品</span>合计：<span class="colors">￥'+v.final_price+'</span>(含运费 ￥'+v.shipping_price+')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+						       			}else{
+						       				$('<div class="order-con"><div class="order-con-title"><a href="store.html?id='+v.shop_id+'" class="color6">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr colors">尾款等待买家付款</span></div><a href="order-details3.html?user_id='+user_id+'&order_id='+v.id+'"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共<span class="goodsnum"></sapn>件商品</span>合计：<span class="colors">￥'+v.final_price+'</span>(含运费 ￥'+v.shipping_price+')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+						       			}
+						       		}else{
+						       			if(v.shipping_status==0){
+						       				$('<div class="order-con"><div class="order-con-title"><a href="store.html?id='+v.shop_id+'" class="color6">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr colors">待发货</span></div><a href="order-detailsSend.html?user_id='+user_id+'&order_id='+v.id+'"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共<span class="goodsnum"></sapn>件商品</span>合计：<span class="colors">￥'+v.final_price+'</span>(含运费 ￥'+v.shipping_price+')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+						       			}else{
+						       				if(v.order_status==4){
+						       					$('<div class="order-con"><div class="order-con-title"><a href="store.html?id='+v.shop_id+'" class="color6">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr colors">交易成功</span></div><a href="order-detailsSucc.html?user_id='+user_id+'&order_id='+v.id+'"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共<span class="goodsnum"></sapn>件商品</span>合计：<span class="colors">￥'+v.final_price+'</span>(含运费 ￥'+v.shipping_price+')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+						       				}else{
+						       					if(v.order_status==2){
+						       						$('<div class="order-con"><div class="order-con-title"><a href="store.html?id='+v.shop_id+'" class="color6">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr colors">已收货</span></div><a href="order-detailsSucc.html?user_id='+user_id+'&order_id='+v.id+'"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共<span class="goodsnum"></sapn>件商品</span>合计：<span class="colors">￥'+v.final_price+'</span></span>(含运费 ￥'+v.shipping_price+')<div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+						       					}else{
+						       						$('<div class="order-con"><div class="order-con-title"><a href="store.html?id='+v.shop_id+'" class="color6">'+v.shop_name+'<img src="images/right.png" /></a><span class="fr colors">待收货</span></div><a href="order-detailsFor.html?user_id='+user_id+'&order_id='+v.id+'"><div class="products"></div></a><div class="order-nums"><span class="fl colore">共<span class="goodsnum"></sapn>件商品</span>合计：<span class="colors">￥'+v.final_price+'</span></span>(含运费 ￥'+v.shipping_price+')<div class="clear"></div></div><div class="btns"><div class="order-btn fl show-confirm">确认收货</div><a href="logistics.html?order_id='+v.id+'&order_sn='+v.order_sn+'"><div class="order-del fl" >查看物流</div></a><div class="clear"></div></div></div>').appendTo($(".help-right-box"));
+						       					}
+						       				}
+						       			}
+						       		}
+						       }
+						       
+						       $.each(v.order_goods, function(z,x) {
+						       		$('<div class="order-product"><div class="fl order-product-img"><img src="'+x.smeta.thumb+'"></div><div class="fl order-product-con"><div class="order-product-con-name">'+x.goods_name+'</div><div class="order-product-con-gg">'+x.spec_key_name+'</div><div class="order-product-con-price">￥'+x.goods_price+'<span>x'+x.goods_num+'</span></div></div><div class="clear"></div></div>').appendTo($(".products").eq(i));
+						       });
+						       
+						    })
+						    
+						    $(".payment").click(function(){
+						    	var total=$(this).attr("money");
+						    	var goods_id=$(this).attr("");
+						    	localStorage.setItem("msg","");
+						    	window.location.href="pays1.html?total="+total;
+						    })
+						    
+	//					    if (list.get(groupPosition).getPay_status().equals("2")) {
+	//			                holder.tvCombined.setText("¥" + list.get(groupPosition).getFinal_price());
+	//			            } else {
+	//			                if (list.get(groupPosition).getOrder_type().equals("0")) {
+	//			                    if (list.get(groupPosition).getFinal_price().equals("0.00")) {
+	//			                        holder.tvCombined.setText("¥" + 0.01);
+	//			                    } else {
+	//			                        holder.tvCombined.setText("¥" + list.get(groupPosition).getFinal_price());
+	//			                    }
+	//			                } else {
+	//			                    double money = MathUtils.add(Double.parseDouble(list.get(groupPosition).getBookprice()), Double.parseDouble(list.get(groupPosition).getShipping_price()));
+	//			                    holder.tvCombined.setText("¥" + String.valueOf(money));
+	//			                }
+	//			            }
+	
+					         	 
+					       	$(document.body).infinite().on("infinite", function() {
+						        if(loading) return;
+						        loading = true;
+						        setTimeout(function() {
+						          page++;
+						          indexData();
+						          loading = false;
+						        }, 500);
+						      });
+							      
+					        }
+				
+					}else{
+					   	console.log(data);
+					    $.toast(data.data, "text");
+					}
+				},	error:function(){
+						   
+				}
+			})
+		}
+	</script>
+	
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>意见反馈</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="feedback">
+				<textarea placeholder="请输入您要反馈的内容" class="content"></textarea>
+				<div class="btn">发表</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		$('.btn').click(function(){
+			var content=$(".content").val();
+			var user_id=parseInt(localStorage.getItem('user_id'));
+			var platform = 4;
+			var timestamp = Date.parse(new Date());
+   			var values=["user_id","content","platform","timestamp"];
+			var data={"user_id":user_id,"content":content,"platform":platform,"timestamp":timestamp};
+			var sign = doSign(values,data);
+			var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			
+			if(content==""){
+				 $.toast("请输入您要反馈的内容!", "text");
+			}else{
+				$.ajax({
+					type:"post",
+					url: link_url+"feedbackByUser",
+					dataType: "json",
+					data: {"user_id":user_id,"content":content,"platform":platform,"key":keys,"timestamp":timestamp,"sign":sign},
+					success: function(data) {
+					    if(data.status == 1){
+					        console.log("ok");
+					        console.log(data);
+					        $.toast("反馈成功", "text");
+					        window.location.href="center.html?id="+user_id;
+					    }else{
+					    	 console.log(data);
+					     	$.toast(data.data, "text");
+					    }
+					},
+					error:function(){
+					    console.log(link_url);
+					}
+				})
+				
+			}
+			
+		})
+
+	</script>
+</html>

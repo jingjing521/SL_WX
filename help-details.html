@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>帮助中心</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="help">
+				<div class="help-con">
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/center.js"></script>
+	<script src="js/md5.js"></script>
+	<script>
+		$(document).ready(function(){
+			var keywords=localStorage.getItem("keywords");
+			console.log(keywords);
+			var page=0;
+			var timestamp = Date.parse(new Date());
+	   		var values=["keywords","page","timestamp"];
+			var data={"keywords":keywords,"page":page,"timestamp":timestamp};
+			var sign = doSign(values,data);
+			var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			$.ajax({
+				type:"post",
+				url: link_url+"getHelpList",
+				dataType: "json",
+				data: {"keywords":keywords,"page":page,"key":keys,"timestamp":timestamp,"sign":sign},
+				success: function(data) {
+					if(data.status == 1){
+					    console.log("ok");
+					    console.log(data);
+					    $.each(data.data,function(i,v){
+					    	$('<div class="help-con-item"><a href="'+v.detail_url+'"><div class="fl help-con-item-name">'+v.title+'</div><div class="fr help-con-item-l"><img src="images/lefts.png"></div><div class="clear"></div></a></div>').appendTo($(".help-con"));
+					    })
+					}else{
+						 console.log(data);
+					    $.toast(data.data, "text");
+					}
+				}, error:function(){
+					console.log(link_url);
+				}
+			})
+		})
+	</script>
+</html>

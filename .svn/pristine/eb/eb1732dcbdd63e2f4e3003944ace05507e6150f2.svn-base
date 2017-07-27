@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>商品评价</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="evaluation">
+				<div class="order-left">
+					<li class="on1 active" id="li-1">全部</li>
+					<li class="on2" id="li-2">好评</li>
+					<li class="on3" id="li-3">中评</li>
+					<li class="on4" id="li-4">差评</li>
+				</div>
+
+				<div class="order-right">
+					<div class="order-right-nums">评论<span></span>条</div>
+					<div class="help-right-box" id="div-1">
+						<!--全部-->
+
+					</div>
+				</div>
+			</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="js/center.js"></script>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script>
+		$(function() {
+			FastClick.attach(document.body);
+		});
+	</script>
+	<script src="js/jquery-weui.js"></script>
+	<script>
+		$(".on1").click(function() {
+			window.location.href = "evaluation.html?id=" + parseUrl().id;
+		})
+		$(".on2").click(function() {
+			window.location.href = "evaluation1.html?id=" + parseUrl().id;
+		})
+		$(".on3").click(function() {
+			window.location.href = "evaluation2.html?id=" + parseUrl().id;
+		})
+		$(".on4").click(function() {
+			window.location.href = "evaluation3.html?id=" + parseUrl().id;
+		})
+		//		.商品更多评论接口
+		//		接口名
+		//		goodsCommentListMore
+		//		说明
+		//		参数
+		//		参数	类型	说明	是否必须	取值范围
+		//		goods_id	Int(11)	商品id	Y	
+		//		type	Int(11)	类型	N	0全部 1好评 2中评 3差评
+		//		page	Int(11)	页数	N	
+		//		key	String	秘钥key	Y	
+		//		timestamp	Int(11)	时间戳	Y	
+		//		sign	String	签名	Y	
+		//订单初始化
+		var page = 1;
+		indexData();
+
+		function indexData() {
+
+			var goods_id = parseUrl().id;
+			var user_id = localStorage.getItem("user_id");
+			var type = 0;
+			var timestamp1 = Date.parse(new Date());
+			var values1 = ["goods_id", "type", "page", "timestamp"];
+			var data1 = {
+				"goods_id": goods_id,
+				"type": type,
+				"page": page,
+				"timestamp": timestamp1
+			};
+			var sign1 = doSign(values1, data1);
+			var keys = "idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+			$.post(link_url + "goodsCommentListMore", {
+				"page": page,
+				"goods_id": goods_id,
+				"type": type,
+				"key": keys,
+				"timestamp": timestamp1,
+				"sign": sign1
+			}, function(data) {
+				var sceniclist = "";
+				var products = "";
+				if(data.status == 1) {
+					console.log(data);
+					var str = JSON.stringify(data.data);
+					sessionStorage.pline = str;
+					$(".order-right-nums").children("span").text(data.data.comment_count);
+					$.each(data.data.posts, function(i, v) {
+						var stars = v.star_level;
+						if(stars == 1) {
+							$('<div class="product-con-pj"><div class="product-con-pj-t"><div class="product-con-pj-timg fl"><img src="' + v.avatar + '"></div><div class="product-con-pj-tname fl"><div class="usernames">' + v.user_nicename + '</div><div class="weui-rater" style="width: 100%;"><a data-num="0" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a></div></div><div class="product-con-pj-time fr">' + v.add_time + '</div><div class="clear"></div></div><div class="product-con-pj-nr">' + v.content + '</div><div class="product-con-pj-fl">'+v.spec_key_name+'</div></div></div>').appendTo($(".help-right-box"));
+
+						} else if(stars == 2) {
+							$('<div class="product-con-pj"><div class="product-con-pj-t"><div class="product-con-pj-timg fl"><img src="' + v.avatar + '"></div><div class="product-con-pj-tname fl"><div class="usernames">' + v.user_nicename + '</div><div class="weui-rater" style="width: 100%;"><a data-num="0" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="1" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a></div></div><div class="product-con-pj-time fr">' + v.add_time + '</div><div class="clear"></div></div><div class="product-con-pj-nr">' + v.content + '</div><div class="product-con-pj-fl">'+v.spec_key_name+'</div></div></div>').appendTo($(".help-right-box"));
+
+						} else if(stars == 3) {
+							$('<div class="product-con-pj"><div class="product-con-pj-t"><div class="product-con-pj-timg fl"><img src="' + v.avatar + '"></div><div class="product-con-pj-tname fl"><div class="usernames">' + v.user_nicename + '</div><div class="weui-rater" style="width: 100%;"><a data-num="0" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="1" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="2" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a></div></div><div class="product-con-pj-time fr">' + v.add_time + '</div><div class="clear"></div></div><div class="product-con-pj-nr">' + v.content + '</div><div class="product-con-pj-fl">'+v.spec_key_name+'</div></div></div>').appendTo($(".help-right-box"));
+
+						} else if(stars == 4) {
+							$('<div class="product-con-pj"><div class="product-con-pj-t"><div class="product-con-pj-timg fl"><img src="' + v.avatar + '"></div><div class="product-con-pj-tname fl"><div class="usernames">' + v.user_nicename + '</div><div class="weui-rater" style="width: 100%;"><a data-num="0" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="1" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="2" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="3" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a></div></div><div class="product-con-pj-time fr">' + v.add_time + '</div><div class="clear"></div></div><div class="product-con-pj-nr">' + v.content + '</div><div class="product-con-pj-fl">'+v.spec_key_name+'</div></div></div>').appendTo($(".help-right-box"));
+
+						} else if(stars == 5) {
+							$('<div class="product-con-pj"><div class="product-con-pj-t"><div class="product-con-pj-timg fl"><img src="' + v.avatar + '"></div><div class="product-con-pj-tname fl"><div class="usernames">' + v.user_nicename + '</div><div class="weui-rater" style="width: 100%;"><a data-num="0" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="1" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="2" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="3" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="4" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a></div></div><div class="product-con-pj-time fr">' + v.add_time + '</div><div class="clear"></div></div><div class="product-con-pj-nr">' + v.content + '</div><div class="product-con-pj-fl">'+v.spec_key_name+'</div></div></div>').appendTo($(".help-right-box"));
+
+						}
+					})
+				}
+			}, "json").error(function(xhr, errorText, errorType) {
+				//			$.toast('网络错误，请稍后再试', 'text');
+			});
+		}
+		//加载更多
+
+		var totalheight = 0; //定义一个总的高度变量
+		function loaata() {
+			totalheight = parseInt($(window).height()) + parseInt($(window).scrollTop()); //浏览器的高度加上滚动条的高度 
+
+			console.log("浏览器的高度加上滚动条的高度" + totalheight + ",文档的高度" + $(document).height());
+
+			if($(document).height() <= totalheight) //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+			{
+				//加载数据
+				page++;
+				var goods_id = parseUrl().id;
+				var user_id = localStorage.getItem("user_id");
+				var type = 0;
+				var timestamp1 = Date.parse(new Date());
+				var values1 = ["goods_id", "type", "page", "timestamp"];
+				var data1 = {
+					"goods_id": goods_id,
+					"type": type,
+					"page": page,
+					"timestamp": timestamp1
+				};
+				var sign1 = doSign(values1, data1);
+				var keys = "idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+				//景区列表加载下一页
+				$.post(link_url + "goodsCommentListMore", {
+					"page": page,
+					"goods_id": goods_id,
+					"type": type,
+					"key": keys,
+					"timestamp": timestamp1,
+					"sign": sign1
+				}, function(data) {
+					console.log(data);
+					var sceniclistmore = "";
+					if(data.status == 1) {
+						var str1 = sessionStorage.pline;
+						var str2 = JSON.parse(str1);
+						var len = str2.length;
+
+						Array.prototype.push.apply(str2, data.data);
+						sessionStorage.pline = JSON.stringify(str2)
+						$.each(data.data.posts, function(i, v) {
+							var stars = v.star_level;
+							if(stars == 1) {
+								$('<div class="product-con-pj"><div class="product-con-pj-t"><div class="product-con-pj-timg fl"><img src="' + v.avatar + '"></div><div class="product-con-pj-tname fl"><div class="usernames">' + v.user_nicename + '</div><div class="weui-rater" style="width: 100%;"><a data-num="0" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a></div></div><div class="product-con-pj-time fr">' + v.add_time + '</div><div class="clear"></div></div><div class="product-con-pj-nr">' + v.content + '</div><div class="product-con-pj-fl">'+v.spec_key_name+'</div></div></div>').appendTo($(".help-right-box"));
+	
+							} else if(stars == 2) {
+								$('<div class="product-con-pj"><div class="product-con-pj-t"><div class="product-con-pj-timg fl"><img src="' + v.avatar + '"></div><div class="product-con-pj-tname fl"><div class="usernames">' + v.user_nicename + '</div><div class="weui-rater" style="width: 100%;"><a data-num="0" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="1" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a></div></div><div class="product-con-pj-time fr">' + v.add_time + '</div><div class="clear"></div></div><div class="product-con-pj-nr">' + v.content + '</div><div class="product-con-pj-fl">'+v.spec_key_name+'</div></div></div>').appendTo($(".help-right-box"));
+	
+							} else if(stars == 3) {
+								$('<div class="product-con-pj"><div class="product-con-pj-t"><div class="product-con-pj-timg fl"><img src="' + v.avatar + '"></div><div class="product-con-pj-tname fl"><div class="usernames">' + v.user_nicename + '</div><div class="weui-rater" style="width: 100%;"><a data-num="0" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="1" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="2" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a></div></div><div class="product-con-pj-time fr">' + v.add_time + '</div><div class="clear"></div></div><div class="product-con-pj-nr">' + v.content + '</div><div class="product-con-pj-fl">'+v.spec_key_name+'</div></div></div>').appendTo($(".help-right-box"));
+	
+							} else if(stars == 4) {
+								$('<div class="product-con-pj"><div class="product-con-pj-t"><div class="product-con-pj-timg fl"><img src="' + v.avatar + '"></div><div class="product-con-pj-tname fl"><div class="usernames">' + v.user_nicename + '</div><div class="weui-rater" style="width: 100%;"><a data-num="0" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="1" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="2" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="3" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a></div></div><div class="product-con-pj-time fr">' + v.add_time + '</div><div class="clear"></div></div><div class="product-con-pj-nr">' + v.content + '</div><div class="product-con-pj-fl">'+v.spec_key_name+'</div></div></div>').appendTo($(".help-right-box"));
+	
+							} else if(stars == 5) {
+								$('<div class="product-con-pj"><div class="product-con-pj-t"><div class="product-con-pj-timg fl"><img src="' + v.avatar + '"></div><div class="product-con-pj-tname fl"><div class="usernames">' + v.user_nicename + '</div><div class="weui-rater" style="width: 100%;"><a data-num="0" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="1" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="2" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="3" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a><a data-num="4" class="weui-rater-box checked"> <span class="weui-rater-inner"><img src="images/xx.png" alt=""></span> </a></div></div><div class="product-con-pj-time fr">' + v.add_time + '</div><div class="clear"></div></div><div class="product-con-pj-nr">' + v.content + '</div><div class="product-con-pj-fl">'+v.spec_key_name+'</div></div></div>').appendTo($(".help-right-box"));
+	
+							}
+						})
+						console.log(str2);
+					} else {
+						//					$.toast(data.data, 'text');
+					}
+				}, "json").error(function(xhr, errorText, errorType) {
+					//				$.toast('网络错误，请稍后再试', 'text');
+					//$(".J_loadimg").css("visibility", "hidden");
+				});
+			}
+		}
+
+		$(window).scroll(function() {
+			//		    console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop()); 
+			//		    console.log("页面的文档高度 ："+$(document).height());
+			//		    console.log('浏览器的高度：'+$(window).height());
+			loaata();
+		});
+	</script>
+
+</html>

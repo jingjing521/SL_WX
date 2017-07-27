@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>筛选</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="screening">
+				<div class="tr screening-con-titles">重置</div>
+				<div class="screening-con">
+					<div class="screening-con-title">品类</div>
+					<div class="screening-con-items">
+						<div class="screening-con-item fl active">全部</div>
+						<div class="screening-con-item fl">男款钱包（100）</div>
+						<div class="screening-con-item fl">女士钱包（124）</div>
+						<div class="screening-con-item fl">男士腰带（25）</div>
+						<div class="screening-con-item fl">女款腰带（111)</div>
+						<div class="screening-con-item fl">男款钱包（100）</div>
+						<div class="screening-con-item fl">女士钱包（124）</div>
+						<div class="screening-con-item fl">男士腰带（25）</div>
+						<div class="screening-con-item fl">女款腰带（111)</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				
+				<div class="screening-con">
+					<div class="screening-con-title">尺码</div>
+					<div class="screening-con-items1">
+						<div class="screening-con-item1 fl actives">全部</div>
+						<div class="screening-con-item1 fl">均码</div>
+						<div class="screening-con-item1 fl">1200</div>
+						<div class="screening-con-item1 fl">1220</div>
+						<div class="screening-con-item1 fl">1230</div>
+						<div class="screening-con-item1 fl">1240</div>
+						<div class="screening-con-item1 fl">1400</div>
+						<div class="screening-con-item1 fl">1420</div>
+						<div class="screening-con-item1 fl">1430</div>
+						<div class="screening-con-item1 fl">1400</div>
+						<div class="screening-con-item1 fl">1420</div>
+						<div class="screening-con-item1 fl">1430</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="btn">确定</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$(".screening-con-items").on("click",".screening-con-item",function(){
+				$(".screening-con-item").removeClass("active");
+				$(this).addClass("active"); 
+				console.log($(this).text());
+			})
+			$(".screening-con-items1").on("click",".screening-con-item1",function(){
+				$(".screening-con-item1").removeClass("actives");
+				$(this).addClass("actives");
+				console.log($(this).text());
+			})
+			var w=$(window).height();
+			console.log(w);
+			$("#screening").css("min-height",w-10);
+			$(".btn").click(function(){
+				window.location.href="store.html";
+			})
+			$(".screening-con-titles").click(function(){
+				$(".screening-con").children().children().removeClass("active");
+				$(".screening-con").children().children().removeClass("actives");
+			})
+		});
+	</script>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>售后</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="afterSales">
+				<div class="afterSales-con">
+		            <div class="afterSales-con-title">
+		            	金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr colors">处理中</span>
+		            </div>
+		            <a href="afterSales-details.html"><div class="afterSales-product">
+						<div class="fl afterSales-product-img"><img src="images/small-img.jpg"></div>
+						<div class="fl afterSales-product-con">
+							<div class="afterSales-product-con-name">粉红中长款V领针织外套</div>
+							<div class="afterSales-product-con-gg">颜色：粉红色；尺码：S</div>
+						</div>
+					<div class="clear"></div>
+					</div></a>
+				</div>
+				
+				<div class="afterSales-con">
+		            <div class="afterSales-con-title">
+		            	金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr">已完成</span>
+		            </div>
+		            <a href="afterSales-details.html"><div class="afterSales-product">
+						<div class="fl afterSales-product-img"><img src="images/small-img1.jpg"></div>
+						<div class="fl afterSales-product-con">
+							<div class="afterSales-product-con-name">黑色连帽毛领羽绒服</div>
+							<div class="afterSales-product-con-gg">颜色：黑色；尺码：S</div>
+						</div>
+					<div class="clear"></div>
+					</div></a>
+				</div>
+				
+				<div class="afterSales-con">
+		            <div class="afterSales-con-title">
+		            	金蘑姑姑桃宝店<img src="images/right.png" /><span class="fr">已完成</span>
+		            </div>
+		            <a href="afterSales-details.html"><div class="afterSales-product">
+						<div class="fl afterSales-product-img"><img src="images/small-img.jpg"></div>
+						<div class="fl afterSales-product-con">
+							<div class="afterSales-product-con-name">粉红中长款V领针织外套</div>
+							<div class="afterSales-product-con-gg">颜色：粉红色；尺码：S</div>
+						</div>
+					<div class="clear"></div>
+					</div></a>
+				</div>
+				
+			</div>
+		</div>
+	</body>
+
+</html>

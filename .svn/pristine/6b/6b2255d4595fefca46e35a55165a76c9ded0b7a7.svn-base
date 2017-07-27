@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+<!--离线应用的另一个技巧-->
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<!--指定的iphone中safari顶端的状态条的样式-->
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<!--告诉设备忽略将页面中的数字识别为电话号码-->
+<meta content="telephone=no" name="format-detection" />
+<title>视频播放</title>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body style=" background-image:url(images/bgs.png);">
+<div class="index-bg">
+
+<!--主体部分-->
+	<div class="video-sp">
+		<!--<iframe height="auto" class="video-sp-v" width="100%" src='http://player.youku.com/embed/XMTg5NTIxMzE1Mg==' frameborder=0 'allowfullscreen'></iframe>-->
+
+    </div>
+<!--主体部分-->
+</div>
+</body>
+<script src="js/jquery-2.2.1.js"></script>
+<script src="js/center.js"></script>
+<script>
+	
+	if(parseUrl().type=="p"){
+//		alert(1);
+		var url=localStorage.getItem("vimg");
+		var video=localStorage.getItem("vvideo");
+		console.log(url);
+		console.log(video);
+		$('<video controls="controls" poster="'+url+'" onPlay="ture" width="100%" height="100%" onClick="if(/Android/.test(navigator.userAgent))this.play();" class="video-sp-l"><source src="'+video+'"><source src="'+video+'" type="video/mp4"><source src="'+video+'" type="video/webm"><source src="'+video+'" type="video/ogg"></video>').appendTo($(".video-sp"));
+	}else if(parseUrl().type=="s"){
+//		alert(2);
+		var url=localStorage.getItem("video_thumb");
+		var video=localStorage.getItem("video");
+		console.log(url);
+		console.log(video);
+		$('<video controls="controls" poster="'+url+'" onPlay="ture" width="100%" height="100%" onClick="if(/Android/.test(navigator.userAgent))this.play();" class="video-sp-l"><source src="'+video+'"><source src="'+video+'" type="video/mp4"><source src="'+video+'" type="video/webm"><source src="'+video+'" type="video/ogg"></video>').appendTo($(".video-sp"));
+	
+	}
+</script>
+</html>

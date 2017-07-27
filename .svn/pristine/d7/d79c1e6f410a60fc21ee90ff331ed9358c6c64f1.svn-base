@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>确认订单</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="css/weui.min.css">
+		<link rel="stylesheet" href="css/jquery-weui.css">
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="confirmOrder">
+				
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="js/center.js" ></script>
+	<script type="text/javascript" src="js/md5.js" ></script>
+	<script>
+	$(document).ready(function(){
+		
+		//结算信息接口
+		var address_id=localStorage.getItem("address_id");
+		var user_id=localStorage.getItem("user_id");
+		var timestamp = Date.parse(new Date());
+	 	var values=["user_id","address_id","timestamp"];
+		var data={"user_id":user_id,"address_id":address_id,"timestamp":timestamp};
+		var sign = doSign(values,data);
+		var keys="idf5nsi5t0qbemwo12hztbftm53tbv6pht";
+		$.ajax({
+			type:"post",
+			url: link_url+"goodsCartSettlementInfo",
+			dataType: "json",
+			data: {"user_id":user_id,"address_id":address_id,"key":keys,"timestamp":timestamp,"sign":sign},
+			success: function(data) {
+				if(data.status == 1){
+					console.log("ok");
+					console.log(data);
+					//收货地址
+					if(parseUrl().type==1){
+						$('<div class="confirm-con"><div class="fl confirm-con-l"><a href="shipping-Chooseaddr.html"><div class="confirm-con-text"><span class="colore">收货人：</span>'+localStorage.getItem("s_consignee")+'</div><div class="confirm-con-text"><span class="colore">手机号码：</span>'+localStorage.getItem("s_phone")+'</div><div class="confirm-con-text"><span class="colore">收货地址：</span>'+localStorage.getItem("s_address")+'</div></a></div><div class="fr confirm-con-r"><img src="images/lefts.png"></div><div class="clear"></div></div>').appendTo($("#confirmOrder"));
+					}else{
+						localStorage.removeItem("s_consignee");
+						localStorage.removeItem("s_phone");
+						localStorage.removeItem("s_address");
+						var n=data.data.address_info;
+						$('<div class="confirm-con"><div class="fl confirm-con-l"><a href="shipping-Chooseaddr.html"><div class="confirm-con-text"><span class="colore">收货人：</span>'+n.consignee+'</div><div class="confirm-con-text"><span class="colore">手机号码：</span>'+n.phone+'</div><div class="confirm-con-text"><span class="colore">收货地址：</span>'+n.city_name+n.district_name+n.address+'</div></a></div><div class="fr confirm-con-r"><img src="images/lefts.png"></div><div class="clear"></div></div>').appendTo($("#confirmOrder"));
+					
+					}
+					
+					var arr=[];
+					var shippingenables=[];
+					var cid;
+					var msgs;
+					var jsnum=[];
+					var arrr=[];
+					//数组相加
+					Array.prototype.sum = function () {
+					    for (var sum = i = 0; i < this.length; i++)sum += parseInt(this[i]);
+					    return sum ;
+					};
+					
+					//已选中商品
+					$.each(data.data.goods_info.cartList,function(i,v){
+	                    $.each(v.goods_list,function(x,y){
+	 						if(y.selected == 1){
+	 							arrr.push(v) 
+	 						}
+	                    })
+	            	});
+					Array.prototype.unique1 = function(){
+						var res = [this[0]];
+						for(var i = 1; i < this.length; i++){
+						  var repeat = false;
+						  for(var j = 0; j < res.length; j++){
+						   if(this[i] == res[j]){
+						    repeat = true;
+						    break;
+						   }
+						  }
+						  if(!repeat){
+						   res.push(this[i]);
+						  }
+						 }
+						return res;
+				    };
+				    var carts = arrr.unique1();
+					console.log(carts);
+					//商品详情
+					var vv;
+					$.each(carts, function(i,v) {
+						$('<div class="confirm-cons confirm-cons1"><div class="orderd-con-title" cid="'+v.cid+'"><img src="images/store.png" class="store">'+v.cname+'<img src="images/lefts.png" class="fr lefts"></div><div class="orderd-con-product"></div><div class="orderd-con-titles">配送费:<img src="images/lefts.png" class="fr lefts"><input type="text" readonly="readonly"  shippingenable="'+v.shippingenable+'" value="￥'+v.shipping+'" class="fr kd confirm-cons-input"></div><textarea class="confirm-cons-textarea" placeholder="给我们留言（选填，45字以内）"></textarea><div class="orderd-con-titles bbn">共<span class="snum"></span>件<span class="fr colors">￥<span class="sprice"></span></span><span class="fr">合计：</span></div></div>').appendTo($("#confirmOrder"));
+						$(".orderd-con-title").click(function(){
+							window.location.href="store.html?id="+v.cid;
+						})
+						$.each(v.goods_list,function(a,s){
+							if(s.selected==1){
+								$('<div class="orderd-product" gid='+s.goods_id+'><div class="fl orderd-product-img"><img src="'+s.goods_img.thumb+'"></div><div class="fl orderd-product-con"><div class="orderd-product-con-name">'+s.goods_name+'</div><div class="orderd-product-con-gg">'+s.spec_key_name+'</div><div class="orderd-product-con-price">￥'+s.goods_price+'<span class="goodsnum">x'+s.goods_num+'</span></div></div><div class="clear"></div></div>').appendTo($(".orderd-con-product").eq(i));
+								
+							}
+							
+						})
+						
+						$(".snum").eq(i).text(v.selectnum);
+						var snum=$(".snum").eq(i).text();
+						$(".sprice").eq(i).text(v.totalprice);
+				
+						$(".orderd-product").click(function(){
+							var gid=$(this).attr("gid");
+							window.location.href="product.html?id="+gid;
+						})
+						var psf=$(".kd").eq(i).val();
+						var str1=psf.replace("￥","");
+						arr.push(str1);
+						console.log(arr);
+						var shippingenable=$(".kd").eq(i).attr("shippingenable");
+						shippingenables.push(shippingenable);
+					})
+					
+
+					//合计
+					var b=data.data.goods_info.total_price;
+					var arrvalue="";
+					var str="";
+					var vals;
+					
+					vals=arr.sum();
+					$('<div class="confirm-cons" style="padding-bottom: 10px; margin-bottom: 0;"><div class="orderd-con-text tr bbs linh50"><span class="colore fl"> 积分：</span>可用<span class="integra"></span>积分<img src="images/kg (2).png"></div><div class="orderd-con-text tr pd10"><span class="colore fl"> 商品金额：</span>￥<span class="sprices">'+b.total_fee+'</span></div><div class="orderd-con-text tr"><span class="colore fl">配送费：</span>￥'+vals+'</div><div class="orderd-con-text tr mb10"><span class="colore fl">积分抵扣：</span>-￥<span class="deduction"></span></div><div class="orderd-nums">合计：<span class="colors">￥<span class="total"></span></span></div><div class="orderd-btn">提交订单</div><div class="clear"></div></div>').appendTo($("#confirmOrder"));
+					var m=data.data.integral_info;
+					var score=parseFloat(m.score);
+					var score_config=parseFloat(m.score_config);
+					$(".integra").text(score);
+
+					if(score<=0){
+						$(".orderd-con-text img").attr("src","images/kg (2).png");
+						total();
+					}else if(score>0){
+						var i=1;
+						b();
+						total();
+						$(".orderd-con-text").click(function(){
+							if(i%2!=0){
+								a();
+								total();
+								i++;
+							}else if(i%2==0){
+								b();
+								total();
+								i++;
+							}else{
+								alert("error");
+							};
+							
+						})	
+						function a(){
+							$(".orderd-con-text img").attr("src","images/kg (1).png");
+							score=parseFloat(m.score);
+						}
+						function b(){
+							$(".orderd-con-text img").attr("src","images/kg (2).png");
+							score=0;
+						}
+					}
+					
+					var integration;
+					function total(){//合计
+						var deduction=parseFloat(score*score_config);
+						var sp=parseFloat($(".sprices").text());
+						console.log(sp);
+						var ssum=parseFloat(sp)+parseFloat(vals);
+						if(deduction<ssum){
+							$(".deduction").text(deduction);
+							$(".total").text(parseFloat(ssum-deduction));
+						}else if(deduction==ssum){
+							$(".deduction").text(deduction);
+							$(".total").text(0.01);
+						}else if(deduction>ssum){
+							integration=parseFloat(ssum/score_config);
+							var dk=parseFloat(integration*score_config);
+							console.log(integration);
+							console.log(dk);
+							console.log(ssum);
+							$(".deduction").text(dk);
+							if(dk==ssum){
+								$(".deduction").text(dk);
+								$(".total").text(0.01);
+							}else{
+								$(".deduction").text(dk);
+								$(".total").text(ssum-dk);
+							}
+						}
+					}
+					
+					$(".orderd-btn").click(function(){//配送费判断
+						var svalue;
+						var strs="";
+						$.each(shippingenables, function(i,v) {
+							svalue=shippingenables[i]
+							if(i==0){
+								strs+=shippingenables[i];
+							}else{
+								strs+=","+shippingenables[i];
+							}
+						});
+						console.log(strs);
+						if(strs.indexOf("false")>0){
+							$.toast("提交订单失败！","text");
+						}else{
+							var json=[];
+							$.each($(".confirm-cons1"),function(i,v){
+								cid=$(".confirm-cons1").eq(i).find(".orderd-con-title").attr("cid");
+								msgs=$(".confirm-cons1").eq(i).find(".confirm-cons-textarea").val();
+								var item={};
+								item['shop_id']=cid;
+								item['msg']=msgs;
+								json.push(item);
+								console.log(cid);
+								console.log(msgs);
+							})
+							console.log(json);			
+//							var object = {};
+//							object.msg = json;
+							var obj=JSON.stringify(json);
+							localStorage.setItem("msg",obj);
+
+							var total=$(".total").text();
+							window.location.href="pay.html?score="+integration+"&total="+total;
+							
+						}
+						
+					})
+				}else{
+					$.toast(data.data, "text");
+				}
+			},error:function(){
+				console.log(link_url);
+			}
+		})
+	})
+
+	</script>
+	<script src="js/fastclick.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+<script src="js/jquery-weui.js"></script>
+
+</html>

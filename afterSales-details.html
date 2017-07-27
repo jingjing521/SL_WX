@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>售后订单详情</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="orderDetails">
+				<div class="orderd-con">
+					<div class="orderd-con-title">订单状态<span class="fr colors font16 otype">处理中</span></div>
+					<div class="orderd-con-text"><span class="colore">退款编号：</span><span class="bh"></span></div>
+					<div class="orderd-con-text"><span class="colore">申请时间：</span><span class="time"></span> </div>
+				</div>
+				
+				<div class="orderd-con">
+					<div class="orderd-con-titles">商品信息</div>
+					<div class="orderd-product">
+						<div class="fl orderd-product-img"><img src="images/small-img.jpg"></div>
+						<div class="fl orderd-product-con">
+							<div class="orderd-product-con-name"></div>
+							<div class="orderd-product-con-gg"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				
+				<div class="orderd-con">
+					<div class="orderd-con-titles bbn">售后回复</div>
+					<textarea class="afterSales-text" placeholder="" readonly="readonly"></textarea>
+				</div>
+
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-2.2.1.js"></script>
+	<script src="js/md5.js"></script>
+	<script src="js/center.js"></script>
+	<script>
+		$(document).ready(function(){
+			var order_sn=localStorage.getItem("order_sn");
+			var time=localStorage.getItem("time");
+			var img=localStorage.getItem("img");
+			var goods_name=localStorage.getItem("goods_name");
+			var spec_key_name=localStorage.getItem("spec_key_name");
+			var otype=localStorage.getItem("otype");
+			$(".otype").text(otype);
+			$(".bh").text(order_sn);
+			$(".time").text(time);
+			$(".orderd-product-img").children("img").attr("src",img);
+			$(".orderd-product-con-name").text(goods_name);
+			$(".orderd-product-con-gg").text(spec_key_name);
+		})
+	</script>
+</html>

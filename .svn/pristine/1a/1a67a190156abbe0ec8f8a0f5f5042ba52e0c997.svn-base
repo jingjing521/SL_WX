@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
+		<!--离线应用的另一个技巧-->
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<!--告诉设备忽略将页面中的数字识别为电话号码-->
+		<meta content="telephone=no" name="format-detection" />
+		<title>查看物流</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<!-- 总体框架 -->
+		<div class="index-bg">
+			<div id="logistics">
+				<div class="logistics-con">
+					<div class="logistics-con-text">物流公司：<span>百世汇通</span></div>
+					<div class="logistics-con-text">订&nbsp;单&nbsp; 号：<span>422215223621</span></div>
+				</div>
+				<div class="logistics-cons">
+					<div class="logistics-con-title">物流跟踪</div>
+					<div class="about4_main">
+						<div class="line fl"></div>
+						<ul>
+							<li>
+								<div class="line-active fl"><img src="images/xz (2).png"></div>
+								<div class="fl logistics-cons-text">
+									[西安高新一部]派件已签收，签收人是拍照签收签收网点是西安高新一部
+									<p>2016-1-13 16:05:30</p>
+								</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="line-active fl"><img src="images/xz (2).png"></div>
+								<div class="fl logistics-cons-text">
+									[西安高新一部]派件已签收，签收人是哈
+									<p>2016-1-13 16:05:30</p>
+								</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="line-active fl"><img src="images/xz (2).png"></div>
+								<div class="fl logistics-cons-text">
+									[西安高新一部]派件已签收，签收人是拍照签收签收网点是西安高新一部
+									<p>2016-1-13 16:05:30</p>
+								</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="line-active fl"><img src="images/xz (2).png"></div>
+								<div class="fl logistics-cons-text">
+									[西安高新一部]派件已签收，签收人是拍照签收签收网点是西安高新一部
+									<p>2016-1-13 16:05:30</p>
+								</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="line-active fl"><img src="images/xz (2).png"></div>
+								<div class="fl logistics-cons-text">
+									[西安高新一部]派件已签收，签收人是拍照签收签收网点是西安高新一部
+									<p>2016-1-13 16:05:30</p>
+								</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="line-active fl"><img src="images/xz (2).png"></div>
+								<div class="fl logistics-cons-text">
+									您的包裹已出库
+									<p>2016-1-13 16:05:30</p>
+								</div>
+								<div class="clear"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			console.log(11);
+			$(".about4_main").find("ul li").first().find("img").attr("src","images/xz (1).png");
+			$(".about4_main").find("ul li").first().find("img").css({"width":"18px","height":"18px","margin-left":"-3px"});
+		})
+	</script>
+</html>
